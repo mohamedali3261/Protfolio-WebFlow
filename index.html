@@ -1182,23 +1182,6 @@
     <script src="script.js"></script>
     <script src="chatbot.js"></script>
 
-    <!-- Analytics Tracking -->
-    <script>
-        // Track page visit
-        (function () {
-            if (window.location.hostname === 'localhost') return;
-
-            fetch('/api/track', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    page: window.location.pathname,
-                    referrer: document.referrer || 'direct'
-                })
-            }).catch(err => console.log('Tracking error:', err));
-        })();
-    </script>
-
 </body>
 
 </html>

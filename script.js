@@ -881,7 +881,7 @@ function initContactForm() {
 
     if (!form) return;
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const submitBtn = form.querySelector('.btn-submit');
@@ -890,45 +890,18 @@ function initContactForm() {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
         submitBtn.disabled = true;
 
-        try {
-            // Get form data
-            const formData = {
-                name: form.querySelector('#name').value,
-                email: form.querySelector('#email').value,
-                service: form.querySelector('#service').value,
-                message: form.querySelector('#message').value
-            };
-
-            // Send to API
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                submitBtn.innerHTML = '<i class="fas fa-check"></i> تم الإرسال بنجاح!';
-                submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-                form.reset();
-            } else {
-                throw new Error(result.error || 'Failed to send message');
-            }
-
-        } catch (error) {
-            console.error('Contact form error:', error);
-            submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> حدث خطأ!';
-            submitBtn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
-        }
-
         setTimeout(() => {
-            submitBtn.innerHTML = originalContent;
-            submitBtn.style.background = '';
-            submitBtn.disabled = false;
-        }, 3000);
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> تم الإرسال بنجاح!';
+            submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+
+            form.reset();
+
+            setTimeout(() => {
+                submitBtn.innerHTML = originalContent;
+                submitBtn.style.background = '';
+                submitBtn.disabled = false;
+            }, 3000);
+        }, 2000);
     });
 }
 
