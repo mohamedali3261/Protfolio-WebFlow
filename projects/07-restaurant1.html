@@ -1,0 +1,4562 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم الشرق | تجربة طعام فاخرة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Almarai', sans-serif;
+            background: #050505;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        :root {
+            --gold: #c9a227;
+            --gold-light: #e8d48b;
+            --gold-dark: #8b6914;
+            --dark: #050505;
+            --dark-light: #0f0f0f;
+            --dark-medium: #1a1a1a;
+            --cream: #f5f0e1;
+            --red: #8b0000;
+        }
+
+        /* ==================== PRELOADER ==================== */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--dark);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 1s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .preloader.hide {
+            clip-path: circle(0% at 50% 50%);
+        }
+
+        .preloader-inner {
+            text-align: center;
+        }
+
+        .preloader-logo {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--gold);
+            letter-spacing: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .preloader-tagline {
+            font-size: 1rem;
+            color: #666;
+            letter-spacing: 8px;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+
+        .preloader-progress {
+            width: 300px;
+            height: 1px;
+            background: #222;
+            margin: 40px auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preloader-progress::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: var(--gold);
+            animation: loadProgress 2s ease forwards;
+        }
+
+        @keyframes loadProgress {
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* ==================== CUSTOM CURSOR ==================== */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            width: 50px;
+            height: 50px;
+            background: rgba(201, 162, 39, 0.1);
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 25px 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .nav-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-btn {
+            padding: 14px 35px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .nav-btn:hover {
+            color: var(--dark);
+        }
+
+        .nav-btn:hover::before {
+            left: 0;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: var(--gold);
+            transition: all 0.3s;
+            transform-origin: center;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--dark);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-links {
+            text-align: center;
+        }
+
+        .mobile-menu-links a {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s;
+        }
+
+        .mobile-menu.active .mobile-menu-links a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--gold);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo">الشرق</div>
+            <div class="preloader-tagline">تجربة طعام فاخرة</div>
+            <div class="preloader-progress"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">🍽️</span>
+                <span class="logo-text">الشرق</span>
+            </a>
+            <div class="nav-links">
+                <a href="#home">الرئيسية</a>
+                <a href="#story">قصتنا</a>
+                <a href="#menu">القائمة</a>
+                <a href="#experience">التجربة</a>
+                <a href="#gallery">المعرض</a>
+                <a href="#reserve">الحجز</a>
+            </div>
+            <a href="#reserve" class="nav-btn">احجز طاولتك</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="#home">الرئيسية</a>
+            <a href="#story">قصتنا</a>
+            <a href="#menu">القائمة</a>
+            <a href="#experience">التجربة</a>
+            <a href="#gallery">المعرض</a>
+            <a href="#reserve">الحجز</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&h=1080&fit=crop"
+                alt="Restaurant">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-pattern"></div>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <div class="line"><span class="small">مرحباً بكم في</span></div>
+                    <div class="line"><span class="large">مطعم الشرق</span></div>
+                </h1>
+                <p class="hero-desc">نقدم لكم رحلة فريدة في عالم النكهات الشرقية الأصيلة، حيث يلتقي فن الطهي العريق
+                    بالإبداع المعاصر في أجواء من الفخامة والرقي.</p>
+                <div class="hero-btns">
+                    <a href="#menu" class="btn btn-primary">
+                        <span>استكشف القائمة</span>
+                        <i class="fas fa-utensils"></i>
+                    </a>
+                    <a href="#reserve" class="btn btn-secondary">
+                        <span>احجز طاولتك</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-image-main">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=800&fit=crop"
+                        alt="Signature Dish">
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <div class="scroll-mouse"></div>
+            <span class="scroll-text">اسحب للأسفل</span>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <section class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <div class="marquee-item"><span>مأكولات شرقية</span><i class="fas fa-circle"></i></div>
+                <div class="marquee-item"><span>أجواء فاخرة</span><i class="fas fa-circle"></i></div>
+                <div class="marquee-item"><span>طهاة عالميون</span><i class="fas fa-circle"></i></div>
+                <div class="marquee-item"><span>مكونات طازجة</span><i class="fas fa-circle"></i></div>
+                <div class="marquee-item"><span>خدمة متميزة</span><i class="fas fa-circle"></i></div>
+                <div class="marquee-item"><span>تجربة لا تُنسى</span><i class="fas fa-circle"></i></div>
+            </div>
+            <div class="marquee-content">
+                <div class="marquee-item"><span>مأكولات شرقية</span><i class="fas fa-circle"></i></div>
+                <div class="marquee-item"><span>أجواء فاخرة</span><i class="fas fa-circle"></i></div>
+                <div class="marquee-item"><span>طهاة عالميون</span><i class="fas fa-circle"></i></div>
+                <div class="marquee-item"><span>مكونات طازجة</span><i class="fas fa-circle"></i></div>
+                <div class="marquee-item"><span>خدمة متميزة</span><i class="fas fa-circle"></i></div>
+                <div class="marquee-item"><span>تجربة لا تُنسى</span><i class="fas fa-circle"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story" id="story">
+        <div class="story-bg-text">الشرق</div>
+        <div class="story-container">
+            <div class="story-header">
+                <div class="section-label reveal">
+                    <span>قصتنا</span>
+                </div>
+                <h2 class="section-title reveal stagger-1">رحلة من <span class="highlight">الشغف</span><br>والإبداع في
+                    الطهي</h2>
+            </div>
+
+            <div class="story-grid">
+                <div class="story-images reveal-left">
+                    <div class="story-img img-1">
+                        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&h=800&fit=crop"
+                            alt="Chef">
+                    </div>
+                    <div class="story-img img-2">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&h=600&fit=crop"
+                            alt="Food">
+                    </div>
+                    <div class="story-img img-3">
+                        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=500&fit=crop"
+                            alt="Dish">
+                    </div>
+                    <div class="story-experience">
+                        <div class="experience-number">15</div>
+                        <div class="experience-text">عام من التميز</div>
+                    </div>
+                </div>
+
+                <div class="story-content">
+                    <h3 class="story-subtitle reveal">حيث يلتقي التراث بالإبداع</h3>
+                    <p class="story-text reveal stagger-1">منذ عام 2009، نقدم في مطعم الشرق تجربة طعام استثنائية تجمع
+                        بين النكهات الشرقية الأصيلة والتقنيات العالمية الحديثة. نؤمن بأن الطعام ليس مجرد وجبة، بل هو فن
+                        وثقافة وذكريات تُصنع على موائدنا.</p>
+
+                    <div class="story-features reveal stagger-2">
+                        <div class="story-feature">
+                            <div class="feature-icon">🌿</div>
+                            <div class="feature-content">
+                                <h4>مكونات طازجة</h4>
+                                <p>نختار أجود المكونات يومياً</p>
+                            </div>
+                        </div>
+                        <div class="story-feature">
+                            <div class="feature-icon">👨‍🍳</div>
+                            <div class="feature-content">
+                                <h4>طهاة محترفون</h4>
+                                <p>فريق من أمهر الطهاة العالميين</p>
+                            </div>
+                        </div>
+                        <div class="story-feature">
+                            <div class="feature-icon">🍽️</div>
+                            <div class="feature-content">
+                                <h4>وصفات أصيلة</h4>
+                                <p>وصفات متوارثة عبر الأجيال</p>
+                            </div>
+                        </div>
+                        <div class="story-feature">
+                            <div class="feature-icon">✨</div>
+                            <div class="feature-content">
+                                <h4>أجواء راقية</h4>
+                                <p>تصميم داخلي فاخر ومميز</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="story-stats reveal stagger-3">
+                        <div class="stat-item">
+                            <div class="stat-number">50<span>+</span></div>
+                            <div class="stat-label">طبق مميز</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">10<span>K+</span></div>
+                            <div class="stat-label">عميل سعيد</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">25</div>
+                            <div class="stat-label">جائزة</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Section -->
+    <section class="specialties">
+        <div class="specialties-container">
+            <div class="specialties-header">
+                <div>
+                    <div class="section-label reveal">
+                        <span>تخصصاتنا</span>
+                    </div>
+                    <h2 class="section-title reveal stagger-1">أطباقنا <span class="highlight">المميزة</span></h2>
+                </div>
+                <div class="specialties-nav reveal stagger-2">
+                    <button class="nav-arrow"><i class="fas fa-arrow-right"></i></button>
+                    <button class="nav-arrow"><i class="fas fa-arrow-left"></i></button>
+                </div>
+            </div>
+
+            <div class="specialties-grid">
+                <div class="specialty-card reveal stagger-1">
+                    <div class="specialty-image">
+                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500&h=400&fit=crop"
+                            alt="Wagyu Steak">
+                        <span class="specialty-badge">الأكثر طلباً</span>
+                    </div>
+                    <div class="specialty-content">
+                        <div class="specialty-category">الأطباق الرئيسية</div>
+                        <h3 class="specialty-title">ستيك واغيو</h3>
+                        <p class="specialty-desc">ستيك واغيو ياباني مشوي مع صوص الفطر والخضروات الموسمية</p>
+                        <div class="specialty-footer">
+                            <div class="specialty-price">450 <span>ر.س</span></div>
+                            <button class="specialty-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="specialty-card reveal stagger-2">
+                    <div class="specialty-image">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&h=400&fit=crop"
+                            alt="Lamb Ribs">
+                        <span class="specialty-badge">اختيار الشيف</span>
+                    </div>
+                    <div class="specialty-content">
+                        <div class="specialty-category">المشويات</div>
+                        <h3 class="specialty-title">ريش الغنم</h3>
+                        <p class="specialty-desc">ريش غنم مشوية على الفحم مع الأرز البخاري والصلصة الخاصة</p>
+                        <div class="specialty-footer">
+                            <div class="specialty-price">320 <span>ر.س</span></div>
+                            <button class="specialty-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="specialty-card reveal stagger-3">
+                    <div class="specialty-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=400&fit=crop"
+                            alt="Salmon">
+                        <span class="specialty-badge">صحي</span>
+                    </div>
+                    <div class="specialty-content">
+                        <div class="specialty-category">المأكولات البحرية</div>
+                        <h3 class="specialty-title">سمك السلمون</h3>
+                        <p class="specialty-desc">فيليه سلمون نرويجي مشوي مع صوص الليمون والأعشاب</p>
+                        <div class="specialty-footer">
+                            <div class="specialty-price">280 <span>ر.س</span></div>
+                            <button class="specialty-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="specialty-card reveal stagger-4">
+                    <div class="specialty-image">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&h=400&fit=crop"
+                            alt="Chicken">
+                        <span class="specialty-badge">عائلي</span>
+                    </div>
+                    <div class="specialty-content">
+                        <div class="specialty-category">الدواجن</div>
+                        <h3 class="specialty-title">دجاج محشي</h3>
+                        <p class="specialty-desc">دجاج محشي بالأرز والمكسرات مع صوص الرمان</p>
+                        <div class="specialty-footer">
+                            <div class="specialty-price">180 <span>ر.س</span></div>
+                            <button class="specialty-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4);
+            transform: scale(1.1);
+            transition: transform 10s ease;
+        }
+
+        .hero:hover .hero-bg img {
+            transform: scale(1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: -1;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a227' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 25px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 50px;
+            margin-bottom: 30px;
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .hero-badge i {
+            animation: sparkle 2s ease infinite;
+        }
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        .hero-title {
+            margin-bottom: 30px;
+        }
+
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title .line span {
+            display: block;
+            transform: translateY(100%);
+            animation: revealText 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-title .line:nth-child(2) span {
+            animation-delay: 0.2s;
+        }
+
+        .hero-title .small {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #888;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        .hero-title .large {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-top: 10px;
+        }
+
+        @keyframes revealText {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: #888;
+            line-height: 2;
+            margin-bottom: 40px;
+            max-width: 500px;
+            opacity: 0;
+            animation: fadeUp 1s 0.5s forwards;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeUp 1s 0.7s forwards;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #444;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-secondary i {
+            transition: transform 0.3s;
+        }
+
+        .btn-secondary:hover i {
+            transform: translateX(-5px);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 600px;
+            opacity: 0;
+            animation: fadeUp 1s 0.3s forwards;
+        }
+
+        .hero-image-main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 500px;
+            border-radius: 200px 200px 20px 20px;
+            overflow: hidden;
+            border: 3px solid rgba(201, 162, 39, 0.3);
+        }
+
+        .hero-image-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .hero-image-main:hover img {
+            transform: scale(1.1);
+        }
+
+        .hero-float-card {
+            position: absolute;
+            background: rgba(15, 15, 15, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+            border-radius: 15px;
+            padding: 20px 25px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-float-card.card-1 {
+            top: 10%;
+            right: 0;
+            animation-delay: 0s;
+        }
+
+        .hero-float-card.card-2 {
+            bottom: 15%;
+            left: 0;
+            animation-delay: 2s;
+        }
+
+        .hero-float-card.card-3 {
+            top: 40%;
+            right: -20px;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .float-card-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .float-card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .float-card-text {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .scroll-mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(201, 162, 39, 0.5);
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .scroll-mouse::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 2px;
+            animation: scrollDown 2s ease infinite;
+        }
+
+        @keyframes scrollDown {
+            0% {
+                opacity: 1;
+                top: 8px;
+            }
+
+            100% {
+                opacity: 0;
+                top: 30px;
+            }
+        }
+
+        .scroll-text {
+            font-size: 0.75rem;
+            color: #666;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ==================== MARQUEE SECTION ==================== */
+        .marquee-section {
+            padding: 30px 0;
+            background: var(--dark-light);
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            padding: 0 30px;
+            flex-shrink: 0;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            white-space: nowrap;
+        }
+
+        .marquee-item span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #444;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .marquee-item i {
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+
+    <style>
+        /* ==================== STORY SECTION ==================== */
+        .story {
+            padding: 150px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25vw;
+            font-weight: 800;
+            color: rgba(201, 162, 39, 0.02);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .story-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .story-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-label span {
+            font-size: 0.85rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .section-title .highlight {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .story-images {
+            position: relative;
+            height: 700px;
+        }
+
+        .story-img {
+            position: absolute;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .story-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .story-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .story-img.img-1 {
+            width: 350px;
+            height: 450px;
+            top: 0;
+            right: 0;
+            z-index: 2;
+        }
+
+        .story-img.img-2 {
+            width: 280px;
+            height: 350px;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+            border: 5px solid var(--dark);
+        }
+
+        .story-img.img-3 {
+            width: 200px;
+            height: 250px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            border: 5px solid var(--gold);
+        }
+
+        .story-experience {
+            position: absolute;
+            bottom: 80px;
+            right: -30px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            padding: 30px 40px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 4;
+        }
+
+        .experience-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1;
+        }
+
+        .experience-text {
+            font-size: 0.9rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .story-content {
+            padding-right: 50px;
+        }
+
+        .story-subtitle {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--gold);
+        }
+
+        .story-text {
+            font-size: 1.15rem;
+            color: #888;
+            line-height: 2;
+            margin-bottom: 40px;
+        }
+
+        .story-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .story-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .feature-content p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .story-stats {
+            display: flex;
+            gap: 50px;
+            padding-top: 40px;
+            border-top: 1px solid #222;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .stat-number span {
+            font-size: 1.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* ==================== SPECIALTIES SECTION ==================== */
+        .specialties {
+            padding: 150px 0;
+            background: var(--dark-light);
+            position: relative;
+        }
+
+        .specialties::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, var(--dark), transparent);
+        }
+
+        .specialties-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .specialties-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 80px;
+        }
+
+        .specialties-header .section-title {
+            max-width: 600px;
+        }
+
+        .specialties-nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-arrow {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #333;
+            background: transparent;
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-arrow:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--dark);
+        }
+
+        .specialties-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .specialty-card {
+            background: var(--dark);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid #1a1a1a;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .specialty-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(201, 162, 39, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .specialty-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            transform: scaleX(0);
+            transition: transform 0.5s;
+        }
+
+        .specialty-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .specialty-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .specialty-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+
+        .specialty-card:hover .specialty-image img {
+            transform: scale(1.1);
+        }
+
+        .specialty-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 15px;
+            background: var(--gold);
+            color: var(--dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 20px;
+        }
+
+        .specialty-content {
+            padding: 30px;
+        }
+
+        .specialty-category {
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .specialty-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .specialty-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .specialty-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+        }
+
+        .specialty-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .specialty-price span {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .specialty-btn {
+            width: 45px;
+            height: 45px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .specialty-btn:hover {
+            background: var(--gold);
+            color: var(--dark);
+        }
+    </style>
+
+    <style>
+        /* ==================== MENU SECTION ==================== */
+        .menu-section {
+            padding: 150px 0;
+            position: relative;
+        }
+
+        .menu-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: var(--dark-light);
+            z-index: -1;
+        }
+
+        .menu-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .menu-wrapper {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 80px;
+        }
+
+        .menu-sidebar {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .menu-sidebar .section-label {
+            justify-content: flex-start;
+        }
+
+        .menu-sidebar .section-label::after {
+            display: none;
+        }
+
+        .menu-sidebar .section-title {
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+
+        .menu-sidebar-text {
+            font-size: 1.1rem;
+            color: #888;
+            line-height: 1.9;
+            margin-bottom: 40px;
+        }
+
+        .menu-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .category-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 25px;
+            background: transparent;
+            border: 1px solid #222;
+            border-radius: 15px;
+            color: #888;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: rgba(201, 162, 39, 0.1);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .category-btn span {
+            font-size: 0.85rem;
+        }
+
+        .menu-content {
+            display: grid;
+            gap: 25px;
+        }
+
+        .menu-item {
+            display: grid;
+            grid-template-columns: 150px 1fr auto;
+            gap: 30px;
+            padding: 30px;
+            background: var(--dark-light);
+            border-radius: 20px;
+            border: 1px solid #1a1a1a;
+            transition: all 0.4s;
+            align-items: center;
+        }
+
+        .menu-item:hover {
+            border-color: rgba(201, 162, 39, 0.3);
+            transform: translateX(-10px);
+        }
+
+        .menu-item-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.1);
+        }
+
+        .menu-item-info {
+            padding: 10px 0;
+        }
+
+        .menu-item-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .menu-item-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .menu-item-tag {
+            padding: 5px 12px;
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--gold);
+            font-size: 0.75rem;
+            border-radius: 20px;
+        }
+
+        .menu-item-desc {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .menu-item-meta {
+            display: flex;
+            gap: 20px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .meta-item i {
+            color: var(--gold);
+        }
+
+        .menu-item-price {
+            text-align: center;
+        }
+
+        .price-amount {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+            display: block;
+        }
+
+        .price-currency {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .menu-item-action {
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            border: none;
+            border-radius: 50%;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .menu-item-action:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+        }
+
+        /* ==================== EXPERIENCE SECTION ==================== */
+        .experience {
+            padding: 150px 0;
+            background: var(--dark-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .experience-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.1;
+        }
+
+        .experience-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .experience-header .section-title {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .experience-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #222;
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-20px);
+            border-color: rgba(201, 162, 39, 0.5);
+        }
+
+        .experience-card:hover::before {
+            opacity: 1;
+        }
+
+        .experience-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-card-text {
+            font-size: 1rem;
+            color: #888;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-number {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 5rem;
+            font-weight: 800;
+            color: rgba(201, 162, 39, 0.05);
+            line-height: 1;
+        }
+
+        /* ==================== GALLERY SECTION - LUXURY RESTAURANT STYLE ==================== */
+        .gallery {
+            padding: 150px 0;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--dark) 0%, var(--dark-light) 50%, var(--dark) 100%);
+            position: relative;
+        }
+
+        .gallery::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .gallery::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .gallery-bg-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(201, 162, 39, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(201, 162, 39, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .gallery-floating-icon {
+            position: absolute;
+            font-size: 8rem;
+            color: rgba(201, 162, 39, 0.03);
+            animation: floatIcon 20s ease-in-out infinite;
+        }
+
+        .gallery-floating-icon:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .gallery-floating-icon:nth-child(2) {
+            top: 60%;
+            right: 5%;
+            animation-delay: -10s;
+        }
+
+        @keyframes floatIcon {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+            }
+        }
+
+        .gallery-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .gallery-header-content {
+            max-width: 600px;
+        }
+
+        .gallery-subtitle {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .gallery-subtitle::before {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .gallery-subtitle span {
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .gallery-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .gallery-title .highlight {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gallery-desc {
+            font-size: 1.1rem;
+            color: #888;
+            line-height: 1.8;
+        }
+
+        .gallery-filters {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 15px 35px;
+            background: transparent;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: #888;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+        }
+
+        .filter-btn:hover::before,
+        .filter-btn.active::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: var(--dark);
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.2);
+        }
+
+        .gallery-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-stat {
+            text-align: center;
+        }
+
+        .gallery-stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            display: block;
+        }
+
+        .gallery-stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .gallery-masonry {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 200px;
+            gap: 25px;
+            perspective: 1000px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            transition: border-color 0.4s;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover::before {
+            border-color: var(--gold);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(201, 162, 39, 0.1);
+            z-index: 10;
+        }
+
+        .gallery-item.size-large {
+            grid-column: span 2;
+            grid-row: span 3;
+        }
+
+        .gallery-item.size-tall {
+            grid-row: span 2;
+        }
+
+        .gallery-item.size-wide {
+            grid-column: span 2;
+        }
+
+        .gallery-item.size-featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.15);
+            filter: brightness(0.7);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.95) 100%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 35px;
+            z-index: 2;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s 0.1s;
+        }
+
+        .gallery-item-category i {
+            font-size: 0.7rem;
+        }
+
+        .gallery-item:hover .gallery-item-category {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-item-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s 0.2s;
+        }
+
+        .gallery-item:hover .gallery-item-title {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-item-desc {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.6;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s 0.3s;
+        }
+
+        .gallery-item:hover .gallery-item-desc {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-item-actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+
+        .gallery-action-btn {
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1rem;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+
+        .gallery-action-btn:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .gallery-action-btn:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .gallery-item:hover .gallery-action-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-action-btn:hover {
+            background: var(--gold);
+            color: var(--dark);
+            border-color: var(--gold);
+            transform: translateY(0) scale(1.1);
+        }
+
+        .gallery-item-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 8px 18px;
+            background: var(--gold);
+            color: var(--dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            z-index: 3;
+        }
+
+        .gallery-item-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 5rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.05);
+            line-height: 1;
+            z-index: 1;
+            transition: all 0.5s;
+        }
+
+        .gallery-item:hover .gallery-item-number {
+            color: rgba(201, 162, 39, 0.1);
+            transform: scale(1.1);
+        }
+
+        .gallery-load-more {
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .gallery-load-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-load-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gold);
+            transform: translateY(100%);
+            transition: transform 0.5s;
+            z-index: -1;
+        }
+
+        .gallery-load-btn:hover::before {
+            transform: translateY(0);
+        }
+
+        .gallery-load-btn:hover {
+            color: var(--dark);
+        }
+
+        .gallery-load-btn i {
+            transition: transform 0.3s;
+        }
+
+        .gallery-load-btn:hover i {
+            transform: rotate(180deg);
+        }
+
+        /* ==================== LIGHTBOX MODAL ==================== */
+        .gallery-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.97);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(20px);
+        }
+
+        .gallery-lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-container {
+            max-width: 1400px;
+            width: 90%;
+            max-height: 90vh;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            transform: scale(0.9) translateY(50px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-lightbox.active .lightbox-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .lightbox-image-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--dark-light);
+        }
+
+        .lightbox-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-height: 80vh;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 162, 39, 0.9);
+            border: none;
+            border-radius: 50%;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--gold);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-nav.prev {
+            left: 20px;
+        }
+
+        .lightbox-nav.next {
+            right: 20px;
+        }
+
+        .lightbox-content {
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-close:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--dark);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .lightbox-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .lightbox-desc {
+            font-size: 1.1rem;
+            color: #888;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .lightbox-meta {
+            display: flex;
+            gap: 30px;
+            padding: 25px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .lightbox-meta-item {
+            text-align: center;
+        }
+
+        .lightbox-meta-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+
+        .lightbox-meta-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lightbox-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .lightbox-tag {
+            padding: 8px 20px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--gold);
+        }
+
+        .lightbox-share {
+            margin-top: auto;
+        }
+
+        .lightbox-share-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .lightbox-share-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .lightbox-share-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .lightbox-share-btn:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: #666;
+            letter-spacing: 5px;
+        }
+
+        .lightbox-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+
+        .lightbox-thumb {
+            width: 80px;
+            height: 60px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .lightbox-thumb.active,
+        .lightbox-thumb:hover {
+            opacity: 1;
+            border-color: var(--gold);
+        }
+
+        .lightbox-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ==================== GALLERY RESPONSIVE ==================== */
+        @media (max-width: 1200px) {
+            .gallery-masonry {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .gallery-item.size-large {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            .lightbox-container {
+                grid-template-columns: 1fr;
+            }
+
+            .lightbox-content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .gallery-masonry {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 180px;
+            }
+
+            .gallery-item.size-large,
+            .gallery-item.size-featured {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            .gallery-item.size-wide {
+                grid-column: span 2;
+            }
+
+            .gallery-title {
+                font-size: 3rem;
+            }
+
+            .gallery-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                padding: 100px 0;
+            }
+
+            .gallery-container {
+                padding: 0 20px;
+            }
+
+            .gallery-masonry {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 250px;
+                gap: 15px;
+            }
+
+            .gallery-item.size-large,
+            .gallery-item.size-tall,
+            .gallery-item.size-wide,
+            .gallery-item.size-featured {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .gallery-title {
+                font-size: 2.5rem;
+            }
+
+            .gallery-filters {
+                width: 100%;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 10px;
+            }
+
+            .filter-btn {
+                flex-shrink: 0;
+                padding: 12px 25px;
+            }
+
+            .gallery-stats {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .lightbox-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+
+            .lightbox-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+
+    <style>
+        /* ==================== TESTIMONIALS SECTION ==================== */
+        .testimonials {
+            padding: 150px 0;
+            background: linear-gradient(135deg, var(--dark-light) 0%, var(--dark) 100%);
+            position: relative;
+        }
+
+        .testimonials-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .testimonials-wrapper {
+            position: relative;
+        }
+
+        .testimonials-track {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 20px 0;
+        }
+
+        .testimonials-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testimonial-card {
+            flex: 0 0 400px;
+            scroll-snap-align: start;
+            background: var(--dark);
+            border: 1px solid #1a1a1a;
+            border-radius: 30px;
+            padding: 50px 40px;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .testimonial-card:hover {
+            border-color: rgba(201, 162, 39, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .testimonial-quote {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 4rem;
+            color: rgba(201, 162, 39, 0.1);
+            line-height: 1;
+        }
+
+        .testimonial-rating {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 25px;
+        }
+
+        .testimonial-rating i {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.15rem;
+            color: #ccc;
+            line-height: 1.9;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--gold);
+        }
+
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+
+        .author-info span {
+            font-size: 0.9rem;
+            color: var(--gold);
+        }
+
+        /* ==================== RESERVATION SECTION ==================== */
+        .reservation {
+            padding: 150px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reservation-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .reservation-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.2);
+        }
+
+        .reservation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .reservation-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .reservation-info {
+            padding-left: 40px;
+        }
+
+        .reservation-info .section-label {
+            justify-content: flex-start;
+        }
+
+        .reservation-info .section-label::after {
+            display: none;
+        }
+
+        .reservation-info .section-title {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+        }
+
+        .reservation-text {
+            font-size: 1.15rem;
+            color: #888;
+            line-height: 2;
+            margin-bottom: 50px;
+        }
+
+        .contact-cards {
+            display: grid;
+            gap: 20px;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px 30px;
+            background: rgba(15, 15, 15, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #222;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: var(--gold);
+            transform: translateX(-10px);
+        }
+
+        .contact-card-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--gold);
+        }
+
+        .contact-card-content h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #888;
+        }
+
+        .contact-card-content p {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .social-link:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        .reservation-form-wrapper {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #222;
+            border-radius: 40px;
+            padding: 60px 50px;
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .form-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .reservation-form {
+            display: grid;
+            gap: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 18px 20px;
+            background: var(--dark-light);
+            border: 1px solid #222;
+            border-radius: 15px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #555;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23c9a227' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 15px center;
+            background-size: 20px;
+        }
+
+        .form-group select option {
+            background: var(--dark);
+            color: #fff;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border: none;
+            border-radius: 15px;
+            color: var(--dark);
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(201, 162, 39, 0.3);
+        }
+
+        .submit-btn i {
+            transition: transform 0.3s;
+        }
+
+        .submit-btn:hover i {
+            transform: translateX(-5px);
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            padding: 100px 0 40px;
+            background: var(--dark-light);
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 25px;
+        }
+
+        .footer-brand p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social a {
+            width: 45px;
+            height: 45px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--dark);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: var(--gold);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            transform: translateX(-5px);
+        }
+
+        .footer-links a i {
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact-item i {
+            color: var(--gold);
+            margin-top: 5px;
+        }
+
+        .footer-contact-item p {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            border-top: 1px solid #222;
+        }
+
+        .footer-bottom p {
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--gold);
+        }
+
+        /* ==================== BACK TO TOP ==================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+
+    <style>
+        /* ==================== ANIMATIONS ==================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .stagger-1 {
+            transition-delay: 0.1s;
+        }
+
+        .stagger-2 {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-3 {
+            transition-delay: 0.3s;
+        }
+
+        .stagger-4 {
+            transition-delay: 0.4s;
+        }
+
+        .stagger-5 {
+            transition-delay: 0.5s;
+        }
+
+        .stagger-6 {
+            transition-delay: 0.6s;
+        }
+
+        /* Parallax */
+        .parallax-container {
+            overflow: hidden;
+        }
+
+        .parallax-element {
+            will-change: transform;
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
+        @media (max-width: 1200px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .hero-desc {
+                max-width: 100%;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .story-images {
+                height: 500px;
+                order: -1;
+            }
+
+            .story-content {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .story-features {
+                justify-content: center;
+            }
+
+            .story-stats {
+                justify-content: center;
+            }
+
+            .specialties-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .menu-wrapper {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .menu-sidebar {
+                position: static;
+                text-align: center;
+            }
+
+            .menu-sidebar .section-label {
+                justify-content: center;
+            }
+
+            .menu-sidebar .section-label::after {
+                display: block;
+            }
+
+            .menu-categories {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .experience-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .gallery-item.large {
+                grid-column: span 2;
+                height: 400px;
+            }
+
+            .gallery-item.wide {
+                grid-column: span 2;
+                height: 250px;
+            }
+
+            .gallery-item {
+                height: 250px;
+            }
+
+            .reservation-wrapper {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .reservation-info {
+                padding-left: 0;
+                text-align: center;
+            }
+
+            .reservation-info .section-label {
+                justify-content: center;
+            }
+
+            .reservation-info .section-label::after {
+                display: block;
+            }
+
+            .contact-cards {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-btn {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .hero-title .large {
+                font-size: 5rem;
+            }
+
+            .specialties-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 30px;
+            }
+
+            .gallery-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 30px;
+            }
+
+            .testimonial-card {
+                flex: 0 0 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            .hero-title .small {
+                font-size: 1rem;
+                letter-spacing: 4px;
+            }
+
+            .hero-title .large {
+                font-size: 3.5rem;
+            }
+
+            .hero-desc {
+                font-size: 1rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .story-images {
+                height: 400px;
+            }
+
+            .story-img.img-1 {
+                width: 280px;
+                height: 350px;
+            }
+
+            .story-img.img-2 {
+                width: 200px;
+                height: 250px;
+            }
+
+            .story-img.img-3 {
+                display: none;
+            }
+
+            .story-features {
+                grid-template-columns: 1fr;
+            }
+
+            .story-stats {
+                flex-wrap: wrap;
+                gap: 30px;
+            }
+
+            .specialties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-item {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .menu-item-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .menu-item-price {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item.large,
+            .gallery-item.wide {
+                grid-column: span 1;
+                height: 300px;
+            }
+
+            .testimonial-card {
+                flex: 0 0 300px;
+                padding: 40px 30px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .reservation-form-wrapper {
+                padding: 40px 30px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .footer-brand .logo {
+                justify-content: center;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .mobile-menu-links a {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title .large {
+                font-size: 2.8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .story-images {
+                height: 350px;
+            }
+
+            .story-img.img-1 {
+                width: 100%;
+                height: 300px;
+                position: relative;
+                top: 0;
+                right: 0;
+            }
+
+            .story-img.img-2 {
+                display: none;
+            }
+
+            .story-experience {
+                position: relative;
+                bottom: 0;
+                right: 0;
+                margin-top: 20px;
+                display: inline-block;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .specialty-content {
+                padding: 25px;
+            }
+
+            .experience-card {
+                padding: 40px 30px;
+            }
+
+            .experience-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+
+            .testimonial-card {
+                flex: 0 0 280px;
+            }
+
+            .reservation-info .section-title {
+                font-size: 2.5rem;
+            }
+
+            .contact-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cursor,
+            .cursor-dot {
+                display: none;
+            }
+        }
+    </style>
+
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <div class="menu-container">
+            <div class="menu-wrapper">
+                <div class="menu-sidebar">
+                    <div class="section-label reveal">
+                        <span>قائمة الطعام</span>
+                    </div>
+                    <h2 class="section-title reveal stagger-1">اكتشف <span class="highlight">نكهاتنا</span></h2>
+                    <p class="menu-sidebar-text reveal stagger-2">نقدم لكم مجموعة متنوعة من الأطباق الشرقية والعالمية
+                        المحضرة بعناية فائقة من أجود المكونات.</p>
+
+                    <div class="menu-categories reveal stagger-3">
+                        <button class="category-btn active" data-category="main">
+                            <span>الأطباق الرئيسية</span>
+                            <span>12</span>
+                        </button>
+                        <button class="category-btn" data-category="appetizers">
+                            <span>المقبلات</span>
+                            <span>8</span>
+                        </button>
+                        <button class="category-btn" data-category="desserts">
+                            <span>الحلويات</span>
+                            <span>6</span>
+                        </button>
+                        <button class="category-btn" data-category="drinks">
+                            <span>المشروبات</span>
+                            <span>10</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="menu-content reveal stagger-4">
+                    <!-- Main Dishes -->
+                    <div class="menu-item" data-category="main">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=300&h=300&fit=crop"
+                                alt="Wagyu">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">ستيك واغيو الفاخر</h3>
+                                <span class="menu-item-tag">🔥 الأكثر طلباً</span>
+                            </div>
+                            <p class="menu-item-desc">ستيك واغيو ياباني درجة A5 مشوي على الفحم مع صوص الفطر البري
+                                والخضروات الموسمية</p>
+                            <div class="menu-item-meta">
+                                <div class="meta-item"><i class="fas fa-clock"></i> 25 دقيقة</div>
+                                <div class="meta-item"><i class="fas fa-fire"></i> 650 سعرة</div>
+                            </div>
+                        </div>
+                        <div class="menu-item-price">
+                            <span class="price-amount">450</span>
+                            <span class="price-currency">ريال</span>
+                            <button class="menu-item-action"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="menu-item" data-category="main">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=300&fit=crop"
+                                alt="Grilled Salmon">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">سلمون مشوي ملكي</h3>
+                            </div>
+                            <p class="menu-item-desc">فيليه سلمون طازج مشوي مع صوص الليمون والأعشاب، يقدم مع أرز
+                                بالزعفران</p>
+                            <div class="menu-item-meta">
+                                <div class="meta-item"><i class="fas fa-clock"></i> 20 دقيقة</div>
+                                <div class="meta-item"><i class="fas fa-fire"></i> 450 سعرة</div>
+                            </div>
+                        </div>
+                        <div class="menu-item-price">
+                            <span class="price-amount">185</span>
+                            <span class="price-currency">ريال</span>
+                            <button class="menu-item-action"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Appetizers -->
+                    <div class="menu-item" data-category="appetizers" style="display: none;">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?w=300&h=300&fit=crop"
+                                alt="Hummus">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">حمص باللحم والصنوبر</h3>
+                            </div>
+                            <p class="menu-item-desc">حمص كريمي محضر على الطريقة اللبنانية مع قطع لحم الضأن المقلية
+                                والصنوبر المحمص</p>
+                            <div class="menu-item-meta">
+                                <div class="meta-item"><i class="fas fa-clock"></i> 10 دقيقة</div>
+                                <div class="meta-item"><i class="fas fa-fire"></i> 320 سعرة</div>
+                            </div>
+                        </div>
+                        <div class="menu-item-price">
+                            <span class="price-amount">45</span>
+                            <span class="price-currency">ريال</span>
+                            <button class="menu-item-action"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Desserts -->
+                    <div class="menu-item" data-category="desserts" style="display: none;">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1579372781848-65dc7f6920b3?w=300&h=300&fit=crop"
+                                alt="Kunafa">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">كنافة نابلسية ملكية</h3>
+                                <span class="menu-item-tag">🍯 مميز</span>
+                            </div>
+                            <p class="menu-item-desc">كنافة بالجبنة النابلسية الساخنة، تقدم مع الفستق الحلبي وقطر الزهر
+                            </p>
+                            <div class="menu-item-meta">
+                                <div class="meta-item"><i class="fas fa-fire"></i> 580 سعرة</div>
+                            </div>
+                        </div>
+                        <div class="menu-item-price">
+                            <span class="price-amount">35</span>
+                            <span class="price-currency">ريال</span>
+                            <button class="menu-item-action"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Drinks -->
+                    <div class="menu-item" data-category="drinks" style="display: none;">
+                        <div class="menu-item-image">
+                            <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=300&h=300&fit=crop"
+                                alt="Mojito">
+                        </div>
+                        <div class="menu-item-info">
+                            <div class="menu-item-header">
+                                <h3 class="menu-item-title">موهيتو التوت والنعناع</h3>
+                            </div>
+                            <p class="menu-item-desc">مزيج منعش من التوت البري الطازج، النعناع، والليمون مع الثلج
+                                المجروش</p>
+                            <div class="menu-item-meta">
+                                <div class="meta-item"><i class="fas fa-fire"></i> 120 سعرة</div>
+                            </div>
+                        </div>
+                        <div class="menu-item-price">
+                            <span class="price-amount">28</span>
+                            <span class="price-currency">ريال</span>
+                            <button class="menu-item-action"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="experience-bg">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&h=1080&fit=crop"
+                alt="Restaurant">
+        </div>
+        <div class="experience-container">
+            <div class="experience-header">
+                <div class="section-label reveal">
+                    <span>لماذا نحن</span>
+                </div>
+                <h2 class="section-title reveal stagger-1">تجربة <span class="highlight">استثنائية</span><br>في كل تفصيل
+                </h2>
+            </div>
+
+            <div class="experience-grid">
+                <div class="experience-card reveal stagger-1">
+                    <span class="experience-number">01</span>
+                    <div class="experience-icon">👨‍🍳</div>
+                    <h3 class="experience-card-title">طهاة عالميون</h3>
+                    <p class="experience-card-text">فريق من أمهر الطهاة بخبرة تتجاوز 20 عاماً في أرقى المطاعم العالمية
+                    </p>
+                </div>
+
+                <div class="experience-card reveal stagger-2">
+                    <span class="experience-number">02</span>
+                    <div class="experience-icon">🌿</div>
+                    <h3 class="experience-card-title">مكونات طازجة</h3>
+                    <p class="experience-card-text">نستخدم أجود المكونات الطازجة المستوردة يومياً من أفضل المصادر
+                        العالمية</p>
+                </div>
+
+                <div class="experience-card reveal stagger-3">
+                    <span class="experience-number">03</span>
+                    <div class="experience-icon">✨</div>
+                    <h3 class="experience-card-title">أجواء راقية</h3>
+                    <p class="experience-card-text">تصميم داخلي فاخر يجمع بين الأصالة الشرقية والحداثة العصرية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="gallery-bg-pattern"></div>
+        <span class="gallery-floating-icon">🍽️</span>
+        <span class="gallery-floating-icon">✨</span>
+
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <div class="gallery-header-content">
+                    <div class="gallery-subtitle">
+                        <span>معرض الصور</span>
+                    </div>
+                    <h2 class="gallery-title">لحظات <span class="highlight">استثنائية</span><br>من مطعمنا</h2>
+                    <p class="gallery-desc">استمتع بجولة بصرية في أرقى تفاصيل مطعم الشرق، من الأطباق الفاخرة إلى الأجواء
+                        الساحرة</p>
+                    <div class="gallery-stats">
+                        <div class="gallery-stat">
+                            <span class="gallery-stat-number">500+</span>
+                            <span class="gallery-stat-label">صورة</span>
+                        </div>
+                        <div class="gallery-stat">
+                            <span class="gallery-stat-number">50+</span>
+                            <span class="gallery-stat-label">طبق مصور</span>
+                        </div>
+                        <div class="gallery-stat">
+                            <span class="gallery-stat-number">15</span>
+                            <span class="gallery-stat-label">جائزة تصوير</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">الكل</button>
+                    <button class="filter-btn" data-filter="food">الأطباق</button>
+                    <button class="filter-btn" data-filter="interior">الأجواء</button>
+                    <button class="filter-btn" data-filter="team">الفريق</button>
+                    <button class="filter-btn" data-filter="events">المناسبات</button>
+                </div>
+            </div>
+
+            <div class="gallery-masonry">
+                <!-- Item 1 - Large -->
+                <div class="gallery-item size-large" data-category="interior" data-index="0">
+                    <div class="gallery-item-inner">
+                        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&h=1000&fit=crop"
+                            alt="الصالة الرئيسية">
+                        <div class="gallery-item-badge">مميز</div>
+                        <div class="gallery-item-actions">
+                            <button class="gallery-action-btn gallery-zoom-btn"><i class="fas fa-expand"></i></button>
+                            <button class="gallery-action-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="gallery-item-overlay">
+                            <span class="gallery-item-category"><i class="fas fa-circle"></i> الأجواء</span>
+                            <h4 class="gallery-item-title">الصالة الرئيسية</h4>
+                            <p class="gallery-item-desc">تصميم داخلي فاخر يجمع بين الأصالة والحداثة</p>
+                        </div>
+                        <span class="gallery-item-number">01</span>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="gallery-item size-tall" data-category="team" data-index="1">
+                    <div class="gallery-item-inner">
+                        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500&h=700&fit=crop"
+                            alt="فريق الطهاة">
+                        <div class="gallery-item-actions">
+                            <button class="gallery-action-btn gallery-zoom-btn"><i class="fas fa-expand"></i></button>
+                            <button class="gallery-action-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="gallery-item-overlay">
+                            <span class="gallery-item-category"><i class="fas fa-circle"></i> الفريق</span>
+                            <h4 class="gallery-item-title">الشيف الرئيسي</h4>
+                            <p class="gallery-item-desc">خبرة 20 عاماً في فنون الطهي العالمية</p>
+                        </div>
+                        <span class="gallery-item-number">02</span>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="gallery-item" data-category="food" data-index="2">
+                    <div class="gallery-item-inner">
+                        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=500&h=400&fit=crop"
+                            alt="طبق مميز">
+                        <div class="gallery-item-actions">
+                            <button class="gallery-action-btn gallery-zoom-btn"><i class="fas fa-expand"></i></button>
+                            <button class="gallery-action-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="gallery-item-overlay">
+                            <span class="gallery-item-category"><i class="fas fa-circle"></i> الأطباق</span>
+                            <h4 class="gallery-item-title">ستيك واغيو</h4>
+                            <p class="gallery-item-desc">أجود أنواع اللحوم اليابانية</p>
+                        </div>
+                        <span class="gallery-item-number">03</span>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="gallery-item" data-category="interior" data-index="3">
+                    <div class="gallery-item-inner">
+                        <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=500&h=400&fit=crop"
+                            alt="الصالة الخاصة">
+                        <div class="gallery-item-actions">
+                            <button class="gallery-action-btn gallery-zoom-btn"><i class="fas fa-expand"></i></button>
+                            <button class="gallery-action-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="gallery-item-overlay">
+                            <span class="gallery-item-category"><i class="fas fa-circle"></i> الأجواء</span>
+                            <h4 class="gallery-item-title">الصالة الخاصة</h4>
+                            <p class="gallery-item-desc">خصوصية تامة لمناسباتك المميزة</p>
+                        </div>
+                        <span class="gallery-item-number">04</span>
+                    </div>
+                </div>
+
+                <!-- Item 5 - Wide -->
+                <div class="gallery-item size-wide" data-category="interior" data-index="4">
+                    <div class="gallery-item-inner">
+                        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=900&h=400&fit=crop"
+                            alt="ركن المشروبات">
+                        <div class="gallery-item-actions">
+                            <button class="gallery-action-btn gallery-zoom-btn"><i class="fas fa-expand"></i></button>
+                            <button class="gallery-action-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="gallery-item-overlay">
+                            <span class="gallery-item-category"><i class="fas fa-circle"></i> الأجواء</span>
+                            <h4 class="gallery-item-title">ركن المشروبات</h4>
+                            <p class="gallery-item-desc">تشكيلة متنوعة من أفخر المشروبات</p>
+                        </div>
+                        <span class="gallery-item-number">05</span>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="gallery-item size-featured" data-category="food" data-index="5">
+                    <div class="gallery-item-inner">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&h=600&fit=crop"
+                            alt="طبق رئيسي">
+                        <div class="gallery-item-badge">الأكثر طلباً</div>
+                        <div class="gallery-item-actions">
+                            <button class="gallery-action-btn gallery-zoom-btn"><i class="fas fa-expand"></i></button>
+                            <button class="gallery-action-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="gallery-item-overlay">
+                            <span class="gallery-item-category"><i class="fas fa-circle"></i> الأطباق</span>
+                            <h4 class="gallery-item-title">ريش الغنم المشوية</h4>
+                            <p class="gallery-item-desc">مشوية على الفحم مع التوابل الشرقية</p>
+                        </div>
+                        <span class="gallery-item-number">06</span>
+                    </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="gallery-item" data-category="events" data-index="6">
+                    <div class="gallery-item-inner">
+                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&h=400&fit=crop"
+                            alt="مناسبة خاصة">
+                        <div class="gallery-item-actions">
+                            <button class="gallery-action-btn gallery-zoom-btn"><i class="fas fa-expand"></i></button>
+                            <button class="gallery-action-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="gallery-item-overlay">
+                            <span class="gallery-item-category"><i class="fas fa-circle"></i> المناسبات</span>
+                            <h4 class="gallery-item-title">حفل خاص</h4>
+                            <p class="gallery-item-desc">نجعل مناسباتك لا تُنسى</p>
+                        </div>
+                        <span class="gallery-item-number">07</span>
+                    </div>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="gallery-item size-tall" data-category="food" data-index="7">
+                    <div class="gallery-item-inner">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&h=700&fit=crop"
+                            alt="حلويات">
+                        <div class="gallery-item-actions">
+                            <button class="gallery-action-btn gallery-zoom-btn"><i class="fas fa-expand"></i></button>
+                            <button class="gallery-action-btn"><i class="fas fa-heart"></i></button>
+                        </div>
+                        <div class="gallery-item-overlay">
+                            <span class="gallery-item-category"><i class="fas fa-circle"></i> الأطباق</span>
+                            <h4 class="gallery-item-title">الحلويات الشرقية</h4>
+                            <p class="gallery-item-desc">تحف فنية من السكر والحب</p>
+                        </div>
+                        <span class="gallery-item-number">08</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-load-more">
+                <button class="gallery-load-btn">
+                    <span>عرض المزيد</span>
+                    <i class="fas fa-arrow-down"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Lightbox -->
+    <div class="gallery-lightbox" id="galleryLightbox">
+        <button class="lightbox-close"><i class="fas fa-times"></i></button>
+        <div class="lightbox-container">
+            <div class="lightbox-image-wrapper">
+                <img src="" alt="" class="lightbox-image" id="lightboxImage">
+                <button class="lightbox-nav prev"><i class="fas fa-chevron-right"></i></button>
+                <button class="lightbox-nav next"><i class="fas fa-chevron-left"></i></button>
+            </div>
+            <div class="lightbox-content">
+                <span class="lightbox-category" id="lightboxCategory"><i class="fas fa-circle"></i> <span></span></span>
+                <h3 class="lightbox-title" id="lightboxTitle"></h3>
+                <p class="lightbox-desc" id="lightboxDesc"></p>
+                <div class="lightbox-meta">
+                    <div class="lightbox-meta-item">
+                        <span class="lightbox-meta-value">4K</span>
+                        <span class="lightbox-meta-label">الجودة</span>
+                    </div>
+                    <div class="lightbox-meta-item">
+                        <span class="lightbox-meta-value">2024</span>
+                        <span class="lightbox-meta-label">السنة</span>
+                    </div>
+                    <div class="lightbox-meta-item">
+                        <span class="lightbox-meta-value">Pro</span>
+                        <span class="lightbox-meta-label">التصوير</span>
+                    </div>
+                </div>
+                <div class="lightbox-tags">
+                    <span class="lightbox-tag">مطعم فاخر</span>
+                    <span class="lightbox-tag">تصميم راقي</span>
+                    <span class="lightbox-tag">أجواء مميزة</span>
+                </div>
+                <div class="lightbox-share">
+                    <span class="lightbox-share-title">مشاركة</span>
+                    <div class="lightbox-share-btns">
+                        <button class="lightbox-share-btn"><i class="fab fa-facebook-f"></i></button>
+                        <button class="lightbox-share-btn"><i class="fab fa-twitter"></i></button>
+                        <button class="lightbox-share-btn"><i class="fab fa-instagram"></i></button>
+                        <button class="lightbox-share-btn"><i class="fab fa-pinterest"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="lightbox-counter"><span id="currentIndex">1</span> / <span id="totalImages">8</span></span>
+    </div>
+
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <div class="testimonials-header">
+                <div class="section-label reveal">
+                    <span>آراء العملاء</span>
+                </div>
+                <h2 class="section-title reveal stagger-1">ماذا يقول <span class="highlight">عملاؤنا</span></h2>
+            </div>
+
+            <div class="testimonials-wrapper">
+                <div class="testimonials-track">
+                    <div class="testimonial-card">
+                        <span class="testimonial-quote">"</span>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">تجربة رائعة! الطعام لذيذ جداً والخدمة ممتازة. الأجواء راقية والديكور
+                            مذهل. سأعود بالتأكيد مع عائلتي.</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+                                    alt="Customer">
+                            </div>
+                            <div class="author-info">
+                                <h4>أحمد محمد</h4>
+                                <span>عميل دائم</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <span class="testimonial-quote">"</span>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">أفضل مطعم زرته في الرياض! الأطباق فاخرة والنكهات مذهلة. أنصح الجميع
+                            بتجربة ستيك الواغيو.</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"
+                                    alt="Customer">
+                            </div>
+                            <div class="author-info">
+                                <h4>سارة أحمد</h4>
+                                <span>مدونة طعام</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <span class="testimonial-quote">"</span>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">احتفلنا بذكرى زواجنا هنا وكانت ليلة لا تُنسى. الفريق اهتم بكل
+                            التفاصيل وجعل المناسبة مميزة.</p>
+                        <div class="testimonial-author">
+                            <div class="author-image">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+                                    alt="Customer">
+                            </div>
+                            <div class="author-info">
+                                <h4>خالد العمري</h4>
+                                <span>رجل أعمال</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Reservation Section -->
+    <section class="reservation" id="reserve">
+        <div class="reservation-bg">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&h=1080&fit=crop"
+                alt="Restaurant">
+        </div>
+        <div class="reservation-container">
+            <div class="reservation-wrapper">
+                <div class="reservation-info">
+                    <div class="section-label reveal">
+                        <span>تواصل معنا</span>
+                    </div>
+                    <h2 class="section-title reveal stagger-1">احجز <span class="highlight">طاولتك</span> الآن</h2>
+                    <p class="reservation-text reveal stagger-2">نسعد بخدمتكم وتقديم أفضل تجربة طعام. احجز طاولتك مسبقاً
+                        لضمان مكانك في أجواء من الفخامة والرقي.</p>
+
+                    <div class="contact-cards reveal stagger-3">
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-card-content">
+                                <h4>العنوان</h4>
+                                <p>شارع الملك فهد، حي العليا، الرياض</p>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fas fa-phone"></i></div>
+                            <div class="contact-card-content">
+                                <h4>الهاتف</h4>
+                                <p dir="ltr">+966 50 123 4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fas fa-clock"></i></div>
+                            <div class="contact-card-content">
+                                <h4>ساعات العمل</h4>
+                                <p>يومياً: 12 ظهراً - 12 منتصف الليل</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links reveal stagger-4">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-snapchat"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="reservation-form-wrapper reveal-scale">
+                    <h3 class="form-title">احجز طاولتك</h3>
+                    <p class="form-subtitle">املأ النموذج وسنتواصل معك لتأكيد الحجز</p>
+
+                    <form class="reservation-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>الاسم الكامل</label>
+                                <input type="text" placeholder="اسمك الكريم">
+                            </div>
+                            <div class="form-group">
+                                <label>رقم الجوال</label>
+                                <input type="tel" placeholder="05xxxxxxxx">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>التاريخ</label>
+                                <input type="date">
+                            </div>
+                            <div class="form-group">
+                                <label>الوقت</label>
+                                <input type="time">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>عدد الأشخاص</label>
+                            <select>
+                                <option>اختر عدد الأشخاص</option>
+                                <option>شخصان</option>
+                                <option>3-4 أشخاص</option>
+                                <option>5-6 أشخاص</option>
+                                <option>7-8 أشخاص</option>
+                                <option>أكثر من 8 أشخاص</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>ملاحظات خاصة</label>
+                            <textarea placeholder="أي طلبات أو ملاحظات خاصة؟"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>تأكيد الحجز</span>
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-icon">🍽️</span>
+                        <span class="logo-text">الشرق</span>
+                    </a>
+                    <p>نقدم لكم تجربة طعام استثنائية تجمع بين أصالة المطبخ الشرقي وفن الطهي العالمي منذ عام 2009.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-snapchat"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>روابط سريعة</h4>
+                    <div class="footer-links">
+                        <a href="#home"><i class="fas fa-arrow-left"></i> الرئيسية</a>
+                        <a href="#story"><i class="fas fa-arrow-left"></i> قصتنا</a>
+                        <a href="#menu"><i class="fas fa-arrow-left"></i> القائمة</a>
+                        <a href="#gallery"><i class="fas fa-arrow-left"></i> المعرض</a>
+                        <a href="#reserve"><i class="fas fa-arrow-left"></i> الحجز</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>ساعات العمل</h4>
+                    <div class="footer-links">
+                        <a href="#">السبت - الخميس: 12م - 12ص</a>
+                        <a href="#">الجمعة: 1م - 12ص</a>
+                        <a href="#">الحجز مسبقاً مطلوب</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>تواصل معنا</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>شارع الملك فهد، حي العليا<br>الرياض، المملكة العربية السعودية</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p dir="ltr">+966 50 123 4567</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@alsharq.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 مطعم الشرق. جميع الحقوق محفوظة</p>
+                <div class="footer-bottom-links">
+                    <a href="#">سياسة الخصوصية</a>
+                    <a href="#">الشروط والأحكام</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#home" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hide');
+            }, 2000);
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Navbar Scroll
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('show', window.scrollY > 500);
+        });
+
+        // Category Buttons
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // ==================== GALLERY SYSTEM ====================
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const lightbox = document.getElementById('galleryLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxDesc = document.getElementById('lightboxDesc');
+        const lightboxCategory = document.getElementById('lightboxCategory');
+        const currentIndexEl = document.getElementById('currentIndex');
+        const totalImagesEl = document.getElementById('totalImages');
+        let currentGalleryIndex = 0;
+        let filteredItems = [...galleryItems];
+
+        // Menu Filtering
+        const menuCategoryBtns = document.querySelectorAll('.menu-sidebar .category-btn');
+        const menuItems = document.querySelectorAll('.menu-content .menu-item');
+
+        menuCategoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.getAttribute('data-category');
+
+                // Update active button
+                menuCategoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter items
+                menuItems.forEach(item => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+
+                    setTimeout(() => {
+                        if (item.getAttribute('data-category') === category) {
+                            item.style.display = 'grid';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 50);
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    }, 300);
+                });
+            });
+        });
+
+        // Gallery Data
+        const galleryData = [
+            { title: 'الصالة الرئيسية', desc: 'تصميم داخلي فاخر يجمع بين الأصالة والحداثة، مع إضاءة دافئة وأجواء راقية تليق بضيوفنا الكرام', category: 'الأجواء', img: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200&h=800&fit=crop' },
+            { title: 'الشيف الرئيسي', desc: 'خبرة 20 عاماً في فنون الطهي العالمية، يقود فريقاً من أمهر الطهاة لتقديم أشهى الأطباق', category: 'الفريق', img: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&h=800&fit=crop' },
+            { title: 'ستيك واغيو', desc: 'أجود أنواع اللحوم اليابانية، مشوية بإتقان لتقديم تجربة طعم لا مثيل لها', category: 'الأطباق', img: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=1200&h=800&fit=crop' },
+            { title: 'الصالة الخاصة', desc: 'خصوصية تامة لمناسباتك المميزة، مع خدمة شخصية وأجواء حصرية', category: 'الأجواء', img: 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=1200&h=800&fit=crop' },
+            { title: 'ركن المشروبات', desc: 'تشكيلة متنوعة من أفخر المشروبات الطازجة والعصائر الطبيعية', category: 'الأجواء', img: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&h=800&fit=crop' },
+            { title: 'ريش الغنم المشوية', desc: 'مشوية على الفحم مع التوابل الشرقية الأصيلة، تقدم مع الأرز البخاري', category: 'الأطباق', img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&h=800&fit=crop' },
+            { title: 'حفل خاص', desc: 'نجعل مناسباتك لا تُنسى مع خدمة متميزة وتنظيم احترافي', category: 'المناسبات', img: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1200&h=800&fit=crop' },
+            { title: 'الحلويات الشرقية', desc: 'تحف فنية من السكر والحب، حلويات شرقية أصيلة بلمسة عصرية', category: 'الأطباق', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&h=800&fit=crop' }
+        ];
+
+        // Filter Gallery
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                galleryItems.forEach(item => {
+                    const category = item.dataset.category;
+                    if (filter === 'all' || category === filter) {
+                        item.style.display = 'block';
+                        item.style.animation = 'fadeInUp 0.6s ease forwards';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                filteredItems = [...galleryItems].filter(item => item.style.display !== 'none');
+                totalImagesEl.textContent = filteredItems.length;
+            });
+        });
+
+        // Open Lightbox
+        document.querySelectorAll('.gallery-zoom-btn').forEach((btn, index) => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openLightbox(index);
+            });
+        });
+
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => openLightbox(index));
+        });
+
+        function openLightbox(index) {
+            currentGalleryIndex = index;
+            updateLightboxContent();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateLightboxContent() {
+            const data = galleryData[currentGalleryIndex];
+            lightboxImage.src = data.img;
+            lightboxTitle.textContent = data.title;
+            lightboxDesc.textContent = data.desc;
+            lightboxCategory.querySelector('span').textContent = data.category;
+            currentIndexEl.textContent = currentGalleryIndex + 1;
+            totalImagesEl.textContent = galleryData.length;
+        }
+
+        // Close Lightbox
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Navigate Lightbox
+        document.querySelector('.lightbox-nav.prev').addEventListener('click', () => {
+            currentGalleryIndex = (currentGalleryIndex - 1 + galleryData.length) % galleryData.length;
+            updateLightboxContent();
+        });
+
+        document.querySelector('.lightbox-nav.next').addEventListener('click', () => {
+            currentGalleryIndex = (currentGalleryIndex + 1) % galleryData.length;
+            updateLightboxContent();
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') {
+                currentGalleryIndex = (currentGalleryIndex + 1) % galleryData.length;
+                updateLightboxContent();
+            }
+            if (e.key === 'ArrowRight') {
+                currentGalleryIndex = (currentGalleryIndex - 1 + galleryData.length) % galleryData.length;
+                updateLightboxContent();
+            }
+        });
+
+        // Like Button Animation
+        document.querySelectorAll('.gallery-action-btn:nth-child(2)').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                btn.classList.toggle('liked');
+                if (btn.classList.contains('liked')) {
+                    btn.style.background = '#e74c3c';
+                    btn.style.borderColor = '#e74c3c';
+                    btn.innerHTML = '<i class="fas fa-heart"></i>';
+                } else {
+                    btn.style.background = 'rgba(0, 0, 0, 0.5)';
+                    btn.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                }
+            });
+        });
+
+        // Add fadeInUp animation
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }`;
+        document.head.appendChild(styleSheet);
+
+        // Parallax Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroImg = document.querySelector('.hero-bg img');
+            if (heroImg) {
+                heroImg.style.transform = `scale(1.1) translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Form Submission
+        document.querySelector('.reservation-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('شكراً لك! سنتواصل معك قريباً لتأكيد الحجز.');
+        });
+    </script>
+</body>
+
+</html>

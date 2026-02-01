@@ -1,0 +1,3107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخطاط محمد نور | فن الخط العربي الأصيل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Amiri', serif;
+    background: #0a0806;
+    color: #f8f4eb;
+    overflow-x: hidden;
+    line-height: 1.9;
+}
+
+:root {
+    --gold: #d4a853;
+    --gold-light: #f0d590;
+    --gold-dark: #a67c32;
+    --gold-glow: rgba(212, 168, 83, 0.4);
+    --cream: #f8f4eb;
+    --cream-dark: #e8dcc8;
+    --brown: #3d2914;
+    --brown-light: #5a3d1f;
+    --dark: #0a0806;
+    --dark-100: #0f0c09;
+    --dark-200: #14110d;
+    --dark-300: #1a1612;
+    --dark-400: #221d17;
+    --muted: rgba(248, 244, 235, 0.6);
+    --glass: rgba(212, 168, 83, 0.06);
+    --glass-border: rgba(212, 168, 83, 0.18);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+    border-radius: 5px;
+    border: 2px solid var(--dark);
+}
+
+::selection {
+    background: var(--gold);
+    color: var(--dark);
+}
+
+.preloader {
+    position: fixed;
+    inset: 0;
+    background: var(--dark);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: all 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.preloader.hide {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.calligraphy-loader {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.ink-circle {
+    position: absolute;
+    inset: 0;
+    border: 3px solid transparent;
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: inkSpin 1.5s linear infinite;
+}
+
+.ink-circle:nth-child(2) {
+    inset: 15px;
+    border-top-color: transparent;
+    border-right-color: var(--gold-light);
+    animation-duration: 2s;
+    animation-direction: reverse;
+}
+
+.ink-circle:nth-child(3) {
+    inset: 30px;
+    border-top-color: var(--gold-dark);
+    border-left-color: var(--gold-dark);
+    animation-duration: 2.5s;
+}
+
+@keyframes inkSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loader-quill {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: var(--gold);
+    animation: quillPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes quillPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.7;
+    }
+}
+
+.loader-text {
+    margin-top: 40px;
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    text-shadow: 0 0 30px var(--gold-glow);
+}
+
+.loader-progress {
+    width: 250px;
+    height: 4px;
+    background: var(--dark-300);
+    margin-top: 30px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loader-progress::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    animation: progressLoad 2.5s ease-out forwards;
+    transform-origin: right;
+}
+
+@keyframes progressLoad {
+    from {
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+    to {
+        transform: scaleX(1);
+        transform-origin: right;
+    }
+}
+.cursor-glo
+w {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+    transition: opacity 0.3s;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: transparent;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header.scrolled {
+    background: rgba(10, 8, 6, 0.95);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+}
+
+.header-top-ornament {
+    height: 5px;
+    background: linear-gradient(90deg, transparent 0%, var(--gold-dark) 20%, var(--gold) 50%, var(--gold-dark) 80%, transparent 100%);
+    transform: scaleX(0);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header.scrolled .header-top-ornament {
+    transform: scaleX(1);
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.logo-icon {
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    transition: transform 0.5s;
+}
+
+.logo:hover .logo-icon {
+    transform: rotate(30deg);
+}
+
+.logo-icon i {
+    font-size: 1.4rem;
+    color: var(--dark);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-name {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    line-height: 1.2;
+    transition: text-shadow 0.3s;
+}
+
+.logo:hover .logo-name {
+    text-shadow: 0 0 20px var(--gold-glow);
+}
+
+.logo-title {
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 45px;
+}
+
+.nav-link {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 1rem;
+    position: relative;
+    padding: 8px 0;
+    transition: color 0.3s;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+}
+
+.nav-link::after {
+    content: '✦';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    color: var(--gold);
+    font-size: 0.6rem;
+    transition: transform 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--gold);
+}
+
+.nav-link:hover::before {
+    width: 100%;
+}
+
+.nav-link:hover::after {
+    transform: translateX(-50%) scale(1);
+}
+
+.header-cta {
+    padding: 15px 35px;
+    background: transparent;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.header-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    transform: translateX(-100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.header-cta:hover {
+    color: var(--dark);
+    border-color: var(--gold);
+    box-shadow: 0 0 40px var(--gold-glow);
+}
+
+.header-cta:hover::before {
+    transform: translateX(0);
+}
+
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+}
+
+.mobile-menu-btn span {
+    width: 30px;
+    height: 2px;
+    background: var(--gold);
+    transition: all 0.4s;
+    transform-origin: center;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: var(--dark);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav.active {
+    right: 0;
+}
+
+.mobile-nav a {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 2rem;
+    color: var(--cream);
+    text-decoration: none;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+.mobile-nav.active a {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-nav a:hover {
+    color: var(--gold);
+    text-shadow: 0 0 20px var(--gold-glow);
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 50px;
+}
+
+.hero-bg-layers {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, var(--dark-300) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, var(--dark-200) 0%, transparent 50%), var(--dark);
+}
+
+.hero-bg-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0L93.3 25v50L50 100 6.7 75V25z' fill='none' stroke='%23d4a853' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+    animation: patternFloat 40s linear infinite;
+}
+
+@keyframes patternFloat {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(100px, 100px) rotate(5deg);
+    }
+}
+
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleRise 8s ease-in-out infinite;
+}
+
+.particle:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    left: 20%;
+    animation-delay: 1s;
+}
+
+.particle:nth-child(3) {
+    left: 30%;
+    animation-delay: 2s;
+}
+
+.particle:nth-child(4) {
+    left: 40%;
+    animation-delay: 3s;
+}
+
+.particle:nth-child(5) {
+    left: 50%;
+    animation-delay: 4s;
+}
+
+.particle:nth-child(6) {
+    left: 60%;
+    animation-delay: 5s;
+}
+
+.particle:nth-child(7) {
+    left: 70%;
+    animation-delay: 6s;
+}
+
+.particle:nth-child(8) {
+    left: 80%;
+    animation-delay: 7s;
+}
+
+.particle:nth-child(9) {
+    left: 90%;
+    animation-delay: 0.5s;
+}
+
+.particle:nth-child(10) {
+    left: 95%;
+    animation-delay: 2.5s;
+}
+
+@keyframes particleRise {
+    0% {
+        bottom: -10px;
+        opacity: 0;
+        transform: scale(0);
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        bottom: 100%;
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+.hero-floating-elements {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.floating-calligraphy {
+    position: absolute;
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 8rem;
+    color: var(--gold);
+    opacity: 0.03;
+    animation: floatCalligraphy 20s ease-in-out infinite;
+}
+
+.floating-calligraphy:nth-child(1) {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.floating-calligraphy:nth-child(2) {
+    top: 60%;
+    right: 5%;
+    animation-delay: 5s;
+}
+
+.floating-calligraphy:nth-child(3) {
+    bottom: 10%;
+    left: 15%;
+    animation-delay: 10s;
+}
+
+@keyframes floatCalligraphy {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-30px) rotate(3deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(-2deg);
+    }
+    75% {
+        transform: translateY(-40px) rotate(2deg);
+    }
+}
+.her
+o-main-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    width: 100%;
+}
+
+.hero-frame {
+    position: relative;
+    padding: 80px 100px;
+    background: linear-gradient(135deg, rgba(20, 17, 13, 0.9) 0%, rgba(10, 8, 6, 0.95) 100%);
+    border: 2px solid var(--gold);
+    clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+    opacity: 0;
+    transform: scale(0.9);
+    animation: heroFrameIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.5s;
+}
+
+@keyframes heroFrameIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.hero-frame::before {
+    content: '';
+    position: absolute;
+    inset: 15px;
+    border: 1px solid var(--gold);
+    opacity: 0.3;
+    clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+    pointer-events: none;
+}
+
+.hero-corner {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+}
+
+.hero-corner svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 2;
+}
+
+.hero-corner.top-right {
+    top: -2px;
+    right: -2px;
+}
+
+.hero-corner.top-left {
+    top: -2px;
+    left: -2px;
+    transform: scaleX(-1);
+}
+
+.hero-corner.bottom-right {
+    bottom: -2px;
+    right: -2px;
+    transform: scaleY(-1);
+}
+
+.hero-corner.bottom-left {
+    bottom: -2px;
+    left: -2px;
+    transform: scale(-1);
+}
+
+.hero-content {
+    text-align: center;
+}
+
+.hero-bismillah {
+    font-family: 'Scheherazade New', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1s;
+    text-shadow: 0 0 40px var(--gold-glow);
+}
+
+.hero-title {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 5rem;
+    color: var(--cream);
+    margin-bottom: 10px;
+    line-height: 1.2;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.2s;
+}
+
+.hero-title-highlight {
+    display: block;
+    font-size: 3.5rem;
+    color: var(--gold);
+    margin-top: 15px;
+    position: relative;
+}
+
+.hero-title-highlight::before,
+.hero-title-highlight::after {
+    content: '❋';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--gold);
+    opacity: 0.5;
+}
+
+.hero-title-highlight::before {
+    right: calc(100% + 20px);
+}
+
+.hero-title-highlight::after {
+    left: calc(100% + 20px);
+}
+
+.hero-verse {
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.5rem;
+    color: var(--gold-light);
+    margin: 25px 0;
+    font-style: italic;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.4s;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto 40px;
+    line-height: 2;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.6s;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.8s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.btn-primary {
+    padding: 18px 50px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark);
+    text-decoration: none;
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s;
+    box-shadow: 0 10px 30px rgba(212, 168, 83, 0.3);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.7s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(212, 168, 83, 0.5);
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-secondary {
+    padding: 18px 50px;
+    background: transparent;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.btn-secondary:hover {
+    color: var(--dark);
+}
+
+.btn-secondary:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 2.5s;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.scroll-mouse {
+    width: 30px;
+    height: 50px;
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    position: relative;
+}
+
+.scroll-mouse::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 10px;
+    background: var(--gold);
+    border-radius: 2px;
+    animation: scrollWheel 2s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-50%) translateY(15px);
+        opacity: 0;
+    }
+}
+
+.scroll-text {
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+}
+.sec
+tion {
+    padding: 140px 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.reveal-element {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-element.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(80px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 2;
+}
+
+.section-ornament {
+    width: 300px;
+    height: 50px;
+    margin: 0 auto 30px;
+    position: relative;
+}
+
+.section-ornament::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.section-ornament::after {
+    content: '❖';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: var(--gold);
+    background: var(--dark);
+    padding: 0 20px;
+}
+
+.section-title {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 3.5rem;
+    color: var(--cream);
+    margin-bottom: 20px;
+}
+
+.section-title span {
+    color: var(--gold);
+    position: relative;
+}
+
+.section-title span::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.section-subtitle {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.9;
+}
+
+.about-section {
+    background: var(--dark-100);
+}
+
+.about-section .section-bg {
+    background: radial-gradient(ellipse at 80% 20%, rgba(212, 168, 83, 0.03) 0%, transparent 50%);
+}
+
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.about-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 100px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.about-visual {
+    position: relative;
+}
+
+.about-image-wrapper {
+    position: relative;
+    padding: 30px;
+}
+
+.about-image-frame {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-image-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 3px solid var(--gold);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.about-image-frame::after {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1px solid var(--gold);
+    opacity: 0.4;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.about-image {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    filter: sepia(10%);
+    transition: all 0.8s;
+}
+
+.about-image-wrapper:hover .about-image {
+    filter: sepia(0%);
+    transform: scale(1.05);
+}
+
+.about-floating-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 130px;
+    height: 130px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid var(--dark);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: badgePulse 3s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.about-floating-badge span:first-child {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 2.5rem;
+    color: var(--dark);
+    line-height: 1;
+}
+
+.about-floating-badge span:last-child {
+    font-size: 0.85rem;
+    color: var(--dark);
+    font-weight: bold;
+}
+
+.about-decorative-line {
+    position: absolute;
+    top: 50%;
+    left: -50px;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    transform: translateY(-50%);
+}
+
+.about-content {
+    padding-right: 30px;
+}
+
+.about-title {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 2.8rem;
+    color: var(--gold);
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+}
+
+.about-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+}
+
+.about-text {
+    font-size: 1.15rem;
+    color: var(--muted);
+    line-height: 2.2;
+    margin-bottom: 25px;
+}
+
+.about-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.credential-tag {
+    padding: 14px 28px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    color: var(--gold);
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+}
+
+.credential-tag::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateY(100%);
+    transition: transform 0.4s;
+    z-index: -1;
+}
+
+.credential-tag:hover {
+    color: var(--dark);
+    border-color: var(--gold);
+}
+
+.credential-tag:hover::before {
+    transform: translateY(0);
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+    padding-top: 40px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.gallery-section {
+    background: var(--dark);
+}
+
+.gallery-section .section-bg {
+    background: radial-gradient(ellipse at 20% 80%, rgba(212, 168, 83, 0.02) 0%, transparent 50%);
+}
+
+.gallery-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.gallery-masonry {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+    gap: 25px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark-200);
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(10, 8, 6, 0.9) 100%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 2;
+}
+
+.gallery-item:hover {
+    border-color: var(--gold);
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px var(--gold-glow);
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
+}
+
+.gallery-item.large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.gallery-item.tall {
+    grid-row: span 2;
+}
+
+.gallery-item.wide {
+    grid-column: span 2;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: sepia(15%);
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.1);
+    filter: sepia(0%);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+    z-index: 3;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-title {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+
+.gallery-category {
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.gallery-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.4s;
+    z-index: 4;
+}
+
+.gallery-icon i {
+    color: var(--dark);
+    font-size: 1.2rem;
+}
+
+.gallery-item:hover .gallery-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.styles-section {
+    background: var(--dark-100);
+}
+
+.styles-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.styles-section .section-bg {
+    background: radial-gradient(ellipse at 50% 50%, rgba(212, 168, 83, 0.02) 0%, transparent 60%);
+}
+
+.styles-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.styles-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.style-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.style-card {
+    position: relative;
+    padding: 50px 30px;
+    background: var(--dark-200);
+    border: 1px solid var(--glass-border);
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.style-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    transform: scaleX(0);
+    transition: transform 0.5s;
+}
+
+.style-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(212, 168, 83, 0.1) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.style-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-15px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.style-card:hover::before {
+    transform: scaleX(1);
+}
+
+.style-card:hover::after {
+    opacity: 1;
+}
+
+.style-inkwell {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px;
+    position: relative;
+}
+
+.style-inkwell-body {
+    width: 80px;
+    height: 70px;
+    background: linear-gradient(180deg, var(--dark-400) 0%, var(--dark) 100%);
+    margin: 0 auto;
+    border-radius: 10px 10px 30px 30px;
+    border: 2px solid var(--gold-dark);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.style-inkwell-body::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 18px;
+    background: linear-gradient(180deg, var(--dark-300) 0%, var(--dark-400) 100%);
+    border-radius: 8px 8px 0 0;
+    border: 2px solid var(--gold-dark);
+    border-bottom: none;
+}
+
+.style-letter {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s;
+}
+
+.style-card:hover .style-letter {
+    transform: scale(1.2);
+    text-shadow: 0 0 30px var(--gold-glow);
+}
+
+.style-name {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.5rem;
+    color: var(--cream);
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.style-description {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.8;
+    position: relative;
+    z-index: 2;
+}
+.serv
+ices-section {
+    background: var(--dark);
+}
+
+.services-section .section-bg {
+    background: radial-gradient(ellipse at 70% 30%, rgba(212, 168, 83, 0.02) 0%, transparent 50%);
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+}
+
+.service-card {
+    position: relative;
+    padding: 50px 40px;
+    background: linear-gradient(180deg, var(--dark-200) 0%, var(--dark-100) 100%);
+    border: 1px solid var(--glass-border);
+    text-align: center;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(212, 168, 83, 0.08) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    transform: scaleX(0);
+    transition: transform 0.5s;
+}
+
+.service-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-15px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 30px var(--gold-glow);
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-card:hover::after {
+    transform: scaleX(1);
+}
+
+.service-icon-wrapper {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 35px;
+    position: relative;
+}
+
+.service-icon-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    transition: all 0.5s;
+}
+
+.service-card:hover .service-icon-bg {
+    transform: rotate(30deg);
+}
+
+.service-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-icon i {
+    font-size: 2rem;
+    color: var(--dark);
+    transition: all 0.5s;
+}
+
+.service-card:hover .service-icon i {
+    transform: scale(1.2);
+}
+
+.service-title {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.6rem;
+    color: var(--cream);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.service-description {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.service-price {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    position: relative;
+    z-index: 2;
+}
+
+.service-price span {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.testimonials-section {
+    background: var(--dark-100);
+    overflow: hidden;
+}
+
+.testimonials-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.testimonials-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.testimonials-slider {
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card {
+    padding: 60px;
+    background: var(--dark-200);
+    border: 1px solid var(--glass-border);
+    text-align: center;
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 10rem;
+    color: var(--gold);
+    opacity: 0.1;
+    line-height: 1;
+}
+
+.testimonial-text {
+    font-size: 1.4rem;
+    color: var(--cream);
+    line-height: 2.2;
+    margin-bottom: 40px;
+    font-style: italic;
+    position: relative;
+    z-index: 2;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.testimonial-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    object-fit: cover;
+}
+
+.testimonial-info h4 {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-bottom: 5px;
+}
+
+.testimonial-info span {
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.testimonial-stars {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 30px;
+}
+
+.testimonial-stars i {
+    color: var(--gold);
+    font-size: 1.2rem;
+}
+.contac
+t-section {
+    background: var(--dark);
+}
+
+.contact-section .section-bg {
+    background: radial-gradient(ellipse at 30% 70%, rgba(212, 168, 83, 0.02) 0%, transparent 50%);
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+    position: relative;
+    z-index: 2;
+}
+
+.contact-info {
+    padding-top: 30px;
+}
+
+.contact-info-title {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 25px;
+}
+
+.contact-info-text {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 2;
+    margin-bottom: 50px;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 25px 30px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.contact-method:hover {
+    border-color: var(--gold);
+    transform: translateX(15px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.contact-method-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.5s;
+}
+
+.contact-method:hover .contact-method-icon {
+    transform: rotate(10deg);
+}
+
+.contact-method-icon i {
+    font-size: 1.4rem;
+    color: var(--dark);
+}
+
+.contact-method-content h4 {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.2rem;
+    color: var(--cream);
+    margin-bottom: 5px;
+}
+
+.contact-method-content span {
+    font-size: 1rem;
+    color: var(--muted);
+}
+
+.contact-form-wrapper {
+    position: relative;
+}
+
+.contact-scroll {
+    background: linear-gradient(180deg, #f8f4eb 0%, #e8dcc8 100%);
+    padding: 60px 50px;
+    position: relative;
+    color: var(--brown);
+}
+
+.contact-scroll::before {
+    content: '';
+    top: -25px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(180deg, #c4b59d 0%, #a89880 100%);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+.contact-scroll::after {
+    content: '';
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(180deg, #a89880 0%, #c4b59d 100%);
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+.scroll-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid var(--gold);
+}
+
+.scroll-header h3 {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.8rem;
+    color: var(--brown);
+}
+
+.scroll-header p {
+    font-size: 0.95rem;
+    color: var(--brown-light);
+    margin-top: 10px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.05rem;
+    color: var(--brown);
+    margin-bottom: 12px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid transparent;
+    color: var(--brown);
+    font-family: 'Amiri', serif;
+    font-size: 1rem;
+    transition: all 0.4s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 5px 20px rgba(212, 168, 83, 0.2);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--brown-light);
+    opacity: 0.7;
+}
+
+.form-group textarea {
+    height: 130px;
+    resize: none;
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%233d2914' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 15px center;
+    padding-left: 45px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 22px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border: none;
+    color: var(--dark);
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.5s;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.7s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(212, 168, 83, 0.5);
+}
+
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+.footer {
+    background: #050403;
+    padding: 80px 50px 30px;
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.footer-brand {
+    padding-right: 40px;
+}
+
+.footer-logo {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 20px;
+}
+
+.footer-verse {
+    font-size: 1.1rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 30px;
+    line-height: 1.9;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social {
+    width: 50px;
+    height: 50px;
+    background: var(--dark-200);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    text-decoration: none;
+    transition: all 0.4s;
+}
+
+.footer-social:hover {
+    background: var(--gold);
+    color: var(--dark);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--gold-glow);
+}
+
+.footer-column h4 {
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.4rem;
+    color: var(--cream);
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.footer-column h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--gold);
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-links a::before {
+    content: '←';
+    color: var(--gold);
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--gold);
+    transform: translateX(-10px);
+}
+
+.footer-links a:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    color: var(--muted);
+}
+
+.footer-contact-item i {
+    color: var(--gold);
+    font-size: 1.1rem;
+    width: 20px;
+}
+
+.footer-bottom {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-copyright {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.footer-copyright span {
+    color: var(--gold);
+}
+
+.footer-back-top {
+    width: 50px;
+    height: 50px;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark);
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.footer-back-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--gold-glow);
+}
+
+@media (max-width: 1200px) {
+    .about-container {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    
+    .about-visual {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .gallery-masonry {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .footer-main {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero-frame {
+        padding: 60px 50px;
+    }
+    
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .hero-title-highlight {
+        font-size: 2.8rem;
+    }
+    
+    .style-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        padding: 15px 25px;
+    }
+    
+    .nav-menu {
+        display: none;
+    }
+    
+    .header-cta {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .section {
+        padding: 100px 25px;
+    }
+    
+    .hero {
+        padding: 100px 25px;
+    }
+    
+    .hero-frame {
+        padding: 50px 30px;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-title-highlight {
+        font-size: 2rem;
+    }
+    
+    .hero-title-highlight::before,
+    .hero-title-highlight::after {
+        display: none;
+    }
+    
+    .hero-bismillah {
+        font-size: 1.8rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .gallery-masonry {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 180px;
+    }
+    
+    .gallery-item.large {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+    
+    .gallery-item.tall {
+        grid-row: span 1;
+    }
+    
+    .style-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-scroll {
+        padding: 50px 30px;
+    }
+    
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .footer-column h4::after {
+        right: 50%;
+        transform: translateX(50%);
+    }
+    
+    .footer-links a {
+        justify-content: center;
+    }
+    
+    .footer-contact-item {
+        justify-content: center;
+    }
+    
+    .footer-socials {
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-title-highlight {
+        font-size: 1.6rem;
+    }
+    
+    .hero-bismillah {
+        font-size: 1.5rem;
+    }
+    
+    .hero-verse {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .gallery-masonry {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-item.large,
+    .gallery-item.wide {
+        grid-column: span 1;
+    }
+    
+    .about-stats {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .testimonial-card {
+        padding: 40px 25px;
+    }
+    
+    .testimonial-text {
+        font-size: 1.1rem;
+    }
+}
+    </style>
+</head>
+<bo
+dy>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="calligraphy-loader">
+            <div class="ink-circle"></div>
+            <div class="ink-circle"></div>
+            <div class="ink-circle"></div>
+            <div class="loader-quill">✒️</div>
+        </div>
+        <div class="loader-text">بسم الله الرحمن الرحيم</div>
+        <div class="loader-progress"></div>
+    </div>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-top-ornament"></div>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-feather-alt"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name">محمد نور</span>
+                    <span class="logo-title">خطاط ومزخرف</span>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#home" class="nav-link">الرئيسية</a>
+                <a href="#about" class="nav-link">عن الخطاط</a>
+                <a href="#gallery" class="nav-link">المعرض</a>
+                <a href="#styles" class="nav-link">الخطوط</a>
+                <a href="#services" class="nav-link">الخدمات</a>
+                <a href="#contact" class="nav-link">تواصل</a>
+            </nav>
+            <a href="#contact" class="header-cta">اطلب لوحتك</a>
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#home">الرئيسية</a>
+        <a href="#about">عن الخطاط</a>
+        <a href="#gallery">المعرض</a>
+        <a href="#styles">الخطوط</a>
+        <a href="#services">الخدمات</a>
+        <a href="#contact">تواصل</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg-layers">
+            <div class="hero-bg-gradient"></div>
+            <div class="hero-bg-pattern"></div>
+        </div>
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="hero-floating-elements">
+            <div class="floating-calligraphy">الله</div>
+            <div class="floating-calligraphy">محمد</div>
+            <div class="floating-calligraphy">نور</div>
+        </div>
+        <div class="hero-main-content">
+            <div class="hero-frame">
+                <div class="hero-corner top-right">
+                    <svg viewBox="0 0 80 80"><path d="M0 0 L80 0 L80 80" stroke-linecap="round"/></svg>
+                </div>
+                <div class="hero-corner top-left">
+                    <svg viewBox="0 0 80 80"><path d="M0 0 L80 0 L80 80" stroke-linecap="round"/></svg>
+                </div>
+                <div class="hero-corner bottom-right">
+                    <svg viewBox="0 0 80 80"><path d="M0 0 L80 0 L80 80" stroke-linecap="round"/></svg>
+                </div>
+                <div class="hero-corner bottom-left">
+                    <svg viewBox="0 0 80 80"><path d="M0 0 L80 0 L80 80" stroke-linecap="round"/></svg>
+                </div>
+                <div class="hero-content">
+                    <div class="hero-bismillah">بسم الله الرحمن الرحيم</div>
+                    <h1 class="hero-title">
+                        فن الخط العربي
+                        <span class="hero-title-highlight">محمد نور الدين</span>
+                    </h1>
+                    <p class="hero-verse">"وَعَلَّمَ آدَمَ الْأَسْمَاءَ كُلَّهَا"</p>
+                    <p class="hero-description">خطاط ومزخرف متخصص في الخط العربي بأنواعه. أقدم لوحات فنية وتصاميم خطية للمساجد والقصور والهدايا الفاخرة بخبرة تزيد عن 20 عاماً في هذا الفن الأصيل.</p>
+                    <div class="hero-buttons">
+                        <a href="#gallery" class="btn-primary">معرض الأعمال</a>
+                        <a href="#contact" class="btn-secondary">اطلب لوحتك</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="scroll-mouse"></div>
+            <span class="scroll-text">اكتشف المزيد</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+        <div class="section-bg"></div>
+        <div class="section-header reveal-element">
+            <div class="section-ornament"></div>
+            <h2 class="section-title">عن <span>الخطاط</span></h2>
+            <p class="section-subtitle">رحلة عشرين عاماً في فن الخط العربي الأصيل</p>
+        </div>
+        <div class="about-container">
+            <div class="about-visual reveal-left">
+                <div class="about-image-wrapper">
+                    <div class="about-decorative-line"></div>
+                    <div class="about-image-frame">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop&crop=face" alt="الخطاط محمد نور" class="about-image">
+                    </div>
+                    <div class="about-floating-badge">
+                        <span>+20</span>
+                        <span>سنة خبرة</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-content reveal-right">
+                <h3 class="about-title">محمد نور الدين</h3>
+                <p class="about-text">خطاط ومزخرف سعودي، بدأت رحلتي مع الخط العربي منذ الصغر على يد كبار الخطاطين. تتلمذت على يد الأستاذ حامد الآمدي في تركيا، وحصلت على إجازات في عدة أنواع من الخطوط العربية الأصيلة.</p>
+                <p class="about-text">قمت بتنفيذ أعمال خطية لمساجد ومتاحف وقصور في مختلف أنحاء العالم العربي والإسلامي. أسعى لنقل هذا الفن الأصيل للأجيال القادمة من خلال التعليم والإبداع المستمر.</p>
+                <div class="about-credentials">
+                    <span class="credential-tag">إجازة في خط الثلث</span>
+                    <span class="credential-tag">إجازة في خط النسخ</span>
+                    <span class="credential-tag">عضو جمعية الخطاطين</span>
+                    <span class="credential-tag">مدرب معتمد</span>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">لوحة فنية</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">مسجد</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">عميل سعيد</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery-section" id="gallery">
+        <div class="section-bg"></div>
+        <div class="section-header reveal-element">
+            <div class="section-ornament"></div>
+            <h2 class="section-title">معرض <span>الأعمال</span></h2>
+            <p class="section-subtitle">مجموعة مختارة من أعمالي في فن الخط العربي والزخرفة الإسلامية</p>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-masonry">
+                <div class="gallery-item large reveal-scale">
+                    <img src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=800&h=800&fit=crop" alt="آية الكرسي" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">آية الكرسي</h4>
+                        <span class="gallery-category">خط الثلث - ذهب على أزرق</span>
+                    </div>
+                    <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                </div>
+                <div class="gallery-item reveal-scale">
+                    <img src="https://images.unsplash.com/photo-1579187707643-35646d22b596?w=500&h=400&fit=crop" alt="بسم الله" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">بسم الله</h4>
+                        <span class="gallery-category">خط الديواني</span>
+                    </div>
+                    <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                </div>
+                <div class="gallery-item tall reveal-scale">
+                    <img src="https://images.unsplash.com/photo-1590076215667-875d4ef2d7de?w=500&h=600&fit=crop" alt="الحمد لله" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">الحمد لله</h4>
+                        <span class="gallery-category">خط النسخ</span>
+                    </div>
+                    <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                </div>
+                <div class="gallery-item reveal-scale">
+                    <img src="https://images.unsplash.com/photo-1567177662154-dfeb4c93b6ae?w=500&h=400&fit=crop" alt="سورة الفاتحة" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">سورة الفاتحة</h4>
+                        <span class="gallery-category">خط الثلث</span>
+                    </div>
+                    <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                </div>
+                <div class="gallery-item wide reveal-scale">
+                    <img src="https://images.unsplash.com/photo-1585036156171-384164a8c675?w=700&h=400&fit=crop" alt="محمد ﷺ" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">محمد ﷺ</h4>
+                        <span class="gallery-category">خط الطغراء</span>
+                    </div>
+                    <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                </div>
+                <div class="gallery-item reveal-scale">
+                    <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=500&h=400&fit=crop" alt="الله أكبر" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h4 class="gallery-title">الله أكبر</h4>
+                        <span class="gallery-category">خط الكوفي</span>
+                    </div>
+                    <div class="gallery-icon"><i class="fas fa-expand"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+   <!-- Styles Section -->
+    <section class="section styles-section" id="styles">
+        <div class="section-bg"></div>
+        <div class="section-header reveal-element">
+            <div class="section-ornament"></div>
+            <h2 class="section-title">أنواع <span>الخطوط</span></h2>
+            <p class="section-subtitle">أتقن جميع أنواع الخط العربي الأصيل بإجازات معتمدة</p>
+        </div>
+        <div class="styles-container">
+            <div class="styles-showcase">
+                <div class="style-row">
+                    <div class="style-card reveal-element">
+                        <div class="style-inkwell">
+                            <div class="style-inkwell-body">
+                                <span class="style-letter">ث</span>
+                            </div>
+                        </div>
+                        <h4 class="style-name">خط الثلث</h4>
+                        <p class="style-description">أم الخطوط وأجملها، يستخدم في العناوين والآيات القرآنية</p>
+                    </div>
+                    <div class="style-card reveal-element">
+                        <div class="style-inkwell">
+                            <div class="style-inkwell-body">
+                                <span class="style-letter">ن</span>
+                            </div>
+                        </div>
+                        <h4 class="style-name">خط النسخ</h4>
+                        <p class="style-description">خط المصاحف والكتب، واضح وسهل القراءة</p>
+                    </div>
+                    <div class="style-card reveal-element">
+                        <div class="style-inkwell">
+                            <div class="style-inkwell-body">
+                                <span class="style-letter">د</span>
+                            </div>
+                        </div>
+                        <h4 class="style-name">خط الديواني</h4>
+                        <p class="style-description">خط الدواوين والمراسلات الرسمية العثمانية</p>
+                    </div>
+                    <div class="style-card reveal-element">
+                        <div class="style-inkwell">
+                            <div class="style-inkwell-body">
+                                <span class="style-letter">ك</span>
+                            </div>
+                        </div>
+                        <h4 class="style-name">خط الكوفي</h4>
+                        <p class="style-description">أقدم الخطوط العربية، هندسي ومعماري</p>
+                    </div>
+                </div>
+                <div class="style-row">
+                    <div class="style-card reveal-element">
+                        <div class="style-inkwell">
+                            <div class="style-inkwell-body">
+                                <span class="style-letter">ر</span>
+                            </div>
+                        </div>
+                        <h4 class="style-name">خط الرقعة</h4>
+                        <p class="style-description">خط الكتابة اليومية السريعة والعملية</p>
+                    </div>
+                    <div class="style-card reveal-element">
+                        <div class="style-inkwell">
+                            <div class="style-inkwell-body">
+                                <span class="style-letter">ف</span>
+                            </div>
+                        </div>
+                        <h4 class="style-name">خط الفارسي</h4>
+                        <p class="style-description">خط أنيق ومائل، يستخدم في الشعر والأدب</p>
+                    </div>
+                    <div class="style-card reveal-element">
+                        <div class="style-inkwell">
+                            <div class="style-inkwell-body">
+                                <span class="style-letter">ط</span>
+                            </div>
+                        </div>
+                        <h4 class="style-name">الطغراء</h4>
+                        <p class="style-description">توقيع السلاطين والملوك، فن راقي</p>
+                    </div>
+                    <div class="style-card reveal-element">
+                        <div class="style-inkwell">
+                            <div class="style-inkwell-body">
+                                <span class="style-letter">ج</span>
+                            </div>
+                        </div>
+                        <h4 class="style-name">الجلي ديواني</h4>
+                        <p class="style-description">ديواني مزخرف بالنقاط والحركات الجمالية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services-section" id="services">
+        <div class="section-bg"></div>
+        <div class="section-header reveal-element">
+            <div class="section-ornament"></div>
+            <h2 class="section-title">الخدمات <span>والأسعار</span></h2>
+            <p class="section-subtitle">خدمات متنوعة في فن الخط العربي والزخرفة الإسلامية</p>
+        </div>
+        <div class="services-container">
+            <div class="services-grid">
+                <div class="service-card reveal-element">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon-bg"></div>
+                        <div class="service-icon"><i class="fas fa-scroll"></i></div>
+                    </div>
+                    <h3 class="service-title">لوحات قرآنية</h3>
+                    <p class="service-description">لوحات خطية للآيات القرآنية بأحجام مختلفة مع إطارات فاخرة وتذهيب يدوي</p>
+                    <div class="service-price">من 500 <span>ر.س</span></div>
+                </div>
+                <div class="service-card reveal-element">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon-bg"></div>
+                        <div class="service-icon"><i class="fas fa-mosque"></i></div>
+                    </div>
+                    <h3 class="service-title">خط المساجد</h3>
+                    <p class="service-description">تصميم وتنفيذ الخطوط للمساجد والمحاريب والقباب بأعلى جودة</p>
+                    <div class="service-price">حسب المشروع</div>
+                </div>
+                <div class="service-card reveal-element">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon-bg"></div>
+                        <div class="service-icon"><i class="fas fa-gift"></i></div>
+                    </div>
+                    <h3 class="service-title">هدايا خطية</h3>
+                    <p class="service-description">لوحات مخصصة بالأسماء والعبارات للهدايا والمناسبات الخاصة</p>
+                    <div class="service-price">من 200 <span>ر.س</span></div>
+                </div>
+                <div class="service-card reveal-element">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon-bg"></div>
+                        <div class="service-icon"><i class="fas fa-building"></i></div>
+                    </div>
+                    <h3 class="service-title">شعارات وهويات</h3>
+                    <p class="service-description">تصميم شعارات بالخط العربي للشركات والمؤسسات بهوية فريدة</p>
+                    <div class="service-price">من 1000 <span>ر.س</span></div>
+                </div>
+                <div class="service-card reveal-element">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon-bg"></div>
+                        <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+                    </div>
+                    <h3 class="service-title">دورات تعليمية</h3>
+                    <p class="service-description">دورات في تعليم الخط العربي للمبتدئين والمتقدمين حضورياً وأونلاين</p>
+                    <div class="service-price">من 800 <span>ر.س</span></div>
+                </div>
+                <div class="service-card reveal-element">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon-bg"></div>
+                        <div class="service-icon"><i class="fas fa-palette"></i></div>
+                    </div>
+                    <h3 class="service-title">زخرفة إسلامية</h3>
+                    <p class="service-description">تصميم وتنفيذ الزخارف الإسلامية والأرابيسك للمشاريع المعمارية</p>
+                    <div class="service-price">من 300 <span>ر.س</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<!-- Testimonials Section -->
+    <section class="section testimonials-section">
+        <div class="section-bg"></div>
+        <div class="section-header reveal-element">
+            <div class="section-ornament"></div>
+            <h2 class="section-title">آراء <span>العملاء</span></h2>
+            <p class="section-subtitle">ماذا يقول عملاؤنا عن تجربتهم معنا</p>
+        </div>
+        <div class="testimonials-container">
+            <div class="testimonials-slider">
+                <div class="testimonial-card reveal-scale">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"عمل احترافي ورائع، اللوحة التي صممها الأستاذ محمد لمسجدنا أصبحت محط إعجاب جميع المصلين. جزاه الله خيراً على هذا الفن الراقي."</p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="أحمد الشمري" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>أحمد الشمري</h4>
+                            <span>إمام مسجد النور - الرياض</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <div class="section-bg"></div>
+        <div class="section-header reveal-element">
+            <div class="section-ornament"></div>
+            <h2 class="section-title">اطلب <span>لوحتك</span></h2>
+            <p class="section-subtitle">تواصل معي لطلب لوحة خطية مخصصة حسب رغبتك</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info reveal-left">
+                <h3 class="contact-info-title">دعني أخط لك</h3>
+                <p class="contact-info-text">أرسل لي تفاصيل طلبك وسأقدم لك عرض سعر مجاني. كل لوحة تُنفذ بعناية فائقة وحب للفن الأصيل. أسعد بخدمتكم وتلبية طلباتكم.</p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-method-content">
+                            <h4>اتصل بي</h4>
+                            <span>+966 50 000 0000</span>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-method-content">
+                            <h4>واتساب</h4>
+                            <span>+966 50 000 0000</span>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-method-content">
+                            <h4>البريد الإلكتروني</h4>
+                            <span>web.flow1488@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="contact-method-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-method-content">
+                            <h4>الموقع</h4>
+                            <span>الرياض، المملكة العربية السعودية</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form-wrapper reveal-right">
+                <form class="contact-scroll" id="contactForm">
+                    <div class="scroll-header">
+                        <h3>نموذج طلب لوحة</h3>
+                        <p>املأ البيانات وسنتواصل معك قريباً</p>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>الاسم الكريم</label>
+                            <input type="text" placeholder="أدخل اسمك" required>
+                        </div>
+                        <div class="form-group">
+                            <label>رقم الجوال</label>
+                            <input type="tel" placeholder="05xxxxxxxx" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" placeholder="example@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>نوع الخط المطلوب</label>
+                        <select required>
+                            <option value="">اختر نوع الخط</option>
+                            <option value="thuluth">خط الثلث</option>
+                            <option value="naskh">خط النسخ</option>
+                            <option value="diwani">خط الديواني</option>
+                            <option value="kufi">خط الكوفي</option>
+                            <option value="ruqaa">خط الرقعة</option>
+                            <option value="farsi">خط الفارسي</option>
+                            <option value="tughra">الطغراء</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>تفاصيل الطلب</label>
+                        <textarea placeholder="اكتب النص المطلوب وأي تفاصيل إضافية عن الحجم واللون والإطار..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>إرسال الطلب</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+ 
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">محمد نور</div>
+                    <p class="footer-verse">"إِنَّ اللَّهَ جَمِيلٌ يُحِبُّ الْجَمَالَ"<br>فن الخط العربي هو تجسيد للجمال الإلهي في الحرف والكلمة.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="footer-social"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>روابط سريعة</h4>
+                    <div class="footer-links">
+                        <a href="#home">الرئيسية</a>
+                        <a href="#about">عن الخطاط</a>
+                        <a href="#gallery">المعرض</a>
+                        <a href="#services">الخدمات</a>
+                        <a href="#contact">تواصل</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>الخدمات</h4>
+                    <div class="footer-links">
+                        <a href="#">لوحات قرآنية</a>
+                        <a href="#">خط المساجد</a>
+                        <a href="#">هدايا خطية</a>
+                        <a href="#">شعارات</a>
+                        <a href="#">دورات تعليمية</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>تواصل معنا</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+966 50 000 0000</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>web.flow1488@gmail.com</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>الرياض، السعودية</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2024 <span>الخطاط محمد نور</span>. جميع الحقوق محفوظة</p>
+                <div class="footer-back-top" id="backToTop">
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hide');
+            }, 3000);
+        });
+
+        // Cursor Glow Effect
+        const cursorGlow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0;
+        let glowX = 0, glowY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            glowX += (mouseX - glowX) * 0.1;
+            glowY += (mouseY - glowY) * 0.1;
+            cursorGlow.style.left = glowX + 'px';
+            cursorGlow.style.top = glowY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Reveal on Scroll
+        const revealElements = document.querySelectorAll('.reveal-element, .reveal-left, .reveal-right, .reveal-scale');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Staggered Animation for Cards
+        document.querySelectorAll('.style-card, .service-card, .gallery-item').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Back to Top
+        document.getElementById('backToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.submit-btn');
+            const originalContent = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> تم الإرسال بنجاح!';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalContent;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                    this.reset();
+                }, 3000);
+            }, 2000);
+        });
+
+        // Parallax Effect on Hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const heroContent = document.querySelector('.hero-main-content');
+            
+            if (scrolled < window.innerHeight) {
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+                heroContent.style.opacity = 1 - (scrolled / window.innerHeight);
+            }
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.stat-number');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const finalValue = parseInt(target.textContent);
+                    let currentValue = 0;
+                    const increment = finalValue / 50;
+                    const suffix = target.textContent.includes('+') ? '+' : '';
+                    
+                    const updateCounter = () => {
+                        if (currentValue < finalValue) {
+                            currentValue += increment;
+                            target.textContent = Math.ceil(currentValue) + suffix;
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            target.textContent = finalValue + suffix;
+                        }
+                    };
+                    updateCounter();
+                    counterObserver.unobserve(target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // Hide cursor glow on mobile
+        if (window.innerWidth <= 768) {
+            cursorGlow.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

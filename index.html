@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Flow | شركة تطوير المواقع </title>
+    <link rel="icon" type="image/png" sizes="32x32" href="img/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/logo.png">
+    <link rel="shortcut icon" href="img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chatbot.css">
+
+    <script src="js/antigravity-effect.js"></script>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+        <div class="bg-glow glow-1"></div>
+        <div class="bg-glow glow-2"></div>
+        <div class="bg-glow glow-3"></div>
+    </div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <img src="img/logo.png" alt="Logo" class="preloader-logo-img">
+                <div class="preloader-ring"></div>
+            </div>
+            <p class="preloader-text" data-ar="جاري تحميل الموقع..." data-en="Loading...">جاري تحميل الموقع...</p>
+            <div class="preloader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav-logo">
+                <img src="img/logo.png" alt="Logo" class="logo-img">
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active"><span data-ar="الرئيسية" data-en="Home">الرئيسية</span></a>
+                </li>
+                <li><a href="#about" class="nav-link"><span data-ar="من نحن" data-en="About">من نحن</span></a></li>
+                <li><a href="#services" class="nav-link"><span data-ar="الخدمات" data-en="Services">الخدمات</span></a>
+                </li>
+                <li><a href="#projects" class="nav-link"><span data-ar="الأعمال" data-en="Portfolio">الأعمال</span></a>
+                </li>
+                <li><a href="#skills" class="nav-link"><span data-ar="المهارات" data-en="Skills">المهارات</span></a>
+                </li>
+
+                <li><a href="#contact" class="nav-link"><span data-ar="تواصل معنا" data-en="Contact">تواصل
+                            معنا</span></a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="lang-toggle" id="langToggle" aria-label="تبديل اللغة">
+                    <span class="lang-current">AR</span>
+                    <i class="fas fa-globe"></i>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="#contact" class="nav-cta neon-btn">
+                    <span data-ar="ابدأ مشروعك" data-en="Start Project">ابدأ مشروعك</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+
+            <button class="nav-toggle" id="navToggle" aria-label="القائمة">
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="line" data-ar="مرحباً بك في" data-en="Welcome to">مرحباً بك في</span>
+                        <span class="name neon-text">Web Flow</span>
+                        <span class="role" data-ar="شركة تطوير المواقع" data-en="Web Development Company">شركة تطوير
+                            المواقع <span class="typed" id="typed"></span></span>
+                    </h1>
+
+                    <p class="hero-description"
+                        data-ar="نصمم ونطور صفحات بورتفوليو احترافية ومواقع شركات مميزة تعكس هوية عملك. فريقنا لديه خبرة +5 سنوات في بناء مواقع تجذب العملاء وتحقق أهدافك."
+                        data-en="We design and develop professional portfolio pages and distinctive company websites that reflect your business identity. Our team has 5+ years of experience building websites that attract clients and achieve your goals.">
+                        نصمم ونطور صفحات بورتفوليو احترافية ومواقع شركات مميزة تعكس هوية عملك.
+                        فريقنا لديه خبرة +5 سنوات في بناء مواقع تجذب العملاء وتحقق أهدافك.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn btn-primary neon-btn">
+                            <span data-ar="شاهد أعمالنا" data-en="View Our Work">شاهد أعمالنا</span>
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-glass">
+                            <span data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="macbook">
+                        <div class="macbook-screen">
+                            <div class="macbook-camera"></div>
+                            <div class="macbook-display">
+                                <div class="browser-bar">
+                                    <div class="browser-dots">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <div class="browser-url">
+                                        <i class="fas fa-lock"></i>
+                                        <span>webflow.dev</span>
+                                    </div>
+                                </div>
+                                <div class="browser-content">
+                                    <video src="img/logoGIF.mp4" autoplay loop muted playsinline></video>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="macbook-body">
+                            <div class="macbook-notch"></div>
+                            <div class="macbook-keyboard">
+                                <!-- Function Row (Touch Bar area) -->
+                                <div class="keyboard-row function-row">
+                                    <span class="key fn power"><i class="fas fa-fingerprint"></i></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn"></span>
+                                    <span class="key fn" data-key="esc">esc</span>
+                                </div>
+                                <!-- Number Row -->
+                                <div class="keyboard-row">
+                                    <span class="key backspace">⌫</span>
+                                    <span class="key">=</span>
+                                    <span class="key">-</span>
+                                    <span class="key">0</span>
+                                    <span class="key">9</span>
+                                    <span class="key">8</span>
+                                    <span class="key">7</span>
+                                    <span class="key">6</span>
+                                    <span class="key">5</span>
+                                    <span class="key">4</span>
+                                    <span class="key">3</span>
+                                    <span class="key">2</span>
+                                    <span class="key">1</span>
+                                    <span class="key" data-key="`">~</span>
+                                </div>
+                                <!-- QWERTY Row -->
+                                <div class="keyboard-row">
+                                    <span class="key backslash">\</span>
+                                    <span class="key">]</span>
+                                    <span class="key">[</span>
+                                    <span class="key">P</span>
+                                    <span class="key">O</span>
+                                    <span class="key">I</span>
+                                    <span class="key">U</span>
+                                    <span class="key">Y</span>
+                                    <span class="key">T</span>
+                                    <span class="key">R</span>
+                                    <span class="key">E</span>
+                                    <span class="key">W</span>
+                                    <span class="key">Q</span>
+                                    <span class="key tab">tab</span>
+                                </div>
+                                <!-- ASDF Row -->
+                                <div class="keyboard-row">
+                                    <span class="key enter">return</span>
+                                    <span class="key">'</span>
+                                    <span class="key">;</span>
+                                    <span class="key">L</span>
+                                    <span class="key">K</span>
+                                    <span class="key">J</span>
+                                    <span class="key">H</span>
+                                    <span class="key">G</span>
+                                    <span class="key">F</span>
+                                    <span class="key">D</span>
+                                    <span class="key">S</span>
+                                    <span class="key">A</span>
+                                    <span class="key caps">caps</span>
+                                </div>
+                                <!-- ZXCV Row -->
+                                <div class="keyboard-row">
+                                    <span class="key shift-right">shift</span>
+                                    <span class="key">/</span>
+                                    <span class="key">.</span>
+                                    <span class="key">,</span>
+                                    <span class="key">M</span>
+                                    <span class="key">N</span>
+                                    <span class="key">B</span>
+                                    <span class="key">V</span>
+                                    <span class="key">C</span>
+                                    <span class="key">X</span>
+                                    <span class="key">Z</span>
+                                    <span class="key shift-left">shift</span>
+                                </div>
+                                <!-- Bottom Row -->
+                                <div class="keyboard-row bottom-row">
+                                    <div class="arrow-keys">
+                                        <span class="key arrow arrow-up">▲</span>
+                                        <div class="arrow-bottom">
+                                            <span class="key arrow arrow-right">▶</span>
+                                            <span class="key arrow arrow-down">▼</span>
+                                            <span class="key arrow arrow-left">◀</span>
+                                        </div>
+                                    </div>
+                                    <span class="key modifier">⌥</span>
+                                    <span class="key command">⌘</span>
+                                    <span class="key spacebar"></span>
+                                    <span class="key command">⌘</span>
+                                    <span class="key modifier">⌥</span>
+                                    <span class="key modifier">⌃</span>
+                                    <span class="key modifier">fn</span>
+                                </div>
+                            </div>
+                            <div class="macbook-trackpad"></div>
+                        </div>
+                        <div class="macbook-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="about-header-box">
+                    <span class="section-tag"><i class="fas fa-users"></i> <span data-ar="تعرف علينا"
+                            data-en="About Us">تعرف
+                            علينا</span></span>
+                    <h2 class="section-title"><span data-ar="من" data-en="About">من</span> <span class="neon-text"
+                            data-ar="نحن" data-en="Us">نحن</span></h2>
+                </div>
+            </div>
+
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="shape-3d-container">
+                        <div class="rings-3d">
+                            <div class="ring ring-outer"></div>
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-3"></div>
+                            <div class="ring-logo">
+                                <img src="img/logo.png" alt="Logo">
+                            </div>
+                        </div>
+                        <div class="shape-glow"></div>
+                    </div>
+                </div>
+
+                <div class="about-info">
+                    <h3 data-ar="شركة تطوير مواقع متخصصة في البورتفوليو والمواقع التجارية"
+                        data-en="Web Development Company Specialized in Portfolio & Business Websites">شركة تطوير مواقع
+                        متخصصة في البورتفوليو والمواقع التجارية</h3>
+                    <p data-ar="نحن Web Flow، شركة تطوير مواقع من مصر متخصصة في تصميم وتطوير صفحات البورتفوليو الاحترافية والمواقع التجارية. نؤمن بأن الموقع الجيد يجب أن يكون سريعاً، جذاباً، ويعكس هوية صاحبه بشكل مميز."
+                        data-en="We are Web Flow, a web development company from Egypt specializing in designing and developing professional portfolio pages and business websites. We believe a good website should be fast, attractive, and reflect its owner's identity distinctively.">
+                        نحن Web Flow، شركة تطوير مواقع من مصر متخصصة في تصميم وتطوير صفحات البورتفوليو الاحترافية
+                        والمواقع التجارية. نؤمن بأن الموقع الجيد يجب أن يكون
+                        سريعاً، جذاباً، ويعكس هوية صاحبه بشكل مميز.
+                    </p>
+                    <p data-ar="عملنا مع مستقلين وشركات صغيرة ومتوسطة في الشرق الأوسط، وساعدنا في إطلاق مواقع حققت نتائج مبهرة في جذب العملاء وعرض الخدمات بشكل احترافي."
+                        data-en="We've worked with freelancers and small to medium businesses in the Middle East, helping launch websites that achieved impressive results in attracting clients and showcasing services professionally.">
+                        عملنا مع مستقلين وشركات صغيرة ومتوسطة في الشرق الأوسط، وساعدنا في إطلاق
+                        مواقع حققت نتائج مبهرة في جذب العملاء وعرض الخدمات بشكل احترافي.
+                    </p>
+
+                    <div class="about-details">
+                        <div class="detail-item">
+                            <i class="fas fa-building"></i>
+                            <div>
+                                <span class="label" data-ar="الشركة" data-en="Company">الشركة</span>
+                                <span class="value" data-ar="Web Flow" data-en="Web Flow">Web Flow</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span class="label" data-ar="البريد" data-en="Email">البريد</span>
+                                <span class="value">web.flow1488@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <span class="label" data-ar="الموقع" data-en="Location">الموقع</span>
+                                <span class="value" data-ar="القاهرة، مصر" data-en="Cairo, Egypt">القاهرة، مصر</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <span class="label" data-ar="الحالة" data-en="Status">الحالة</span>
+                                <span class="value available" data-ar="متاحون للعمل" data-en="Available for work">متاحون
+                                    للعمل</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-actions">
+                        <a href="#contact" class="btn btn-primary neon-btn">
+                            <span data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="services-header-box">
+                    <span class="section-tag"><i class="fas fa-cogs"></i> <span data-ar="ماذا نقدم"
+                            data-en="What We Offer">ماذا نقدم</span></span>
+                    <h2 class="section-title"><span data-ar="خدماتنا" data-en="Our">خدماتنا</span> <span
+                            class="neon-text" data-ar="المميزة" data-en="Services">المميزة</span></h2>
+                    <p class="section-subtitle" data-ar="نقدم حلول متكاملة لتصميم وتطوير المواقع الاحترافية"
+                        data-en="We offer complete solutions for designing and developing professional websites">نقدم
+                        حلول
+                        متكاملة لتصميم وتطوير المواقع الاحترافية</p>
+                </div>
+            </div>
+
+            <div class="services-cards">
+                <div class="service-card-scroll" data-color="#D5FF37">
+                    <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+                    <span class="card-badge"></span>
+                    <h3 class="card-title slide-right">صفحات بورتفوليو</h3>
+                    <p class="card-desc slide-left">صفحات شخصية احترافية لعرض أعمالك ومهاراتك بشكل جذاب يلفت انتباه
+                        العملاء.</p>
+                    <ul class="card-features slide-right">
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>تصميم عصري ومميز</span></li>
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>متجاوب مع جميع الأجهزة</span></li>
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>سرعة تحميل عالية</span></li>
+                    </ul>
+                </div>
+
+                <div class="service-card-scroll" data-color="#7DD6FF">
+                    <div class="card-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <span class="card-badge"></span>
+                    <h3 class="card-title slide-right">صفحات عرض الأسعار</h3>
+                    <p class="card-desc slide-left">صفحات احترافية لعرض خدماتك وأسعارك بطريقة واضحة ومقنعة للعملاء.</p>
+                    <ul class="card-features slide-right">
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>جداول أسعار تفاعلية</span></li>
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>مقارنة الباقات</span></li>
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>نماذج طلب الخدمة</span></li>
+                    </ul>
+                </div>
+
+                <div class="service-card-scroll" data-color="#FFA0B0">
+                    <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                    <span class="card-badge"></span>
+                    <h3 class="card-title slide-right">صفحات الشركات</h3>
+                    <p class="card-desc slide-left">صفحات تعريفية للشركات والمؤسسات لعرض خدماتها وفريق العمل.</p>
+                    <ul class="card-features slide-right">
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>تصميم هوية بصرية</span></li>
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>صفحة الفريق</span></li>
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>معرض الأعمال</span></li>
+                    </ul>
+                </div>
+
+                <div class="service-card-scroll" data-color="#FFA17B">
+                    <div class="card-icon"><i class="fas fa-bullhorn"></i></div>
+                    <span class="card-badge"></span>
+                    <h3 class="card-title slide-right">صفحات الهبوط</h3>
+                    <p class="card-desc slide-left">صفحات Landing Page مصممة لتحويل الزوار إلى عملاء محتملين.</p>
+                    <ul class="card-features slide-right">
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>تصميم يركز على التحويل</span></li>
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>Call to Action فعال</span></li>
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>تحسين SEO</span></li>
+                    </ul>
+                </div>
+
+                <div class="service-card-scroll" data-color="#00F5D4">
+                    <div class="card-icon"><i class="fas fa-tools"></i></div>
+                    <span class="card-badge"></span>
+                    <h3 class="card-title slide-right">صيانة وتحديث</h3>
+                    <p class="card-desc slide-left">خدمات صيانة وتحديث دورية لموقعك لضمان أفضل أداء.</p>
+                    <ul class="card-features slide-right">
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>تحديثات أمنية</span></li>
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>تحسين الأداء</span></li>
+                        <li class="slide-right"><i class="fas fa-check"></i> <span>دعم فني مستمر</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="projects-header-box">
+                    <span class="section-tag"><i class="fas fa-laptop-code"></i> <span data-ar="أعمالنا"
+                            data-en="Our Work">أعمالنا</span></span>
+                    <h2 class="section-title"><span data-ar="مشاريعنا" data-en="Our">مشاريعنا</span> <span
+                            class="neon-text" data-ar="المميزة" data-en="Projects">المميزة</span></h2>
+                    <p class="section-subtitle" data-ar="مجموعة من أفضل المواقع والأنظمة التي صممناها وطورناها"
+                        data-en="A collection of the best websites and systems we've designed and developed">مجموعة من
+                        أفضل المواقع والأنظمة التي
+                        صممناها وطورناها</p>
+                </div>
+
+                <div class="projects-filter">
+                    <button class="filter-btn active" data-filter="websites">
+                        <i class="fas fa-globe"></i>
+                        <span data-ar="المواقع" data-en="Websites">المواقع</span>
+                    </button>
+                    <button class="filter-btn" data-filter="systems">
+                        <i class="fas fa-cogs"></i>
+                        <span data-ar="الأنظمة" data-en="Systems">الأنظمة</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="projects-carousel-container" id="websitesCarousel">
+                <div class="carousel-section">
+                    <div class="carousel-container">
+                        <button class="carousel-arrow up">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <div class="carousel-track">
+                            <a href="projects/01-portfolio1.html" target="_blank" class="carousel-card" data-index="0">
+                                <img src="img/project/Nova Studios.png" alt="بورتفوليو مصور سينمائي">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="بورتفوليو" data-en="Portfolio">بورتفوليو</span>
+                                </div>
+                            </a>
+                            <a href="projects/02-portfolio2.html" target="_blank" class="carousel-card" data-index="1">
+                                <span class="project-number">02</span>
+                                <img src="img/project/Lina The Designer.png" alt="بورتفوليو مصممة UX">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="بورتفوليو" data-en="Portfolio">بورتفوليو</span>
+                                </div>
+                            </a>
+                            <a href="projects/03-pricing1.html" target="_blank" class="carousel-card" data-index="2">
+                                <span class="project-number">03</span>
+                                <img src="img/project/NexusAI.png" alt="منصة NexusAI">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="صفحة أسعار" data-en="Pricing Page">صفحة
+                                        أسعار</span>
+                                </div>
+                            </a>
+                            <a href="projects/04-pricing2.html" target="_blank" class="carousel-card" data-index="3">
+                                <span class="project-number">04</span>
+                                <img src="img/project/GrowthLab.png" alt="GrowthLab استشارات">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="صفحة أسعار" data-en="Pricing Page">صفحة
+                                        أسعار</span>
+                                </div>
+                            </a>
+                            <a href="projects/05-landing1.html" target="_blank" class="carousel-card" data-index="4">
+                                <span class="project-number">05</span>
+                                <img src="img/project/Velocity.png" alt="Velocity منصة إدارة">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="صفحة هبوط" data-en="Landing Page">صفحة
+                                        هبوط</span>
+                                </div>
+                            </a>
+                            <a href="projects/06-company1.html" target="_blank" class="carousel-card" data-index="5">
+                                <span class="project-number">06</span>
+                                <img src="img/project/Innovate.png" alt="Innovate وكالة إبداعية">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="موقع شركة" data-en="Company Site">موقع
+                                        شركة</span>
+                                </div>
+                            </a>
+                            <a href="projects/07-restaurant1.html" target="_blank" class="carousel-card" data-index="6">
+                                <span class="project-number">07</span>
+                                <img src="img/project/Al Sharq Restaurant.png" alt="مطعم الشرق">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="مطعم" data-en="Restaurant">مطعم</span>
+                                </div>
+                            </a>
+                            <a href="projects/08-dental1.html" target="_blank" class="carousel-card" data-index="7">
+                                <span class="project-number">08</span>
+                                <img src="img/project/Smile Clinic.png" alt="عيادة ابتسامة">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="عيادة أسنان" data-en="Dental Clinic">عيادة
+                                        أسنان</span>
+                                </div>
+                            </a>
+                            <a href="projects/09-gym1.html" target="_blank" class="carousel-card" data-index="8">
+                                <span class="project-number">09</span>
+                                <img src="img/project/POWER GYM.png" alt="POWER GYM">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="صالة رياضية" data-en="Gym">صالة رياضية</span>
+                                </div>
+                            </a>
+                            <a href="projects/10-nutrition1.html" target="_blank" class="carousel-card" data-index="9">
+                                <span class="project-number">10</span>
+                                <img src="img/project/Dr. Ahmed.png" alt="د. نورة - أخصائية تغذية">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="أخصائي تغذية" data-en="Nutritionist">أخصائي
+                                        تغذية</span>
+                                </div>
+                            </a>
+                            <a href="projects/11-realestate1.html" target="_blank" class="carousel-card"
+                                data-index="10">
+                                <span class="project-number">11</span>
+                                <img src="img/project/Dar Al Asala.png" alt="دار الأصالة للعقارات">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="وكالة عقارية" data-en="Real Estate">وكالة
+                                        عقارية</span>
+                                </div>
+                            </a>
+                            <a href="projects/12-garage1.html" target="_blank" class="carousel-card" data-index="11">
+                                <span class="project-number">12</span>
+                                <img src="img/project/Engine Workshop.png" alt="ورشة المحرك">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="ورشة سيارات" data-en="Auto Garage">ورشة
+                                        سيارات</span>
+                                </div>
+                            </a>
+                            <a href="projects/13-cars1.html" target="_blank" class="carousel-card" data-index="12">
+                                <span class="project-number">13</span>
+                                <img src="img/project/Luxury Showroom.png" alt="معرض الفخامة">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="معرض سيارات" data-en="Car Showroom">معرض
+                                        سيارات</span>
+                                </div>
+                            </a>
+                            <a href="projects/14-travel1.html" target="_blank" class="carousel-card" data-index="13">
+                                <span class="project-number">14</span>
+                                <img src="img/project/Dream Trips.png" alt="رحلات الأحلام">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="وكالة سفر" data-en="Travel Agency">وكالة
+                                        سفر</span>
+                                </div>
+                            </a>
+                            <a href="projects/15-translator1.html" target="_blank" class="carousel-card"
+                                data-index="14">
+                                <span class="project-number">15</span>
+                                <img src="img/project/Ahmed The Translator.png" alt="أحمد المترجم">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="مترجم محترف" data-en="Translator">مترجم
+                                        محترف</span>
+                                </div>
+                            </a>
+                            <a href="projects/16-editor1.html" target="_blank" class="carousel-card" data-index="15">
+                                <span class="project-number">16</span>
+                                <img src="img/project/Vision Studio.png" alt="Vision Studio ">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="مونتير فيديو" data-en="Video Editor">مونتير
+                                        فيديو</span>
+                                </div>
+                            </a>
+                            <a href="projects/17-trainer1.html" target="_blank" class="carousel-card" data-index="16">
+                                <span class="project-number">17</span>
+                                <img src="img/project/Captain Khaled.png" alt="كابتن خالد">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="مدرب لياقة" data-en="Fitness Trainer">مدرب
+                                        لياقة</span>
+                                </div>
+                            </a>
+                            <a href="projects/18-calligrapher1.html" target="_blank" class="carousel-card"
+                                data-index="17">
+                                <span class="project-number">18</span>
+                                <img src="img/project/Mohamed Nour.png" alt="الخطاط محمد نور">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="خطاط عربي" data-en="Calligrapher">خطاط
+                                        عربي</span>
+                                </div>
+                            </a>
+                            <a href="projects/19-photographer1.html" target="_blank" class="carousel-card"
+                                data-index="18">
+                                <span class="project-number">19</span>
+                                <img src="img/project/Yasser The Photographer.png" alt="ياسر المصور">
+                                <div class="card-overlay">
+                                    <span class="card-category" data-ar="مصور فوتوغرافي" data-en="Photographer">مصور
+                                        فوتوغرافي</span>
+                                </div>
+                            </a>
+                        </div>
+                        <button class="carousel-arrow down">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="carousel-controls-section">
+                    <div class="carousel-nav-controls">
+                        <button class="carousel-nav-arrow up">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                        <button class="carousel-nav-arrow down">
+                            <i class="fas fa-arrow-down"></i>
+                        </button>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-name">Nova Studios</h3>
+                        <p class="project-type">بورتفوليو مصور سينمائي</p>
+                        <p class="project-desc">موقع شخصي بتصميم سينمائي داكن مع أنيميشن احترافية</p>
+                        <a href="projects/01-portfolio1.html" target="_blank"
+                            class="btn btn-primary neon-btn project-link">
+                            <span data-ar="معاينة المشروع" data-en="Preview Project">معاينة المشروع</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="carousel-dots">
+                        <div class="carousel-dot active" data-index="0"></div>
+                        <div class="carousel-dot" data-index="1"></div>
+                        <div class="carousel-dot" data-index="2"></div>
+                        <div class="carousel-dot" data-index="3"></div>
+                        <div class="carousel-dot" data-index="4"></div>
+                        <div class="carousel-dot" data-index="5"></div>
+                        <div class="carousel-dot" data-index="6"></div>
+                        <div class="carousel-dot" data-index="7"></div>
+                        <div class="carousel-dot" data-index="8"></div>
+                        <div class="carousel-dot" data-index="9"></div>
+                        <div class="carousel-dot" data-index="10"></div>
+                        <div class="carousel-dot" data-index="11"></div>
+                        <div class="carousel-dot" data-index="12"></div>
+                        <div class="carousel-dot" data-index="13"></div>
+                        <div class="carousel-dot" data-index="14"></div>
+                        <div class="carousel-dot" data-index="15"></div>
+                        <div class="carousel-dot" data-index="16"></div>
+                        <div class="carousel-dot" data-index="17"></div>
+                        <div class="carousel-dot" data-index="18"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Systems Cards -->
+            <div class="systems-cards-container" id="systemsCarousel" style="display: none;">
+                <div class="systems-grid">
+                    <div class="system-card" data-system="0">
+                        <div class="system-card-header">
+                            <div class="system-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <span class="system-number">01</span>
+                        </div>
+                        <div class="system-card-image">
+                            <img src="img/pharmacy-system IMG/0.png" alt="نظام الصيدلية الذكي">
+                            <div class="system-overlay">
+                                <button class="system-view-btn">
+                                    <i class="fas fa-eye"></i>
+                                    <span data-ar="عرض النظام" data-en="View System">عرض النظام</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="system-card-content">
+                            <h3 class="system-title" data-ar="نظام الصيدلية الذكي" data-en="Smart Pharmacy System">نظام
+                                الصيدلية الذكي</h3>
+                            <p class="system-category" data-ar="نظام إدارة صيدلية" data-en="Pharmacy Management System">
+                                نظام إدارة صيدلية</p>
+                            <p class="system-description"
+                                data-ar="نظام متكامل لإدارة الصيدليات مع تتبع المخزون والمبيعات وإدارة الوصفات الطبية"
+                                data-en="Complete pharmacy management system with inventory tracking, sales and prescription management">
+                                نظام متكامل لإدارة الصيدليات مع تتبع المخزون والمبيعات وإدارة الوصفات الطبية</p>
+                            <div class="system-features-preview">
+                                <span class="feature-tag" data-ar="إدارة المخزون" data-en="Inventory Management">إدارة
+                                    المخزون</span>
+                                <span class="feature-tag" data-ar="نقاط البيع" data-en="POS System">نقاط البيع</span>
+                                <span class="feature-tag" data-ar="الوصفات الطبية" data-en="Prescriptions">الوصفات
+                                    الطبية</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="system-card" data-system="1">
+                        <div class="system-card-header">
+                            <div class="system-icon">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <span class="system-number">02</span>
+                        </div>
+                        <div class="system-card-image">
+                            <img src="img/inventory-system IMG/00.png" alt="نظام إدارة المخزون">
+                            <div class="system-overlay">
+                                <button class="system-view-btn">
+                                    <i class="fas fa-eye"></i>
+                                    <span data-ar="عرض النظام" data-en="View System">عرض النظام</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="system-card-content">
+                            <h3 class="system-title" data-ar="نظام إدارة المخزون" data-en="Inventory Management System">
+                                نظام إدارة المخزون</h3>
+                            <p class="system-category" data-ar="نظام إدارة مخازن" data-en="Warehouse Management System">
+                                نظام إدارة مخازن</p>
+                            <p class="system-description"
+                                data-ar="نظام متطور لإدارة المخازن مع تتبع المنتجات والكميات وإدارة الموردين والعملاء"
+                                data-en="Advanced warehouse management system with product tracking, quantities and supplier/customer management">
+                                نظام متطور لإدارة المخازن مع تتبع المنتجات والكميات وإدارة الموردين والعملاء</p>
+                            <div class="system-features-preview">
+                                <span class="feature-tag" data-ar="تتبع المنتجات" data-en="Product Tracking">تتبع
+                                    المنتجات</span>
+                                <span class="feature-tag" data-ar="إدارة الموردين" data-en="Supplier Management">إدارة
+                                    الموردين</span>
+                                <span class="feature-tag" data-ar="التقارير المالية"
+                                    data-en="Financial Reports">التقارير المالية</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-header">
+                <div class="skills-header-box">
+                    <span class="section-tag"><i class="fas fa-tools"></i> <span data-ar="مهاراتي"
+                            data-en="My Skills">مهاراتي</span></span>
+                    <h2 class="section-title"><span data-ar="التقنيات" data-en="Technologies">التقنيات</span> <span
+                            class="neon-text" data-ar="والأدوات" data-en="& Tools">والأدوات</span></h2>
+                    <p class="section-subtitle" data-ar="التقنيات التي أستخدمها في بناء المواقع الاحترافية"
+                        data-en="Technologies I use to build professional websites">التقنيات التي أستخدمها في بناء
+                        المواقع
+                        الاحترافية</p>
+                </div>
+            </div>
+
+            <div class="skills-content">
+                <div class="skills-tabs">
+                    <button class="tab-btn active" data-tab="frontend" data-ar="الواجهة الأمامية"
+                        data-en="Frontend">الواجهة الأمامية</button>
+                    <button class="tab-btn" data-tab="backend" data-ar="الواجهة الخلفية" data-en="Backend">الواجهة
+                        الخلفية</button>
+                </div>
+
+                <div class="skills-panel active" id="frontend">
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <h4>HTML5</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <h4>CSS3</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <h4>JavaScript</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <h4>React</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fab fa-vuejs"></i>
+                            </div>
+                            <h4>Vue.js</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <h4>Tailwind CSS</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-panel" id="backend">
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fab fa-node-js"></i>
+                            </div>
+                            <h4>Node.js</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fab fa-php"></i>
+                            </div>
+                            <h4>PHP</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <h4>Python</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4>MySQL</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h4>MongoDB</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h4>Express.js</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h4>Laravel</h4>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h4>REST API</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="contact-header-box">
+                    <span class="section-tag"><i class="fas fa-envelope"></i> <span data-ar="تواصل معنا"
+                            data-en="Contact Us">تواصل معنا</span></span>
+                    <h2 class="section-title"><span data-ar="ابدأ" data-en="Start Your">ابدأ</span> <span
+                            class="neon-text" data-ar="مشروعك" data-en="Project">مشروعك</span></h2>
+                    <p class="section-subtitle" data-ar="راسلني وخلينا نحول فكرتك لموقع احترافي"
+                        data-en="Message me and let's turn your idea into a professional website">راسلني وخلينا نحول
+                        فكرتك
+                        لموقع احترافي</p>
+                </div>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-details">
+                            <h4 data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</h4>
+                            <p>web.flow1488@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="info-details">
+                            <h4 data-ar="رقم الواتساب" data-en="WhatsApp">رقم الواتساب</h4>
+                            <p dir="ltr">01115582202</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-details">
+                            <h4 data-ar="الموقع" data-en="Location">الموقع</h4>
+                            <p data-ar="القاهرة، مصر" data-en="Cairo, Egypt">القاهرة، مصر</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" data-ar="الاسم" data-en="Name">الاسم</label>
+                            <input type="text" id="name" name="name" required data-placeholder-ar="اسمك الكامل"
+                                data-placeholder-en="Your full name" placeholder="اسمك الكامل">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" required data-placeholder-ar="بريدك الإلكتروني"
+                                data-placeholder-en="Your email" placeholder="بريدك الإلكتروني">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service" data-ar="نوع الخدمة" data-en="Service Type">نوع الخدمة</label>
+                        <select id="service" name="service" required>
+                            <option value="" data-ar="اختر نوع الخدمة" data-en="Select service type">اختر نوع الخدمة
+                            </option>
+                            <option value="portfolio" data-ar="صفحة بورتفوليو" data-en="Portfolio page">صفحة بورتفوليو
+                            </option>
+                            <option value="pricing" data-ar="صفحة عرض أسعار" data-en="Pricing page">صفحة عرض أسعار
+                            </option>
+                            <option value="landing" data-ar="صفحة هبوط" data-en="Landing page">صفحة هبوط</option>
+                            <option value="company" data-ar="موقع شركة" data-en="Company website">موقع شركة</option>
+                            <option value="other" data-ar="أخرى" data-en="Other">أخرى</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-ar="رسالتك" data-en="Your Message">رسالتك</label>
+                        <textarea id="message" name="message" rows="5" required
+                            data-placeholder-ar="اكتب تفاصيل مشروعك هنا..."
+                            data-placeholder-en="Write your project details here..."
+                            placeholder="اكتب تفاصيل مشروعك هنا..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary neon-btn btn-submit">
+                        <span data-ar="إرسال الرسالة" data-en="Send Message">إرسال الرسالة</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <img src="img/logo.png" alt="Logo" class="logo-img">
+                    </a>
+                    <p data-ar="شركة تطوير مواقع متخصصة في تصميم صفحات البورتفوليو والمواقع التجارية الاحترافية."
+                        data-en="Web development company specializing in designing professional portfolio and business websites.">
+                        شركة تطوير مواقع متخصصة في تصميم صفحات البورتفوليو والمواقع التجارية الاحترافية.
+                    </p>
+
+                    <div class="footer-social">
+                        <a href="https://wa.me/01115582202" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:web.flow1488@gmail.com" target="_blank" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="#" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                        <li><a href="#about" data-ar="من نحن" data-en="About">من نحن</a></li>
+                        <li><a href="#services" data-ar="الخدمات" data-en="Services">الخدمات</a></li>
+                        <li><a href="#projects" data-ar="الأعمال" data-en="Portfolio">الأعمال</a></li>
+                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4 data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h4>
+                    <ul>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:web.flow1488@gmail.com">web.flow1488@gmail.com</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <a href="https://wa.me/01115582202">01115582202</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span data-ar="القاهرة، مصر" data-en="Cairo, Egypt">القاهرة، مصر</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p data-ar="© 2024 Web Flow. جميع الحقوق محفوظة." data-en="© 2024 Web Flow. All rights reserved.">
+                    © 2024 Web Flow. جميع الحقوق محفوظة.
+                </p>
+                <div class="footer-bottom-links">
+                    <a href="#" data-ar="سياسة الخصوصية" data-en="Privacy Policy">سياسة الخصوصية</a>
+                    <span>•</span>
+                    <a href="#" data-ar="شروط الاستخدام" data-en="Terms of Service">شروط الاستخدام</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- System Gallery Modal -->
+    <div class="system-gallery-modal" id="systemGalleryModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-container">
+                    <h3 class="modal-title" id="modalTitle">نظام الصيدلية الذكي</h3>
+                    <div class="modal-subtitle">
+                        <i class="fas fa-eye"></i>
+                        <span data-ar="معرض الصور" data-en="Image Gallery">معرض الصور</span>
+                    </div>
+                </div>
+                <button class="modal-close" id="modalClose" aria-label="إغلاق">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <div class="gallery-main">
+                    <div class="main-image-container">
+                        <img src="" alt="System Screenshot" class="main-image" id="mainImage">
+
+                        <button class="gallery-nav prev" id="prevImage" aria-label="الصورة السابقة">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-nav next" id="nextImage" aria-label="الصورة التالية">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <p data-ar="اضغط للتنقل بين الصور" data-en="Click to navigate between images">اضغط
+                                    للتنقل بين الصور</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-thumbnails" id="galleryThumbnails">
+                    <!-- Thumbnails will be generated dynamically -->
+                </div>
+                <div class="system-info">
+                    <div class="system-features">
+                        <h4>
+                            <span data-ar="المميزات الرئيسية" data-en="Key Features">المميزات الرئيسية</span>
+                        </h4>
+                        <ul class="features-list" id="featuresList">
+                            <!-- Features will be populated dynamically -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Push Notification Banner -->
+    <div class="notification-banner" id="notificationBanner">
+        <div class="notification-content">
+            <div class="notification-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="notification-text">
+                <h4 data-ar="احصل على آخر العروض!" data-en="Get Latest Offers!">احصل على آخر العروض!</h4>
+                <p data-ar="اشترك في الإشعارات لتصلك عروضنا الحصرية"
+                    data-en="Subscribe to notifications for exclusive offers">اشترك في الإشعارات لتصلك عروضنا الحصرية
+                </p>
+            </div>
+            <div class="notification-actions">
+                <button class="btn-allow" id="allowNotifications">
+                    <i class="fas fa-check"></i>
+                    <span data-ar="اشترك" data-en="Subscribe">اشترك</span>
+                </button>
+                <button class="btn-dismiss" id="dismissNotifications">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Chatbot Button -->
+    <button class="chatbot-toggle" id="chatbotToggle" aria-label="فتح الشات">
+        <i class="fas fa-comments"></i>
+        <span class="notification-badge">1</span>
+    </button>
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="header-info">
+                <div class="bot-avatar">
+                    <i class="fas fa-robot"></i>
+                    <span class="status-indicator"></span>
+                </div>
+                <div class="bot-details">
+                    <h3 class="bot-name" data-ar="مساعد Web Flow" data-en="Web Flow Assistant">مساعد Web Flow</h3>
+                    <p class="bot-status" data-ar="متصل الآن" data-en="Online now">متصل الآن</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" id="closeBtn" aria-label="إغلاق">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message bot-message">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p data-ar="مرحباً! 👋 أنا مساعدك الذكي من Web Flow. كيف يمكنني مساعدتك اليوم؟"
+                        data-en="Hello! 👋 I'm your smart assistant from Web Flow. How can I help you today?">
+                        مرحباً! 👋 أنا مساعدك الذكي من Web Flow. كيف يمكنني مساعدتك اليوم؟
+                    </p>
+                    <span class="message-time">الآن</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-replies" id="quickReplies">
+            <button class="quick-reply" data-message="ما هي خدماتكم؟">
+                <i class="fas fa-briefcase"></i>
+                <span data-ar="الخدمات" data-en="Services">الخدمات</span>
+            </button>
+            <button class="quick-reply" data-message="كم تكلفة الموقع؟">
+                <i class="fas fa-calculator"></i>
+                <span data-ar="الأسعار" data-en="Pricing">الأسعار</span>
+            </button>
+            <button class="quick-reply" data-message="كيف نبدأ العمل؟">
+                <i class="fas fa-rocket"></i>
+                <span data-ar="كيف نبدأ؟" data-en="How to start?">كيف نبدأ؟</span>
+            </button>
+            <button class="quick-reply" data-message="ما هي التقنيات المستخدمة؟">
+                <i class="fas fa-code"></i>
+                <span data-ar="التقنيات" data-en="Tech">التقنيات</span>
+            </button>
+            <button class="quick-reply" data-message="أريد التواصل معكم">
+                <i class="fas fa-comment-dots"></i>
+                <span data-ar="تواصل" data-en="Contact">تواصل</span>
+            </button>
+        </div>
+
+        <div class="chatbot-input">
+            <div class="input-wrapper">
+                <input type="text" id="messageInput" placeholder="اكتب رسالتك هنا..."
+                    data-ar-placeholder="اكتب رسالتك هنا..." data-en-placeholder="Type your message here...">
+            </div>
+            <button class="send-btn" id="sendBtn" aria-label="إرسال">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+    <script src="chatbot.js"></script>
+
+</body>
+
+</html>

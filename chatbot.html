@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+    <!-- Chatbot Button -->
+    <button class="chatbot-toggle" id="chatbotToggle" aria-label="فتح الشات">
+        <i class="fas fa-comments"></i>
+        <span class="notification-badge">1</span>
+    </button>
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="header-info">
+                <div class="bot-avatar">
+                    <i class="fas fa-robot"></i>
+                    <span class="status-indicator"></span>
+                </div>
+                <div class="bot-details">
+                    <h3 class="bot-name" data-ar="مساعد Web Flow" data-en="Web Flow Assistant">مساعد Web Flow</h3>
+                    <p class="bot-status" data-ar="متصل الآن" data-en="Online now">متصل الآن</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" id="minimizeBtn" aria-label="تصغير">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button class="header-btn" id="closeBtn" aria-label="إغلاق">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message bot-message">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p data-ar="مرحباً! 👋 أنا مساعدك الذكي من Web Flow. كيف يمكنني مساعدتك اليوم؟" 
+                       data-en="Hello! 👋 I'm your smart assistant from Web Flow. How can I help you today?">
+                        مرحباً! 👋 أنا مساعدك الذكي من Web Flow. كيف يمكنني مساعدتك اليوم؟
+                    </p>
+                    <span class="message-time">الآن</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-replies" id="quickReplies">
+            <button class="quick-reply" data-message="ما هي خدماتكم؟">
+                <i class="fas fa-cogs"></i>
+                <span data-ar="الخدمات" data-en="Services">الخدمات</span>
+            </button>
+            <button class="quick-reply" data-message="كم تكلفة الموقع؟">
+                <i class="fas fa-dollar-sign"></i>
+                <span data-ar="الأسعار" data-en="Pricing">الأسعار</span>
+            </button>
+            <button class="quick-reply" data-message="كم مدة التنفيذ؟">
+                <i class="fas fa-clock"></i>
+                <span data-ar="المدة" data-en="Duration">المدة</span>
+            </button>
+            <button class="quick-reply" data-message="أريد التواصل معكم">
+                <i class="fas fa-phone"></i>
+                <span data-ar="تواصل" data-en="Contact">تواصل</span>
+            </button>
+        </div>
+
+        <div class="chatbot-input">
+            <button class="input-btn" id="emojiBtn" aria-label="إيموجي">
+                <i class="fas fa-smile"></i>
+            </button>
+            <input type="text" id="messageInput" placeholder="اكتب رسالتك هنا..." data-ar-placeholder="اكتب رسالتك هنا..." data-en-placeholder="Type your message here...">
+            <button class="input-btn send-btn" id="sendBtn" aria-label="إرسال">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+
+        <div class="chatbot-footer">
+            <p data-ar="مدعوم بتقنية الذكاء الاصطناعي" data-en="Powered by AI">مدعوم بتقنية الذكاء الاصطناعي</p>
+        </div>
+    </div>
+
+    <script src="chatbot.js"></script>
+</body>
+</html>

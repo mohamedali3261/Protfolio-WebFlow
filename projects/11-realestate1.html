@@ -1,0 +1,3804 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Properties | Luxury Real Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        :root {
+            --primary: #d4af37;
+            --primary-light: #f4d03f;
+            --primary-dark: #b8960c;
+            --primary-glow: rgba(212, 175, 55, 0.4);
+            --dark: #0a0a0a;
+            --dark-2: #111111;
+            --dark-3: #1a1a1a;
+            --dark-4: #222222;
+            --gray: #666666;
+            --gray-light: #999999;
+            --white: #ffffff;
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+            --gradient-dark: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        /* ============ PRELOADER ============ */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--dark);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .building-loader {
+            width: 120px;
+            height: 180px;
+            position: relative;
+            margin: 0 auto 40px;
+        }
+
+        .building-floor {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 0;
+            background: var(--gradient-gold);
+            animation: buildUp 2s ease-out forwards;
+        }
+
+        .building-floor:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .building-floor:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .building-floor:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .building-floor:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+
+        .building-floor:nth-child(5) {
+            animation-delay: 1.2s;
+        }
+
+        @keyframes buildUp {
+            0% {
+                height: 0;
+                opacity: 0;
+            }
+
+            100% {
+                height: 30px;
+                opacity: 1;
+            }
+        }
+
+        .building-floor:nth-child(1) {
+            bottom: 0;
+        }
+
+        .building-floor:nth-child(2) {
+            bottom: 32px;
+            width: 90px;
+        }
+
+        .building-floor:nth-child(3) {
+            bottom: 64px;
+            width: 80px;
+        }
+
+        .building-floor:nth-child(4) {
+            bottom: 96px;
+            width: 70px;
+        }
+
+        .building-floor:nth-child(5) {
+            bottom: 128px;
+            width: 60px;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+
+        .preloader-text {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInText 1s ease 1.5s forwards;
+        }
+
+        .preloader-sub {
+            font-size: 0.9rem;
+            color: var(--gray-light);
+            letter-spacing: 4px;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeInText 1s ease 1.8s forwards;
+        }
+
+        @keyframes fadeInText {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .preloader.loaded {
+            animation: preloaderOut 1s ease 2.5s forwards;
+        }
+
+        @keyframes preloaderOut {
+            0% {
+                clip-path: circle(150% at 50% 50%);
+            }
+
+            100% {
+                clip-path: circle(0% at 50% 50%);
+                pointer-events: none;
+            }
+        }
+
+        /* ============ CUSTOM CURSOR ============ */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99998;
+            transition: transform 0.15s ease, background 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99997;
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            background: var(--primary-glow);
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+
+        .cursor-follower.hover {
+            width: 60px;
+            height: 60px;
+            border-color: var(--primary);
+        }
+
+        /* ============ MAGNETIC BUTTONS ============ */
+        .magnetic-btn {
+            position: relative;
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ============ NAVIGATION ============ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 30px 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .logo-icon i {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+            padding: 10px 0;
+            overflow: hidden;
+        }
+
+        .nav-link span {
+            display: block;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: var(--primary);
+            transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link:hover span {
+            transform: translateY(-100%);
+        }
+
+        .nav-link:hover::after {
+            top: 10px;
+        }
+
+        .nav-cta {
+            padding: 15px 35px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s ease;
+        }
+
+        .nav-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-gold);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .nav-cta:hover {
+            color: var(--dark);
+        }
+
+        .nav-cta:hover::before {
+            transform: translateY(0);
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 40px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.4s ease;
+        }
+
+        .menu-toggle span:nth-child(1) {
+            top: 0;
+        }
+
+        .menu-toggle span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .menu-toggle span:nth-child(3) {
+            bottom: 0;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+
+        /* ============ MOBILE MENU ============ */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--dark);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            clip-path: circle(0% at top right);
+            transition: clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.active {
+            clip-path: circle(150% at top right);
+        }
+
+        .mobile-menu .nav-link {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="building-loader">
+                <div class="building-floor"></div>
+                <div class="building-floor"></div>
+                <div class="building-floor"></div>
+                <div class="building-floor"></div>
+                <div class="building-floor"></div>
+            </div>
+            <div class="preloader-text">ELITE</div>
+            <div class="preloader-sub">LUXURY PROPERTIES</div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo magnetic-btn">
+                <div class="logo-icon"><i class="fas fa-building"></i></div>
+                <span class="logo-text">ELITE</span>
+            </a>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link" data-text="Home"><span>Home</span></a>
+                <a href="#properties" class="nav-link" data-text="Properties"><span>Properties</span></a>
+                <a href="#services" class="nav-link" data-text="Services"><span>Services</span></a>
+                <a href="#about" class="nav-link" data-text="About"><span>About</span></a>
+                <a href="#contact" class="nav-link" data-text="Contact"><span>Contact</span></a>
+            </div>
+            <a href="#contact" class="nav-cta magnetic-btn">Book Consultation</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="nav-link" data-text="Home"><span>Home</span></a>
+        <a href="#properties" class="nav-link" data-text="Properties"><span>Properties</span></a>
+        <a href="#services" class="nav-link" data-text="Services"><span>Services</span></a>
+        <a href="#about" class="nav-link" data-text="About"><span>About</span></a>
+        <a href="#contact" class="nav-link" data-text="Contact"><span>Contact</span></a>
+    </div>
+</body>
+
+</html>
+
+
+<style>
+    /* ============ HERO SECTION ============ */
+    .hero {
+        min-height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+    }
+
+    .hero-bg-image {
+        position: absolute;
+        inset: 0;
+        background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920') center/cover no-repeat;
+    }
+
+    .hero-bg-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.7) 50%, rgba(10, 10, 10, 0.85) 100%);
+    }
+
+    .hero-particles {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 50%;
+        opacity: 0.3;
+        animation: particleFloat 15s infinite linear;
+    }
+
+    @keyframes particleFloat {
+        0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+
+        10% {
+            opacity: 0.3;
+        }
+
+        90% {
+            opacity: 0.3;
+        }
+
+        100% {
+            transform: translateY(-100vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
+
+    .hero-container {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 25px;
+        background: rgba(212, 175, 55, 0.1);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        margin-bottom: 30px;
+        opacity: 0;
+        animation: slideInRight 1s ease 2.8s forwards;
+    }
+
+    .hero-badge i {
+        color: var(--primary);
+    }
+
+    .hero-badge span {
+        font-size: 0.9rem;
+        color: var(--primary);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .hero-title {
+        font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+        font-weight: 900;
+        line-height: 1.2;
+        margin-top: 100px;
+        margin-bottom: 150px;
+        letter-spacing: -1px;
+        color: var(--white);
+        text-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-title .line {
+        display: block;
+        overflow: hidden;
+    }
+
+    .hero-title .line span {
+        display: block;
+        transform: translateY(100%);
+        animation: revealText 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .hero-title .line:nth-child(1) span {
+        animation-delay: 2.9s;
+    }
+
+    .hero-title .line:nth-child(2) span {
+        animation-delay: 3.1s;
+    }
+
+    .hero-title .line:nth-child(3) span {
+        animation-delay: 3.3s;
+    }
+
+    @keyframes revealText {
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    .hero-title .highlight {
+        background: var(--gradient-gold);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+        display: inline-block;
+        filter: drop-shadow(0 0 10px var(--primary-glow));
+    }
+
+
+    @keyframes highlightExpand {
+        to {
+            transform: scaleX(1);
+        }
+    }
+
+    .hero-desc {
+        font-size: 1.15rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 300;
+        line-height: 2;
+        margin-bottom: 60px;
+        max-width: 800px;
+        opacity: 0;
+        animation: fadeInUp 1s ease 3.5s forwards;
+        border-left: 2px solid var(--primary);
+        padding-left: 30px;
+        text-align: left;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        opacity: 0;
+        animation: fadeInUp 1s ease 3.7s forwards;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInRight {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .btn-primary {
+        padding: 18px 45px;
+        background: var(--gradient-gold);
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px var(--primary-glow);
+    }
+
+    .btn-primary:hover::before {
+        left: 100%;
+    }
+
+    .btn-outline {
+        padding: 18px 45px;
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.4s ease;
+    }
+
+    .btn-outline:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        background: rgba(212, 175, 55, 0.1);
+    }
+
+    /* Hero Cards */
+    .hero-cards {
+        position: relative;
+        height: 500px;
+        opacity: 0;
+        animation: fadeIn 1s ease 3.5s forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+
+    .hero-card {
+        position: absolute;
+        width: 280px;
+        background: var(--dark-3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+    }
+
+    .hero-card:nth-child(1) {
+        top: 0;
+        right: 0;
+        z-index: 3;
+        animation: cardFloat1 6s ease-in-out infinite;
+    }
+
+    .hero-card:nth-child(2) {
+        top: 80px;
+        right: 150px;
+        z-index: 2;
+        animation: cardFloat2 6s ease-in-out infinite;
+    }
+
+    .hero-card:nth-child(3) {
+        top: 160px;
+        right: 300px;
+        z-index: 1;
+        animation: cardFloat3 6s ease-in-out infinite;
+    }
+
+    @keyframes cardFloat1 {
+
+        0%,
+        100% {
+            transform: translateY(0) rotate(2deg);
+        }
+
+        50% {
+            transform: translateY(-15px) rotate(2deg);
+        }
+    }
+
+    @keyframes cardFloat2 {
+
+        0%,
+        100% {
+            transform: translateY(0) rotate(-3deg);
+        }
+
+        50% {
+            transform: translateY(-20px) rotate(-3deg);
+        }
+    }
+
+    @keyframes cardFloat3 {
+
+        0%,
+        100% {
+            transform: translateY(0) rotate(1deg);
+        }
+
+        50% {
+            transform: translateY(-10px) rotate(1deg);
+        }
+    }
+
+    .hero-card:hover {
+        transform: translateY(-20px) scale(1.05) rotate(0deg) !important;
+        z-index: 10;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-card-image {
+        height: 180px;
+        overflow: hidden;
+    }
+
+    .hero-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .hero-card:hover .hero-card-image img {
+        transform: scale(1.1);
+    }
+
+    .hero-card-content {
+        padding: 20px;
+    }
+
+    .hero-card-price {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 8px;
+    }
+
+    .hero-card-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--white);
+        margin-bottom: 5px;
+    }
+
+    .hero-card-location {
+        font-size: 0.85rem;
+        color: var(--gray);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    /* Hero Stats */
+    .hero-stats {
+        position: absolute;
+        bottom: 80px;
+        left: 50px;
+        display: flex;
+        gap: 60px;
+        z-index: 10;
+    }
+
+    .hero-stat {
+        text-align: center;
+        opacity: 0;
+        animation: fadeInUp 1s ease forwards;
+        transform: translateY(30px);
+    }
+
+    .hero-stat:nth-child(1) {
+        animation-delay: 4s;
+    }
+
+    .hero-stat:nth-child(2) {
+        animation-delay: 4.2s;
+    }
+
+    .hero-stat:nth-child(3) {
+        animation-delay: 4.4s;
+    }
+
+    .hero-stat:nth-child(4) {
+        animation-delay: 4.6s;
+    }
+
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--primary);
+        line-height: 1;
+        display: block;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: var(--gray-light);
+        margin-top: 8px;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        right: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        opacity: 0;
+        animation: fadeIn 1s ease 4.5s forwards;
+    }
+
+    .scroll-mouse {
+        width: 30px;
+        height: 50px;
+        border: 2px solid var(--primary);
+        border-radius: 20px;
+        position: relative;
+    }
+
+    .scroll-wheel {
+        width: 4px;
+        height: 10px;
+        background: var(--primary);
+        border-radius: 2px;
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: scrollWheel 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollWheel {
+
+        0%,
+        100% {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        50% {
+            transform: translateX(-50%) translateY(15px);
+            opacity: 0;
+        }
+    }
+
+    .scroll-text {
+        font-size: 0.75rem;
+        color: var(--gray);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="hero-bg">
+        <div class="hero-bg-image"></div>
+        <div class="hero-bg-overlay"></div>
+    </div>
+    <div class="hero-particles" id="heroParticles"></div>
+
+    <div class="hero-container">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <div class="line"><span>Discover the Horizons</span></div>
+                <div class="line"><span>of Luxury Living</span></div>
+                <div class="line"><span class="highlight">with Elite Properties</span></div>
+            </h1>
+            <p class="hero-desc">We offer you the finest luxury properties in the best locations. Over 15 years of
+                experience in the high-end real estate market.</p>
+            <div class="hero-buttons">
+                <a href="#properties" class="btn-primary magnetic-btn">
+                    <span>Explore Properties</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#about" class="btn-outline magnetic-btn">
+                    <i class="fas fa-play"></i>
+                    <span>Watch Video</span>
+                </a>
+            </div>
+        </div>
+
+</section>
+
+
+<style>
+    /* ============ FEATURED PROPERTIES ============ */
+    .properties {
+        padding: 150px 0;
+        background: var(--dark-2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .properties::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+
+    .section-container {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 50px;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 80px;
+    }
+
+    .section-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .section-tag::before,
+    .section-tag::after {
+        content: '';
+        width: 50px;
+        height: 1px;
+        background: var(--primary);
+    }
+
+    .section-tag span {
+        font-size: 0.9rem;
+        color: var(--primary);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+    }
+
+    .section-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        line-height: 1.2;
+        margin-bottom: 20px;
+    }
+
+    .section-title .gold {
+        color: var(--primary);
+    }
+
+    .section-desc {
+        font-size: 1.1rem;
+        color: var(--gray-light);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Properties Filter */
+    .properties-filter {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 60px;
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        padding: 15px 35px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        font-family: inherit;
+        font-size: 1rem;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+
+    .filter-btn::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: var(--gradient-gold);
+        transition: height 0.4s ease;
+        z-index: -1;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+        border-color: var(--primary);
+        color: var(--dark);
+    }
+
+    .filter-btn:hover::before,
+    .filter-btn.active::before {
+        height: 100%;
+    }
+
+    /* Properties Grid - Masonry Style */
+    .properties-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 300px;
+        gap: 25px;
+    }
+
+    .property-card {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .property-card.wide {
+        grid-column: span 2;
+    }
+
+    .property-card.tall {
+        grid-row: span 2;
+    }
+
+    .property-card.featured {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .property-card-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .property-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 10, 0.9) 100%);
+        z-index: 1;
+        opacity: 0.7;
+        transition: opacity 0.4s ease;
+    }
+
+    .property-card:hover::before {
+        opacity: 1;
+    }
+
+    .property-card:hover .property-card-bg {
+        transform: scale(1.1);
+    }
+
+    .property-card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 30px;
+        z-index: 2;
+        transform: translateY(20px);
+        transition: transform 0.4s ease;
+    }
+
+    .property-card:hover .property-card-content {
+        transform: translateY(0);
+    }
+
+    .property-badge {
+        display: inline-block;
+        padding: 8px 18px;
+        background: var(--primary);
+        color: var(--dark);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    .property-badge.rent {
+        background: #3498db;
+        color: var(--white);
+    }
+
+    .property-badge.sold {
+        background: #e74c3c;
+        color: var(--white);
+    }
+
+    .property-price {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--primary);
+        margin-bottom: 10px;
+    }
+
+    .property-card.featured .property-price {
+        font-size: 2.5rem;
+    }
+
+    .property-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 10px;
+    }
+
+    .property-location {
+        font-size: 0.95rem;
+        color: var(--gray-light);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .property-location i {
+        color: var(--primary);
+    }
+
+    .property-features {
+        display: flex;
+        gap: 20px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.4s ease 0.1s;
+    }
+
+    .property-card:hover .property-features {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .property-feature {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+        color: var(--gray-light);
+    }
+
+    .property-feature i {
+        color: var(--primary);
+        font-size: 0.85rem;
+    }
+
+    /* Property Card Overlay Actions */
+    .property-actions {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+        z-index: 3;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.4s ease;
+    }
+
+    .property-card:hover .property-actions {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .property-action {
+        width: 45px;
+        height: 45px;
+        background: rgba(255, 255, 255, 0.95);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: var(--dark);
+        transition: all 0.3s ease;
+    }
+
+    .property-action:hover {
+        background: var(--primary);
+        color: var(--dark);
+        transform: scale(1.1);
+    }
+
+    /* View All Button */
+    .properties-cta {
+        text-align: center;
+        margin-top: 60px;
+    }
+
+    .btn-view-all {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        padding: 20px 50px;
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+
+    .btn-view-all::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: var(--gradient-gold);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.6s ease;
+        z-index: -1;
+    }
+
+    .btn-view-all:hover {
+        color: var(--dark);
+        border-color: transparent;
+    }
+
+    .btn-view-all:hover::before {
+        width: 400px;
+        height: 400px;
+    }
+
+    .btn-view-all i {
+        transition: transform 0.3s ease;
+    }
+
+    .btn-view-all:hover i {
+        transform: translateX(-5px);
+    }
+</style>
+
+<!-- Properties Section -->
+<section class="properties" id="properties">
+<section id="properties" class="properties">
+    <div class="container">
+        <div class="section-tag reveal stagger-1"><span>Our Collection</span></div>
+        <h2 class="section-title reveal stagger-2">Featured Properties</h2>
+        
+        <div class="filter-container reveal stagger-3">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="villa">Villa</button>
+            <button class="filter-btn" data-filter="apartment">Apartment</button>
+            <button class="filter-btn" data-filter="mansion">Mansion</button>
+        </div>
+
+        <div class="properties-grid">
+            <div class="property-card featured reveal" data-category="villa">
+                <div class="property-card-bg"
+                    style="background-image: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800')">
+                </div>
+                <div class="property-actions">
+                    <button class="property-action"><i class="far fa-heart"></i></button>
+                    <button class="property-action"><i class="fas fa-share-alt"></i></button>
+                    <button class="property-action"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="property-card-content">
+                    <span class="property-badge">FOR SALE</span>
+                    <div class="property-price">$5,500,000</div>
+                    <h3 class="property-title">Luxury Beachfront Villa</h3>
+                    <div class="property-location"><i class="fas fa-map-marker-alt"></i> Palm Jumeirah, Dubai</div>
+                    <div class="property-features">
+                        <span class="property-feature"><i class="fas fa-bed"></i> 6 Beds</span>
+                        <span class="property-feature"><i class="fas fa-bath"></i> 7 Baths</span>
+                        <span class="property-feature"><i class="fas fa-ruler-combined"></i> 850 m²</span>
+                        <span class="property-feature"><i class="fas fa-car"></i> 4 Cars</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-card reveal" data-category="apartment">
+                <div class="property-card-bg"
+                    style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600')">
+                </div>
+                <div class="property-actions">
+                    <button class="property-action"><i class="far fa-heart"></i></button>
+                    <button class="property-action"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="property-card-content">
+                    <span class="property-badge rent">FOR RENT</span>
+                    <div class="property-price">$8,000/month</div>
+                    <h3 class="property-title">Luxury Apartment</h3>
+                    <div class="property-location"><i class="fas fa-map-marker-alt"></i> Downtown, Dubai</div>
+                    <div class="property-features">
+                        <span class="property-feature"><i class="fas fa-bed"></i> 3 Beds</span>
+                        <span class="property-feature"><i class="fas fa-ruler-combined"></i> 200 m²</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-card tall reveal" data-category="penthouse">
+                <div class="property-card-bg"
+                    style="background-image: url('https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600')">
+                </div>
+                <div class="property-actions">
+                    <button class="property-action"><i class="far fa-heart"></i></button>
+                    <button class="property-action"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="property-card-content">
+                    <span class="property-badge">EXCLUSIVE</span>
+                    <div class="property-price">$3,200,000</div>
+                    <h3 class="property-title">Sky Penthouse</h3>
+                    <div class="property-location"><i class="fas fa-map-marker-alt"></i> Burj Khalifa, Dubai</div>
+                    <div class="property-features">
+                        <span class="property-feature"><i class="fas fa-bed"></i> 4 Beds</span>
+                        <span class="property-feature"><i class="fas fa-ruler-combined"></i> 450 m²</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-card wide reveal" data-category="villa">
+                <div class="property-card-bg"
+                    style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800')">
+                </div>
+                <div class="property-actions">
+                    <button class="property-action"><i class="far fa-heart"></i></button>
+                    <button class="property-action"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="property-card-content">
+                    <span class="property-badge">FOR SALE</span>
+                    <div class="property-price">$2,800,000</div>
+                    <h3 class="property-title">Modern Villa with Garden</h3>
+                    <div class="property-location"><i class="fas fa-map-marker-alt"></i> Riyadh, Saudi Arabia</div>
+                    <div class="property-features">
+                        <span class="property-feature"><i class="fas fa-bed"></i> 5 Beds</span>
+                        <span class="property-feature"><i class="fas fa-bath"></i> 6 Baths</span>
+                        <span class="property-feature"><i class="fas fa-ruler-combined"></i> 600 m²</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-card reveal" data-category="mansion">
+                <div class="property-card-bg"
+                    style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600')">
+                </div>
+                <div class="property-actions">
+                    <button class="property-action"><i class="far fa-heart"></i></button>
+                    <button class="property-action"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="property-card-content">
+                    <span class="property-badge sold">SOLD</span>
+                    <div class="property-price">$8,500,000</div>
+                    <h3 class="property-title">Classic Mansion</h3>
+                    <div class="property-location"><i class="fas fa-map-marker-alt"></i> New Cairo</div>
+                    <div class="property-features">
+                        <span class="property-feature"><i class="fas fa-bed"></i> 8 Beds</span>
+                        <span class="property-feature"><i class="fas fa-ruler-combined"></i> 1200 m²</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="property-card reveal" data-category="apartment">
+                <div class="property-card-bg"
+                    style="background-image: url('https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=600')">
+                </div>
+                <div class="property-actions">
+                    <button class="property-action"><i class="far fa-heart"></i></button>
+                    <button class="property-action"><i class="fas fa-expand"></i></button>
+                </div>
+                <div class="property-card-content">
+                    <span class="property-badge">FOR SALE</span>
+                    <div class="property-price">$950,000</div>
+                    <h3 class="property-title">Duplex Apartment</h3>
+                    <div class="property-location"><i class="fas fa-map-marker-alt"></i> Jeddah, Saudi Arabia</div>
+                    <div class="property-features">
+                        <span class="property-feature"><i class="fas fa-bed"></i> 4 Beds</span>
+                        <span class="property-feature"><i class="fas fa-ruler-combined"></i> 280 m²</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="properties-cta reveal">
+            <a href="#" class="btn-view-all magnetic-btn">
+                <span>View All Properties</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    /* ============ SERVICES SECTION ============ */
+    .services {
+        padding: 150px 0;
+        background: var(--dark);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .services-bg-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20vw;
+        font-weight: 900;
+        color: rgba(212, 175, 55, 0.02);
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .services .section-container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+
+    .service-card {
+        background: var(--dark-3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 50px 40px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 0;
+        background: var(--gradient-gold);
+        transition: height 0.5s ease;
+    }
+
+    .service-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .service-card:hover {
+        transform: translateY(-15px);
+        border-color: rgba(212, 175, 55, 0.2);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .service-card:hover::before {
+        height: 100%;
+    }
+
+    .service-card:hover::after {
+        opacity: 1;
+    }
+
+    .service-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--dark-4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        position: relative;
+        transition: all 0.4s ease;
+    }
+
+    .service-icon::before {
+        content: '';
+        position: absolute;
+        inset: -3px;
+        background: var(--gradient-gold);
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .service-card:hover .service-icon {
+        background: var(--gradient-gold);
+    }
+
+    .service-card:hover .service-icon::before {
+        opacity: 1;
+    }
+
+    .service-icon i {
+        font-size: 2rem;
+        color: var(--primary);
+        transition: color 0.4s ease;
+    }
+
+    .service-card:hover .service-icon i {
+        color: var(--dark);
+    }
+
+    .service-number {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 5rem;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.03);
+        line-height: 1;
+    }
+
+    .service-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 15px;
+    }
+
+    .service-card p {
+        font-size: 1rem;
+        color: var(--gray-light);
+        line-height: 1.9;
+        margin-bottom: 25px;
+    }
+
+    .service-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: gap 0.3s ease;
+    }
+
+    .service-link:hover {
+        gap: 18px;
+    }
+
+    .service-link i {
+        font-size: 0.85rem;
+    }
+
+    /* ============ WHY CHOOSE US ============ */
+    .why-us {
+        padding: 150px 0;
+        background: var(--dark-2);
+        position: relative;
+    }
+
+    .why-us-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 100px;
+        align-items: center;
+    }
+
+    .why-us-content {
+        position: relative;
+    }
+
+    .why-us-list {
+        margin-top: 50px;
+    }
+
+    .why-us-item {
+        display: flex;
+        gap: 25px;
+        padding: 30px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.4s ease;
+    }
+
+    .why-us-item:hover {
+        padding-right: 20px;
+    }
+
+    .why-us-item:last-child {
+        border-bottom: none;
+    }
+
+    .why-us-icon {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        background: rgba(212, 175, 55, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s ease;
+    }
+
+    .why-us-item:hover .why-us-icon {
+        background: var(--gradient-gold);
+    }
+
+    .why-us-icon i {
+        font-size: 1.3rem;
+        color: var(--primary);
+        transition: color 0.4s ease;
+    }
+
+    .why-us-item:hover .why-us-icon i {
+        color: var(--dark);
+    }
+
+    .why-us-text h4 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 8px;
+    }
+
+    .why-us-text p {
+        font-size: 0.95rem;
+        color: var(--gray-light);
+        line-height: 1.8;
+    }
+
+    /* Why Us Image */
+    .why-us-image {
+        position: relative;
+    }
+
+    .why-us-image-main {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .why-us-image-main img {
+        width: 100%;
+        height: 600px;
+        object-fit: cover;
+        transition: transform 0.7s ease;
+    }
+
+    .why-us-image-main:hover img {
+        transform: scale(1.05);
+    }
+
+    .why-us-image-main::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 3px solid var(--primary);
+        transform: translate(20px, 20px);
+        z-index: -1;
+        transition: transform 0.4s ease;
+    }
+
+    .why-us-image-main:hover::before {
+        transform: translate(10px, 10px);
+    }
+
+    .why-us-badge {
+        position: absolute;
+        bottom: -30px;
+        left: -30px;
+        background: var(--gradient-gold);
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .why-us-badge-number {
+        font-size: 4rem;
+        font-weight: 900;
+        color: var(--dark);
+        line-height: 1;
+    }
+
+    .why-us-badge-text {
+        font-size: 1rem;
+        color: var(--dark);
+        font-weight: 600;
+    }
+
+    /* ============ TESTIMONIALS ============ */
+    .testimonials {
+        padding: 150px 0;
+        background: var(--dark);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .testimonials-bg {
+        position: absolute;
+        inset: 0;
+        background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920') center/cover no-repeat;
+        opacity: 0.03;
+    }
+
+    .testimonials .section-container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .testimonials-slider {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .testimonial-card {
+        background: var(--dark-3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 60px;
+        text-align: center;
+        position: relative;
+    }
+
+    .testimonial-card::before {
+        content: '"';
+        position: absolute;
+        top: 30px;
+        right: 50px;
+        font-size: 10rem;
+        font-family: Georgia, serif;
+        color: var(--primary);
+        opacity: 0.1;
+        line-height: 1;
+    }
+
+    .testimonial-stars {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .testimonial-stars i {
+        font-size: 1.2rem;
+        color: var(--primary);
+    }
+
+    .testimonial-text {
+        font-size: 1.4rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 2;
+        margin-bottom: 40px;
+        font-style: italic;
+    }
+
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .testimonial-author img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 3px solid var(--primary);
+        object-fit: cover;
+    }
+
+    .testimonial-author-info {
+        text-align: right;
+    }
+
+    .testimonial-author-info strong {
+        display: block;
+        font-size: 1.2rem;
+        color: var(--white);
+        margin-bottom: 5px;
+    }
+
+    .testimonial-author-info span {
+        font-size: 0.9rem;
+        color: var(--primary);
+    }
+
+    .testimonials-nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 40px;
+    }
+
+    .testimonial-dot {
+        width: 12px;
+        height: 12px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .testimonial-dot.active {
+        background: var(--primary);
+        transform: scale(1.3);
+    }
+
+    .testimonial-dot:hover {
+        background: var(--primary-glow);
+    }
+</style>
+
+<!-- Services Section -->
+<section id="services" class="services">
+    <div class="container">
+        <div class="section-tag reveal stagger-1"><span>Services</span></div>
+        <h2 class="section-title reveal stagger-2">Our Real Estate Services</h2>
+        
+        <div class="services-grid">
+            <div class="service-card reveal-scale stagger-1">
+                <div class="service-icon"><i class="fas fa-comments-dollar"></i></div>
+                <h3 class="service-title">Real Estate Consultancy</h3>
+                <p class="service-desc">Professional advice to help you make the best investment decisions in the market.</p>
+                <a href="#" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="service-card reveal-scale stagger-2">
+                <div class="service-icon"><i class="fas fa-tasks"></i></div>
+                <h3 class="service-title">Property Management</h3>
+                <p class="service-desc">We handle all details of your property management to ensure the highest returns.</p>
+                <a href="#" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="service-card reveal-scale stagger-3">
+                <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                <h3 class="service-title">Real Estate Valuation</h3>
+                <p class="service-desc">Accurate and detailed property valuation based on current market data.</p>
+                <a href="#" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="why-us">
+    <div class="section-container">
+        <div class="why-us-grid">
+            <div class="why-us-content reveal-right">
+                <div class="section-tag" style="justify-content: flex-start;">
+                    <span>Why Choose Us</span>
+                </div>
+                <h2 class="section-title">Why Choose <span class="gold">Elite</span>?</h2>
+                <p class="section-desc" style="margin: 20px 0 0 0;">We offer an exceptional real estate experience that combines expertise, professionalism, and service excellence.</p>
+
+                <div class="why-us-list">
+                    <div class="why-us-item">
+                        <div class="why-us-icon"><i class="fas fa-award"></i></div>
+                        <div class="why-us-text">
+                            <h4>15+ Years Experience</h4>
+                            <p>Extensive experience in the luxury real estate market with a proven track record of success.</p>
+                        </div>
+                    </div>
+                    <div class="why-us-item">
+                        <div class="why-us-icon"><i class="fas fa-users"></i></div>
+                        <div class="why-us-text">
+                            <h4>Professional Team</h4>
+                            <p>A team of specialized experts in all aspects of real estate.</p>
+                        </div>
+                    </div>
+                    <div class="why-us-item">
+                        <div class="why-us-icon"><i class="fas fa-gem"></i></div>
+                        <div class="why-us-text">
+                            <h4>Exclusive Properties</h4>
+                            <p>A unique collection of luxury properties not available on the open market.</p>
+                        </div>
+                    </div>
+                    <div class="why-us-item">
+                        <div class="why-us-icon"><i class="fas fa-headset"></i></div>
+                        <div class="why-us-text">
+                            <h4>Continuous Support</h4>
+                            <p>Excellent 24/7 customer service to meet your needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="why-us-image reveal-left">
+                <div class="why-us-image-main">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c3?w=800" alt="Luxury Interior">
+                </div>
+                <div class="why-us-badge">
+                    <span class="why-us-badge-number">98%</span>
+                    <span class="why-us-badge-text">Client Satisfaction</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <div class="testimonials-bg"></div>
+    <div class="section-container">
+        <div class="section-header reveal">
+            <div class="section-tag">
+                <span>Testimonials</span>
+            </div>
+            <h2 class="section-title">What Our <span class="gold">Clients Say</span></h2>
+            <p class="section-desc">We are proud of our clients' trust and satisfaction with our distinguished services.</p>
+        </div>
+
+        <div class="testimonials-slider reveal">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"An exceptional experience with Elite Properties. They helped me find my dream home in record time. A professional team and high-end service that deserves every appreciation."</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" alt="Client">
+                    <div class="testimonial-author-info">
+                        <strong>Ahmed Mohamed</strong>
+                        <span>Businessman</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonials-nav">
+            <span class="testimonial-dot active"></span>
+            <span class="testimonial-dot"></span>
+            <span class="testimonial-dot"></span>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    /* ============ ABOUT SECTION ============ */
+    .about {
+        padding: 0;
+        background: var(--dark-2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 100vh;
+    }
+
+    .about-image {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 10s ease;
+    }
+
+    .about-image:hover img {
+        transform: scale(1.1);
+    }
+
+    .about-image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent 0%, var(--dark-2) 100%);
+    }
+
+    .about-content {
+        padding: 100px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .about-text {
+        font-size: 1.15rem;
+        color: var(--gray-light);
+        line-height: 2;
+        margin-bottom: 40px;
+    }
+
+    .about-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .about-stat {
+        padding: 30px;
+        background: var(--dark-3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        text-align: center;
+        transition: all 0.4s ease;
+    }
+
+    .about-stat:hover {
+        border-color: var(--primary);
+        transform: translateY(-5px);
+    }
+
+    .about-stat-number {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--primary);
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+
+    .about-stat-label {
+        font-size: 0.95rem;
+        color: var(--gray-light);
+    }
+
+    .about-ceo {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .about-ceo img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 3px solid var(--primary);
+    }
+
+    .about-ceo-info strong {
+        display: block;
+        font-size: 1.1rem;
+        color: var(--white);
+        margin-bottom: 5px;
+    }
+
+    .about-ceo-info span {
+        font-size: 0.9rem;
+        color: var(--primary);
+    }
+
+    .about-ceo-signature {
+        margin-right: auto;
+        font-family: 'Brush Script MT', cursive;
+        font-size: 2rem;
+        color: var(--primary);
+        opacity: 0.7;
+    }
+
+    /* ============ CTA SECTION ============ */
+    .cta {
+        padding: 150px 0;
+        background: var(--dark);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-bg {
+        position: absolute;
+        inset: 0;
+        background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920') center/cover no-repeat;
+    }
+
+    .cta-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.8) 100%);
+    }
+
+    .cta-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .cta-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        line-height: 1.2;
+        margin-bottom: 25px;
+    }
+
+    .cta-desc {
+        font-size: 1.2rem;
+        color: var(--gray-light);
+        margin-bottom: 40px;
+    }
+
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .cta-phone {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 20px 40px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-decoration: none;
+        transition: all 0.4s ease;
+    }
+
+    .cta-phone:hover {
+        background: rgba(212, 175, 55, 0.1);
+        border-color: var(--primary);
+    }
+
+    .cta-phone-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cta-phone-icon i {
+        font-size: 1.2rem;
+        color: var(--dark);
+    }
+
+    .cta-phone-text span {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--gray-light);
+    }
+
+    .cta-phone-text strong {
+        font-size: 1.3rem;
+        color: var(--white);
+    }
+
+    /* ============ CONTACT SECTION ============ */
+    .contact {
+        padding: 150px 0;
+        background: var(--dark-2);
+        position: relative;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 80px;
+    }
+
+    .contact-info {
+        padding: 50px;
+        background: var(--dark-3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-info-item {
+        display: flex;
+        gap: 20px;
+        padding: 25px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-info-item:last-child {
+        border-bottom: none;
+    }
+
+    .contact-info-icon {
+        width: 55px;
+        height: 55px;
+        min-width: 55px;
+        background: rgba(212, 175, 55, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s ease;
+    }
+
+    .contact-info-item:hover .contact-info-icon {
+        background: var(--gradient-gold);
+    }
+
+    .contact-info-icon i {
+        font-size: 1.2rem;
+        color: var(--primary);
+        transition: color 0.4s ease;
+    }
+
+    .contact-info-item:hover .contact-info-icon i {
+        color: var(--dark);
+    }
+
+    .contact-info-text h4 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 8px;
+    }
+
+    .contact-info-text p {
+        font-size: 0.95rem;
+        color: var(--gray-light);
+        line-height: 1.7;
+    }
+
+    .contact-info-text a {
+        color: var(--gray-light);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .contact-info-text a:hover {
+        color: var(--primary);
+    }
+
+    .contact-social {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .contact-social a {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: all 0.4s ease;
+    }
+
+    .contact-social a:hover {
+        background: var(--gradient-gold);
+        color: var(--dark);
+        transform: translateY(-5px);
+    }
+
+    /* Contact Form */
+    .contact-form {
+        padding: 50px;
+        background: var(--dark-3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-form h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 30px;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 0.9rem;
+        color: var(--gray-light);
+        margin-bottom: 10px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 18px 20px;
+        background: var(--dark-4);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        color: var(--white);
+        font-family: inherit;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: rgba(212, 175, 55, 0.05);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: var(--gray);
+    }
+
+    .form-group select {
+        cursor: pointer;
+    }
+
+    .form-group select option {
+        background: var(--dark);
+    }
+
+    .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .form-submit {
+        width: 100%;
+        padding: 20px;
+        background: var(--gradient-gold);
+        border: none;
+        color: var(--dark);
+        font-family: inherit;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        transition: all 0.4s ease;
+    }
+
+    .form-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px var(--primary-glow);
+    }
+
+    .form-submit i {
+        transition: transform 0.3s ease;
+    }
+
+    .form-submit:hover i {
+        transform: translateX(-5px);
+    }
+</style>
+
+<!-- About Section -->
+<section class="about" id="about">
+    <div class="about-grid">
+        <div class="about-image reveal-right">
+            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1000" alt="Luxury Property">
+            <div class="about-image-overlay"></div>
+        </div>
+
+        <div class="about-content reveal-left">
+            <div class="section-tag" style="justify-content: flex-start;">
+                <span>About Us</span>
+            </div>
+            <h2 class="section-title">Our <span class="gold">Success Story</span></h2>
+            <p class="about-text">Since our establishment in 2008, we have strived to provide the best real estate services in the region. We believe that every client deserves an exceptional experience, and therefore we work hard to achieve their real estate dreams.</p>
+            <p class="about-text">Our team of specialized experts combines deep market knowledge with a passion for providing excellent service. We are proud of our proven track record in helping thousands of clients find their dream homes.</p>
+
+            <div class="about-stats">
+                <div class="about-stat">
+                    <span class="about-stat-number" data-count="500">0</span>
+                    <span class="about-stat-label">Properties Sold</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat-number" data-count="1200">0</span>
+                    <span class="about-stat-label">Happy Clients</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat-number" data-count="50">0</span>
+                    <span class="about-stat-label">Awards</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat-number" data-count="25">0</span>
+                    <span class="about-stat-label">Real Estate Experts</span>
+                </div>
+            </div>
+
+            <div class="about-ceo">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150" alt="CEO">
+                <div class="about-ceo-info">
+                    <strong>Mohammed Al-Ahmad</strong>
+                    <span>CEO</span>
+                </div>
+                <span class="about-ceo-signature">Mohammed</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+    <div class="cta-bg"></div>
+    <div class="cta-overlay"></div>
+    <div class="section-container">
+        <div class="cta-content reveal">
+            <h2 class="cta-title">Are you looking for your <span class="gold">dream home</span>?</h2>
+            <p class="cta-desc">Contact us today and get a free consultation from our experts. We are here to help you every step of the way.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn-primary magnetic-btn">
+                    <span>Book a Free Consultation</span>
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <a href="tel:+966500000000" class="cta-phone magnetic-btn">
+                    <div class="cta-phone-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="cta-phone-text">
+                        <span>Call Us Now</span>
+                        <strong>+966 50 000 0000</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+    <div class="section-container">
+        <div class="section-header reveal">
+            <div class="section-tag">
+                <span>Contact Us</span>
+            </div>
+            <h2 class="section-title">We are here to <span class="gold">help you</span></h2>
+            <p class="section-desc">Do not hesitate to contact us for any inquiry or to get a free consultation.</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-info reveal-right">
+                <div class="contact-info-item">
+                    <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-info-text">
+                        <h4>Address</h4>
+                        <p>Kingdom Tower, 45th Floor<br>Riyadh, Saudi Arabia</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="contact-info-text">
+                        <h4>Phone</h4>
+                        <p><a href="tel:+966500000000">+966 50 000 0000</a><br><a href="tel:+966500000001">+966 50 000
+                                0001</a></p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-info-text">
+                        <h4>Email</h4>
+                        <p><a href="mailto:web.flow1488@gmail.com">web.flow1488@gmail.com</a><br><a
+                                href="mailto:web.flow1488@gmail.com">web.flow1488@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+                    <div class="contact-info-text">
+                        <h4>Working Hours</h4>
+                        <p>Saturday - Thursday: 9 AM - 9 PM<br>Friday: Closed</p>
+                    </div>
+                </div>
+
+                <div class="contact-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="contact-form reveal-left">
+                <h3>Send Us a Message</h3>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="Enter your email">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label>Service Type</label>
+                            <select>
+                                <option value="">Select Service</option>
+                                <option value="buy">Buy Property</option>
+                                <option value="sell">Sell Property</option>
+                                <option value="rent">Rent Property</option>
+                                <option value="invest">Invest in Property</option>
+                                <option value="consult">Consultation</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Message</label>
+                        <textarea placeholder="Write your message here..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit magnetic-btn">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    /* ============ FOOTER ============ */
+    .footer {
+        background: var(--dark);
+        padding: 100px 0 0;
+        position: relative;
+    }
+
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 60px;
+        padding-bottom: 60px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-brand {
+        position: relative;
+    }
+
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+
+    .footer-logo-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    .footer-logo-icon i {
+        font-size: 1.3rem;
+        color: var(--dark);
+    }
+
+    .footer-logo-text {
+        font-size: 1.8rem;
+        font-weight: 900;
+        background: var(--gradient-gold);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .footer-desc {
+        font-size: 1rem;
+        color: var(--gray-light);
+        line-height: 1.9;
+        margin-bottom: 25px;
+    }
+
+    .footer-social {
+        display: flex;
+        gap: 12px;
+    }
+
+    .footer-social a {
+        width: 45px;
+        height: 45px;
+        background: var(--dark-3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-decoration: none;
+        font-size: 1rem;
+        transition: all 0.4s ease;
+    }
+
+    .footer-social a:hover {
+        background: var(--gradient-gold);
+        color: var(--dark);
+        transform: translateY(-5px);
+    }
+
+    .footer-column h4 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+    .footer-column h4::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--primary);
+    }
+
+    .footer-links {
+        list-style: none;
+    }
+
+    .footer-links li {
+        margin-bottom: 12px;
+    }
+
+    .footer-links a {
+        color: var(--gray-light);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .footer-links a::before {
+        content: '←';
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary);
+        padding-right: 10px;
+    }
+
+    .footer-links a:hover::before {
+        opacity: 1;
+    }
+
+    .footer-newsletter {
+        position: relative;
+    }
+
+    .footer-newsletter p {
+        font-size: 0.95rem;
+        color: var(--gray-light);
+        margin-bottom: 20px;
+    }
+
+    .newsletter-form {
+        display: flex;
+        gap: 10px;
+    }
+
+    .newsletter-form input {
+        flex: 1;
+        padding: 15px 20px;
+        background: var(--dark-3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        color: var(--white);
+        font-family: inherit;
+        font-size: 0.95rem;
+    }
+
+    .newsletter-form input:focus {
+        outline: none;
+        border-color: var(--primary);
+    }
+
+    .newsletter-form input::placeholder {
+        color: var(--gray);
+    }
+
+    .newsletter-form button {
+        padding: 15px 25px;
+        background: var(--gradient-gold);
+        border: none;
+        color: var(--dark);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px var(--primary-glow);
+    }
+
+    .footer-bottom {
+        padding: 30px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .footer-copyright {
+        font-size: 0.9rem;
+        color: var(--gray);
+    }
+
+    .footer-copyright a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .footer-legal {
+        display: flex;
+        gap: 30px;
+    }
+
+    .footer-legal a {
+        font-size: 0.9rem;
+        color: var(--gray-light);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer-legal a:hover {
+        color: var(--primary);
+    }
+
+    /* ============ SCROLL TO TOP ============ */
+    .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        width: 55px;
+        height: 55px;
+        background: var(--gradient-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--dark);
+        font-size: 1.2rem;
+        cursor: pointer;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+    }
+
+    .scroll-top.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .scroll-top:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px var(--primary-glow);
+    }
+
+    /* ============ REVEAL ANIMATIONS ============ */
+    .reveal {
+        opacity: 0;
+        transform: translateY(60px);
+        transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .reveal-right {
+        opacity: 0;
+        transform: translateX(60px);
+        transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal-right.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .reveal-left {
+        opacity: 0;
+        transform: translateX(-60px);
+        transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal-left.active {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .reveal-scale {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal-scale.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Stagger Delays */
+    .stagger-1 {
+        transition-delay: 0.1s;
+    }
+
+    .stagger-2 {
+        transition-delay: 0.2s;
+    }
+
+    .stagger-3 {
+        transition-delay: 0.3s;
+    }
+
+    .stagger-4 {
+        transition-delay: 0.4s;
+    }
+
+    .stagger-5 {
+        transition-delay: 0.5s;
+    }
+
+    .stagger-6 {
+        transition-delay: 0.6s;
+    }
+</style>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="section-container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon"><i class="fas fa-building"></i></div>
+                    <span class="footer-logo-text">Elite</span>
+                </div>
+                <p class="footer-desc">We are a leading company in the luxury real estate sector, providing distinguished services to our clients for over 15 years. We always strive to achieve your real estate dreams.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#properties">Properties</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Our Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Buy Properties</a></li>
+                    <li><a href="#">Sell Properties</a></li>
+                    <li><a href="#">Rent Properties</a></li>
+                    <li><a href="#">Real Estate Investment</a></li>
+                    <li><a href="#">Consultations</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column footer-newsletter">
+                <h4>Newsletter</h4>
+                <p>Subscribe to our newsletter to get the latest offers and real estate news.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your Email Address">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2024 <a href="#">Elite Properties</a>. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to Top -->
+<div class="scroll-top" id="scrollTop">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+
+<style>
+    /* ============ RESPONSIVE DESIGN ============ */
+    @media (max-width: 1400px) {
+        .hero-container {
+            grid-template-columns: 1fr;
+            gap: 60px;
+        }
+
+        .hero-cards {
+            display: none;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .properties-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .property-card.featured {
+            grid-column: span 2;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .nav-menu {
+            display: none;
+        }
+
+        .nav-cta {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .why-us-grid {
+            gap: 60px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .properties-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .property-card.featured {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .property-card.tall {
+            grid-row: span 1;
+        }
+
+        .why-us-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .why-us-image {
+            order: -1;
+        }
+
+        .why-us-image-main img {
+            height: 400px;
+        }
+
+        .why-us-badge {
+            bottom: -20px;
+            left: 20px;
+            padding: 30px;
+        }
+
+        .why-us-badge-number {
+            font-size: 3rem;
+        }
+
+        .about-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .about-image {
+            height: 400px;
+        }
+
+        .about-image-overlay {
+            background: linear-gradient(180deg, transparent 0%, var(--dark-2) 100%);
+        }
+
+        .about-content {
+            padding: 60px 40px;
+        }
+
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .section-container {
+            padding: 0 25px;
+        }
+
+        .nav-container {
+            padding: 0 25px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        .hero-container {
+            padding: 0 25px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+        }
+
+        .btn-primary,
+        .btn-outline {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .hero-stats {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 60px;
+            padding: 0 25px;
+        }
+
+        .hero-stat {
+            flex: 1 1 40%;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+        }
+
+        .scroll-indicator {
+            display: none;
+        }
+
+        .properties {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 50px;
+        }
+
+        .properties-filter {
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+        }
+
+        .properties-grid {
+            grid-template-columns: 1fr;
+            grid-auto-rows: auto;
+        }
+
+        .property-card.wide,
+        .property-card.tall,
+        .property-card.featured {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .property-card-content {
+            padding: 25px;
+        }
+
+        .property-price {
+            font-size: 1.5rem;
+        }
+
+        .property-card.featured .property-price {
+            font-size: 1.8rem;
+        }
+
+        .services {
+            padding: 100px 0;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .service-card {
+            padding: 40px 30px;
+        }
+
+        .why-us {
+            padding: 100px 0;
+        }
+
+        .why-us-image-main::before {
+            display: none;
+        }
+
+        .testimonials {
+            padding: 100px 0;
+        }
+
+        .testimonial-card {
+            padding: 40px 25px;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+        }
+
+        .about-stats {
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .about-stat {
+            padding: 20px;
+        }
+
+        .about-stat-number {
+            font-size: 2rem;
+        }
+
+        .cta {
+            padding: 100px 0;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 6vw, 3rem);
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+        }
+
+        .cta-phone {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .contact {
+            padding: 100px 0;
+        }
+
+        .contact-info,
+        .contact-form {
+            padding: 30px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .footer {
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .footer-legal {
+            justify-content: center;
+        }
+
+        .scroll-top {
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .mobile-menu .nav-link {
+            font-size: 1.8rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-badge {
+            padding: 10px 15px;
+        }
+
+        .hero-badge span {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        .hero-stats {
+            gap: 20px;
+        }
+
+        .hero-stat {
+            flex: 1 1 100%;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+        }
+
+        .section-tag span {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+        }
+
+        .section-tag::before,
+        .section-tag::after {
+            width: 30px;
+        }
+
+        .property-features {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-view-all {
+            width: 100%;
+            justify-content: center;
+            padding: 18px 30px;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+        }
+
+        .service-icon i {
+            font-size: 1.5rem;
+        }
+
+        .why-us-item {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .why-us-icon {
+            margin: 0 auto;
+        }
+
+        .testimonial-author {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .testimonial-author-info {
+            text-align: center;
+        }
+
+        .about-ceo {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .about-ceo-signature {
+            margin: 20px auto 0;
+        }
+
+        .contact-info-item {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .contact-info-icon {
+            margin: 0 auto;
+        }
+
+        .contact-social {
+            justify-content: center;
+        }
+
+        .newsletter-form {
+            flex-direction: column;
+        }
+
+        .newsletter-form button {
+            width: 100%;
+        }
+
+        .footer-social {
+            justify-content: center;
+        }
+
+        .footer-column h4::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .footer-links {
+            text-align: center;
+        }
+    }
+
+    /* ============ CURSOR HIDE ON MOBILE ============ */
+    @media (hover: none) and (pointer: coarse) {
+
+        .cursor,
+        .cursor-follower {
+            display: none;
+        }
+    }
+
+    /* ============ REDUCED MOTION ============ */
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+</style>
+
+<script>
+    // Preloader
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('preloader').classList.add('loaded');
+            setTimeout(() => {
+                document.getElementById('preloader').style.display = 'none';
+            }, 1500);
+        }, 2500);
+    });
+
+    // Custom Cursor
+    const cursor = document.getElementById('cursor');
+    const cursorFollower = document.getElementById('cursorFollower');
+
+    if (window.matchMedia('(hover: hover)').matches) {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        document.querySelectorAll('a, button, .property-card, .service-card, .magnetic-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorFollower.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorFollower.classList.remove('hover');
+            });
+        });
+    }
+
+    // Magnetic Buttons
+    document.querySelectorAll('.magnetic-btn').forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0, 0)';
+        });
+    });
+
+    // Navbar Scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Hero Particles
+    const particlesContainer = document.getElementById('heroParticles');
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        particlesContainer.appendChild(particle);
+    }
+
+    // Counter Animation
+    const animateCounter = (el) => {
+        const target = parseInt(el.getAttribute('data-count'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const updateCounter = () => {
+            current += step;
+            if (current < target) {
+                el.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                el.textContent = target + '+';
+            }
+        };
+
+        updateCounter();
+    };
+
+    // Scroll Reveal
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    const counters = document.querySelectorAll('[data-count]');
+    let countersAnimated = false;
+
+    const revealOnScroll = () => {
+        revealElements.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (elementTop < windowHeight - 100) {
+                el.classList.add('active');
+            }
+        });
+
+        // Animate counters
+        if (!countersAnimated) {
+            const firstCounter = counters[0];
+            if (firstCounter) {
+                const counterTop = firstCounter.getBoundingClientRect().top;
+                if (counterTop < window.innerHeight - 100) {
+                    counters.forEach(counter => animateCounter(counter));
+                    countersAnimated = true;
+                }
+            }
+        }
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    // Properties Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const propertyCards = document.querySelectorAll('.property-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-filter');
+
+            propertyCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    }, 10);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 400);
+                }
+            });
+        });
+    });
+
+    // Scroll to Top
+    const scrollTopBtn = document.getElementById('scrollTop');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Smooth Scroll for Navigation Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Testimonials Slider (Simple)
+    const testimonialDots = document.querySelectorAll('.testimonial-dot');
+    const testimonials = [
+        {
+            text: '"An exceptional experience with Elite Properties. They helped me find my dream home in record time. A professional team and high-end service that deserves every appreciation."',
+            name: 'Ahmed Mohamed',
+            role: 'Businessman',
+            image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150'
+        },
+        {
+            text: '"Excellent service and high professionalism. I found the perfect apartment thanks to the Elite team. I highly recommend them to anyone looking for a luxury property."',
+            name: 'Sarah Ahmed',
+            role: 'Engineer',
+            image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150'
+        },
+        {
+            text: '"I invested with Elite and achieved excellent returns. A specialized team that understands the market well and provides valuable advice. Thank you."',
+            name: 'Khaled Al-Omari',
+            role: 'Investor',
+            image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150'
+        }
+    ];
+
+    let currentTestimonial = 0;
+
+    testimonialDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentTestimonial = index;
+            updateTestimonial();
+        });
+    });
+
+    function updateTestimonial() {
+        const card = document.querySelector('.testimonial-card');
+        const data = testimonials[currentTestimonial];
+
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+
+        setTimeout(() => {
+            card.querySelector('.testimonial-text').textContent = data.text;
+            card.querySelector('.testimonial-author-info strong').textContent = data.name;
+            card.querySelector('.testimonial-author-info span').textContent = data.role;
+            card.querySelector('.testimonial-author img').src = data.image;
+
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 300);
+
+        testimonialDots.forEach((d, i) => {
+            d.classList.toggle('active', i === currentTestimonial);
+        });
+    }
+
+    // Auto-rotate testimonials
+    setInterval(() => {
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        updateTestimonial();
+    }, 5000);
+
+    // Property Card Heart Toggle
+    document.querySelectorAll('.property-action').forEach(btn => {
+        if (btn.querySelector('.fa-heart')) {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const icon = btn.querySelector('i');
+                icon.classList.toggle('far');
+                icon.classList.toggle('fas');
+                if (icon.classList.contains('fas')) {
+                    icon.style.color = '#e74c3c';
+                } else {
+                    icon.style.color = '';
+                }
+            });
+        }
+    });
+
+    // Form Validation
+    const contactForm = document.querySelector('.contact-form form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const btn = contactForm.querySelector('.form-submit');
+            const originalText = btn.innerHTML;
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> Sent Successfully!';
+                btn.style.background = '#27ae60';
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                    contactForm.reset();
+                }, 2000);
+            }, 1500);
+        });
+    }
+
+    // Newsletter Form
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = newsletterForm.querySelector('input');
+            const btn = newsletterForm.querySelector('button');
+
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            input.value = '';
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+            }, 2000);
+        });
+    }
+</script>
