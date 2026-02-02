@@ -855,6 +855,17 @@ button {
     z-index: 1;
 }
 
+@media (max-width: 1023px) {
+    .hero-visual {
+        order: -1;
+    }
+
+    .hero-text {
+        order: 1;
+    }
+}
+
+
 @media (min-width: 1024px) {
     .hero-content {
         grid-template-columns: 1fr 1fr;
