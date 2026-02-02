@@ -856,8 +856,17 @@ button {
 }
 
 @media (max-width: 1023px) {
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
     .hero-visual {
         order: -1;
+        width: 100%;
+        transform: none !important;
+        /* Prevent conflicts with animation */
     }
 
     .hero-text {
@@ -1639,19 +1648,26 @@ html[dir="ltr"] .hero-actions {
 
 @media (max-width: 768px) {
     .macbook {
-        transform: scale(0.7) translateY(-20px);
-        margin-bottom: -100px;
+        transform: scale(0.7) translateY(-20px) !important;
+        margin-bottom: -110px !important;
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
     }
 
     .macbook-body {
-        transform: perspective(1000px) rotateX(45deg);
+        transform: perspective(1000px) rotateX(32deg) !important;
+        /* Flattened for better visibility */
     }
 }
 
 @media (max-width: 480px) {
     .macbook {
-        transform: scale(0.6) translateY(-30px);
-        margin-bottom: -150px;
+        transform: scale(0.62) translateY(-40px) !important;
+        margin-bottom: -160px !important;
+    }
+
+    .macbook-body {
+        transform: perspective(1000px) rotateX(28deg) !important;
+        /* Even flatter for small phones */
     }
 }
 
