@@ -886,22 +886,49 @@ function initContactForm() {
 
         const submitBtn = form.querySelector('.btn-submit');
         const originalContent = submitBtn.innerHTML;
+        const formData = new FormData(form);
+        const lang = document.documentElement.lang || 'ar';
 
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+        // Update button to loading state
+        submitBtn.innerHTML = lang === 'ar'
+            ? '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...'
+            : '<i class="fas fa-spinner fa-spin"></i> Sending...';
         submitBtn.disabled = true;
 
-        setTimeout(() => {
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> تم الإرسال بنجاح!';
-            submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-
-            form.reset();
-
-            setTimeout(() => {
-                submitBtn.innerHTML = originalContent;
-                submitBtn.style.background = '';
-                submitBtn.disabled = false;
-            }, 3000);
-        }, 2000);
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Success state
+                    submitBtn.innerHTML = lang === 'ar'
+                        ? '<i class="fas fa-check"></i> تم الإرسال بنجاح!'
+                        : '<i class="fas fa-check"></i> Message Sent!';
+                    submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                // Error state
+                submitBtn.innerHTML = lang === 'ar'
+                    ? '<i class="fas fa-exclamation-triangle"></i> حدث خطأ، حاول ثانية'
+                    : '<i class="fas fa-exclamation-triangle"></i> Error, try again';
+                submitBtn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            })
+            .finally(() => {
+                // Reset button state after delay
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalContent;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 5000);
+            });
     });
 }
 
