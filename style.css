@@ -6923,9 +6923,9 @@ section {
 
 @media (max-width: 500px) {
     .testimonial-card {
-        flex: 0 0 calc(100vw - 48px);
+        flex: 0 0 100%;
         padding: 30px;
-        margin: 0 10px;
+        margin: 0;
     }
 
     .testimonial-card:hover {
@@ -7167,7 +7167,7 @@ section {
 
 @media (max-width: 500px) {
     .testimonial-card {
-        flex: 0 0 calc(100vw - 48px);
+        flex: 0 0 100%;
     }
 }
 
