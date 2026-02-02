@@ -1637,6 +1637,24 @@ html[dir="ltr"] .hero-actions {
     transform: perspective(1000px) rotateX(25deg);
 }
 
+@media (max-width: 768px) {
+    .macbook {
+        transform: scale(0.7) translateY(-20px);
+        margin-bottom: -100px;
+    }
+
+    .macbook-body {
+        transform: perspective(1000px) rotateX(45deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .macbook {
+        transform: scale(0.6) translateY(-30px);
+        margin-bottom: -150px;
+    }
+}
+
 /* Hinge Detail */
 .macbook-body::before {
     content: '';
