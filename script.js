@@ -888,6 +888,13 @@ function initContactForm() {
         const originalContent = submitBtn.innerHTML;
         const formData = new FormData(form);
         const lang = document.documentElement.lang || 'ar';
+        const senderName = formData.get('name') || 'Guest';
+
+        // Set dynamic subject for Web3Forms
+        const subjectField = form.querySelector('input[name="subject"]');
+        if (subjectField) {
+            subjectField.value = `🚀 New Client: ${senderName} | Web Flow Portfolio`;
+        }
 
         // Update button to loading state
         submitBtn.innerHTML = lang === 'ar'
