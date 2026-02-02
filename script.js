@@ -1132,7 +1132,7 @@ function initLanguageToggle() {
 
     if (!langToggle) return;
 
-    let currentLang = localStorage.getItem('lang') || 'ar';
+    let currentLang = localStorage.getItem('lang') || 'en';
 
     function updateLanguage(lang) {
         currentLang = lang;
