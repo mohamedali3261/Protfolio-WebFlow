@@ -9381,3 +9381,20 @@ section {
     opacity: 1;
     transform: translateX(0);
 }
+
+/* Global Overflow Safety Fix for Mobile Animations */
+@media (max-width: 768px) {
+
+    section,
+    .hero,
+    .about,
+    .services,
+    .projects,
+    .skills,
+    .testimonials,
+    .contact {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+    }
+}

@@ -379,18 +379,19 @@
 /* Responsive fixes */
 @media (max-width: 480px) {
     .chatbot-window {
-        bottom: 90px;
-        right: 15px;
-        width: 310px;
+        bottom: 85px;
+        right: 10px;
+        width: calc(100% - 20px);
+        max-width: 350px;
         height: 480px;
-        max-height: 70vh;
-        border-radius: 22px;
+        max-height: 65vh;
+        border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .chatbot-toggle {
         bottom: 20px;
-        right: 20px;
+        right: 15px;
         width: 55px;
         height: 55px;
     }
