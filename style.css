@@ -856,10 +856,14 @@ button {
 }
 
 @media (max-width: 1023px) {
+    .hero {
+        padding-top: 80px !important;
+    }
+
     .hero-content {
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: 20px;
     }
 
     .hero-visual {
@@ -1648,7 +1652,7 @@ html[dir="ltr"] .hero-actions {
 
 @media (max-width: 768px) {
     .macbook {
-        transform: scale(0.7) translateY(-20px) !important;
+        transform: scale(0.7) translateY(-50px) !important;
         margin-bottom: -110px !important;
         filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
     }
@@ -1661,7 +1665,7 @@ html[dir="ltr"] .hero-actions {
 
 @media (max-width: 480px) {
     .macbook {
-        transform: scale(0.62) translateY(-40px) !important;
+        transform: scale(0.62) translateY(-80px) !important;
         margin-bottom: -160px !important;
     }
 
