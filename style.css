@@ -916,7 +916,7 @@ html[dir="ltr"] .hero-text {
 
 .hero-title .line {
     display: block;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
     margin-bottom: 15px;
     letter-spacing: 1px;
